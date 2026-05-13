@@ -1622,21 +1622,33 @@ ul, ol { list-style: none; }
 }
 
 /* ========================================
-   GSAP ANIMATION STATES
+   SCROLL REVEAL ANIMATIONS (CSS-based)
    ======================================== */
-.anim-fade-up {
+.scroll-reveal {
   opacity: 0;
   transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scroll-reveal.from-left {
+  transform: translateX(-30px);
+}
+.scroll-reveal.from-right {
+  transform: translateX(30px);
+}
+.scroll-reveal.from-scale {
+  transform: scale(0.95) translateY(40px);
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
 }
 
-.anim-fade-in {
-  opacity: 0;
-}
-
-.anim-scale-in {
-  opacity: 0;
-  transform: scale(0.9);
-}
+.stagger-1 { transition-delay: 0.05s; }
+.stagger-2 { transition-delay: 0.15s; }
+.stagger-3 { transition-delay: 0.25s; }
+.stagger-4 { transition-delay: 0.35s; }
+.stagger-5 { transition-delay: 0.45s; }
+.stagger-6 { transition-delay: 0.55s; }
 
 /* ========================================
    RESPONSIVE
@@ -2348,14 +2360,14 @@ ul, ol { list-style: none; }
 <section class="section-vision" id="vision">
   <div class="container">
     <div class="vision-grid">
-      <div class="vision-left anim-fade-up">
+      <div class="vision-left scroll-reveal">
         <div class="section-label">Unsere Vision</div>
         <blockquote class="vision-quote">
           &bdquo;Der Mensch ist mehr als Struktur und Funktion&nbsp;&mdash; er ist <em>Gesch&ouml;pf</em>, in dem Leib, Seele und Geist eine unteilbare Einheit bilden.&ldquo;
         </blockquote>
         <p class="vision-source">Aus der Pr&auml;ambel des Vereins, 2017</p>
       </div>
-      <div class="vision-right anim-fade-up">
+      <div class="vision-right scroll-reveal">
         <div class="vision-text">
           <p>Christen in der Osteopathie (CiO) vereint Therapeut:innen, die den Menschen ganzheitlich sehen&nbsp;&mdash; im Licht des christlichen Menschenbildes. Wir verstehen uns als Br&uuml;cke zwischen evidenzbasierter Medizin und geistlicher Reflexion.</p>
           <p>In einem Berufsfeld, das zunehmend nach Identit&auml;t sucht, bietet CiO einen Raum f&uuml;r fachlichen Austausch, gemeinsames Gebet und ethische Orientierung. Unser Ziel: therapeutische Exzellenz, getragen von einem lebendigen Glauben.</p>
@@ -2365,7 +2377,7 @@ ul, ol { list-style: none; }
 
     <!-- Value Cards -->
     <div class="value-cards">
-      <div class="value-card anim-fade-up">
+      <div class="value-card scroll-reveal">
         <svg class="value-card-pattern" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><path d="M60,0 L120,60 L60,120 L0,60 Z" fill="none" stroke="var(--gold)" stroke-width="0.5"/><path d="M60,20 L100,60 L60,100 L20,60 Z" fill="none" stroke="var(--gold)" stroke-width="0.3"/></svg>
         <div class="value-icon">
           <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 4L18 32M10 14L26 14" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round"/><circle cx="18" cy="14" r="8" stroke="var(--gold)" stroke-width="0.6" opacity="0.4"/><path d="M18 6C18 6 12 10 12 14C12 18 18 22 18 22C18 22 24 18 24 14C24 10 18 6 18 6Z" fill="var(--gold)" opacity="0.1"/></svg>
@@ -2373,7 +2385,7 @@ ul, ol { list-style: none; }
         <h3>Glaube</h3>
         <p>Christlicher Glaube als tragendes Fundament&nbsp;&mdash; nicht Methode, sondern innere Haltung, die jede Behandlung und Begegnung durchdringt.</p>
       </div>
-      <div class="value-card anim-fade-up">
+      <div class="value-card scroll-reveal">
         <svg class="value-card-pattern" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="50" fill="none" stroke="var(--rose)" stroke-width="0.3"/><circle cx="60" cy="60" r="35" fill="none" stroke="var(--rose)" stroke-width="0.3"/><circle cx="60" cy="60" r="20" fill="none" stroke="var(--rose)" stroke-width="0.3"/></svg>
         <div class="value-icon">
           <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 28C10 28 12 20 14 16C16 12 18 8 18 8C18 8 20 12 22 16C24 20 26 28 26 28" stroke="var(--gold)" stroke-width="1.2" stroke-linecap="round"/><ellipse cx="18" cy="14" rx="5" ry="2.5" stroke="var(--gold)" stroke-width="0.8"/><ellipse cx="18" cy="20" rx="6" ry="2.5" stroke="var(--gold)" stroke-width="0.8"/><ellipse cx="18" cy="26" rx="7" ry="2.5" stroke="var(--gold)" stroke-width="0.8"/><circle cx="18" cy="6" r="2" stroke="var(--gold)" stroke-width="0.8"/></svg>
@@ -2381,7 +2393,7 @@ ul, ol { list-style: none; }
         <h3>Fachlichkeit</h3>
         <p>H&ouml;chste therapeutische Standards und kontinuierliche Weiterbildung. Evidenzbasiertes Arbeiten mit der Tiefe, die Heilung braucht.</p>
       </div>
-      <div class="value-card anim-fade-up">
+      <div class="value-card scroll-reveal">
         <svg class="value-card-pattern" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><path d="M20,60 Q60,20 100,60 Q60,100 20,60" fill="none" stroke="var(--navy)" stroke-width="0.3"/><path d="M40,60 Q60,35 80,60 Q60,85 40,60" fill="none" stroke="var(--navy)" stroke-width="0.3"/></svg>
         <div class="value-icon">
           <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="14" r="4" stroke="var(--gold)" stroke-width="1"/><circle cx="24" cy="14" r="4" stroke="var(--gold)" stroke-width="1"/><circle cx="18" cy="24" r="4" stroke="var(--gold)" stroke-width="1"/><line x1="15" y1="16" x2="16" y2="21" stroke="var(--gold)" stroke-width="0.8"/><line x1="21" y1="16" x2="20" y2="21" stroke="var(--gold)" stroke-width="0.8"/><line x1="13.5" y1="17" x2="22.5" y2="17" stroke="var(--gold)" stroke-width="0.5" opacity="0.4" stroke-dasharray="2 2"/></svg>
@@ -2389,7 +2401,7 @@ ul, ol { list-style: none; }
         <h3>Gemeinschaft</h3>
         <p>Ein Netzwerk, das tr&auml;gt und befl&uuml;gelt. Kollegialer Austausch, gemeinsame Retreats und eine Verbundenheit, die &uuml;ber die Praxis hinausreicht.</p>
       </div>
-      <div class="value-card anim-fade-up">
+      <div class="value-card scroll-reveal">
         <svg class="value-card-pattern" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="20" width="80" height="80" rx="4" fill="none" stroke="var(--gold)" stroke-width="0.3"/><rect x="35" y="35" width="50" height="50" rx="2" fill="none" stroke="var(--gold)" stroke-width="0.3"/></svg>
         <div class="value-icon">
           <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L30 18L18 30L6 18Z" stroke="var(--gold)" stroke-width="1.2"/><path d="M18 11L25 18L18 25L11 18Z" stroke="var(--gold)" stroke-width="0.8" opacity="0.5"/><circle cx="18" cy="18" r="2" fill="var(--gold)" opacity="0.3"/><line x1="18" y1="6" x2="18" y2="30" stroke="var(--gold)" stroke-width="0.4" opacity="0.3"/><line x1="6" y1="18" x2="30" y2="18" stroke="var(--gold)" stroke-width="0.4" opacity="0.3"/></svg>
@@ -2429,7 +2441,7 @@ ul, ol { list-style: none; }
 <!-- ======== SECTION: VORSTAND ======== -->
 <section class="section-vorstand" id="vorstand">
   <div class="container">
-    <div class="section-heading anim-fade-up">
+    <div class="section-heading scroll-reveal">
       <div class="section-label" style="justify-content:center;">Unser Vorstand</div>
       <h2>Sechs Stimmen,<br>ein <em>Anliegen.</em></h2>
       <p class="subtitle">Der Vorstand vereint klinische Erfahrung, Lehrauftr&auml;ge und internationale Vernetzung&nbsp;&mdash; geleitet vom Wunsch, Osteopathie und Glaube zusammenzudenken.</p>
@@ -2437,7 +2449,7 @@ ul, ol { list-style: none; }
 
     <div class="team-grid">
       <!-- Michaela Dippon -->
-      <div class="team-card anim-fade-up">
+      <div class="team-card scroll-reveal">
         <div class="team-card-inner">
           <div class="team-photo">
             <img src="img/Portrait_2023-211x300.jpg" alt="Michaela Dippon" loading="lazy">
@@ -2452,7 +2464,7 @@ ul, ol { list-style: none; }
       </div>
 
       <!-- Johanna Adam -->
-      <div class="team-card anim-fade-up">
+      <div class="team-card scroll-reveal">
         <div class="team-card-inner">
           <div class="team-photo">
             <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2020/01/Johanna-150x150.png" alt="Johanna Adam" loading="lazy">
@@ -2467,7 +2479,7 @@ ul, ol { list-style: none; }
       </div>
 
       <!-- Nelli Baer -->
-      <div class="team-card anim-fade-up">
+      <div class="team-card scroll-reveal">
         <div class="team-card-inner">
           <div class="team-photo">
             <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2025/04/NelliBaer-150x150.jpg" alt="Nelli B&auml;r" loading="lazy">
@@ -2482,7 +2494,7 @@ ul, ol { list-style: none; }
       </div>
 
       <!-- Madeleine Krumpein -->
-      <div class="team-card anim-fade-up">
+      <div class="team-card scroll-reveal">
         <div class="team-card-inner">
           <div class="team-photo">
             <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2025/04/MadeleineKrumpein-150x150.jpg" alt="Madeleine Krumpein" loading="lazy">
@@ -2497,7 +2509,7 @@ ul, ol { list-style: none; }
       </div>
 
       <!-- Luc Fieuw -->
-      <div class="team-card anim-fade-up">
+      <div class="team-card scroll-reveal">
         <div class="team-card-inner">
           <div class="team-photo">
             <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2024/12/LucFieuw-150x150.jpg" alt="Luc Fieuw" loading="lazy">
@@ -2512,7 +2524,7 @@ ul, ol { list-style: none; }
       </div>
 
       <!-- Dr. Astrid Kuehn-Letkemann -->
-      <div class="team-card anim-fade-up">
+      <div class="team-card scroll-reveal">
         <div class="team-card-inner">
           <div class="team-photo">
             <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2024/12/AstridKuehn-150x150.jpg" alt="Dr. Astrid K&uuml;hn-Letkemann" loading="lazy">
@@ -2542,7 +2554,7 @@ ul, ol { list-style: none; }
 <!-- ======== SECTION: VERANSTALTUNGEN ======== -->
 <section class="section-events" id="veranstaltungen">
   <div class="container">
-    <div class="section-heading anim-fade-up">
+    <div class="section-heading scroll-reveal">
       <div class="section-label" style="justify-content:center; color: var(--gold);">
         <span style="display:inline-block; width:32px; height:1.5px; background:var(--gold);"></span>
         Veranstaltungen
@@ -2559,14 +2571,14 @@ ul, ol { list-style: none; }
     </div>
 
     <!-- Early Bird Badge -->
-    <div class="early-bird-badge anim-fade-up">
+    <div class="early-bird-badge scroll-reveal">
       <span>&#10022; 15 % Fr&uuml;hbucher &mdash; Bis 8 Wochen vor Veranstaltungsbeginn</span>
     </div>
 
     <!-- Event Cards -->
     <div class="events-grid" id="eventsGrid">
       <!-- Event 1 -->
-      <div class="event-card anim-fade-up" data-type="fortbildung">
+      <div class="event-card scroll-reveal" data-type="fortbildung">
         <div class="event-date-badge">27. Februar 2027</div>
         <h3>A.T. Stills MAN IS TRIUNE</h3>
         <p class="event-instructors">Michaela Dippon</p>
@@ -2575,7 +2587,7 @@ ul, ol { list-style: none; }
       </div>
 
       <!-- Event 2 -->
-      <div class="event-card anim-fade-up" data-type="fortbildung">
+      <div class="event-card scroll-reveal" data-type="fortbildung">
         <div class="event-date-badge">03.&ndash;04. Juli 2026</div>
         <h3>Der Fu&szlig; als Schl&uuml;ssel zur K&ouml;rperstatik</h3>
         <p class="event-instructors">Nelli B&auml;r, Madeleine Krumpein, Michaela Dippon</p>
@@ -2584,7 +2596,7 @@ ul, ol { list-style: none; }
       </div>
 
       <!-- Event 3 -->
-      <div class="event-card anim-fade-up" data-type="fortbildung">
+      <div class="event-card scroll-reveal" data-type="fortbildung">
         <div class="event-date-badge">16.&ndash;18. Oktober 2026</div>
         <h3>Trauma &mdash; verstehen und begegnen</h3>
         <p class="event-instructors">Johanna Adam &amp; Michaela Dippon</p>
@@ -2593,7 +2605,7 @@ ul, ol { list-style: none; }
       </div>
 
       <!-- Event 4 -->
-      <div class="event-card anim-fade-up" data-type="fortbildung">
+      <div class="event-card scroll-reveal" data-type="fortbildung">
         <div class="event-date-badge">20.&ndash;22. November 2026</div>
         <h3>Das Kiefergelenk</h3>
         <p class="event-instructors">Dr. Matthias Hoch, Wolfgang Riek, Michaela Dippon</p>
@@ -2602,7 +2614,7 @@ ul, ol { list-style: none; }
       </div>
 
       <!-- Event 5 -->
-      <div class="event-card anim-fade-up" data-type="fortbildung">
+      <div class="event-card scroll-reveal" data-type="fortbildung">
         <div class="event-date-badge">11.&ndash;13. Juni 2027</div>
         <h3>Schwangerschaft &mdash; Geburt &mdash; Postpartum</h3>
         <p class="event-instructors">Luc Fieuw &amp; Dr. Astrid K&uuml;hn-Letkemann</p>
@@ -2612,7 +2624,7 @@ ul, ol { list-style: none; }
     </div>
 
     <!-- Netzwerktreffen -->
-    <div class="netzwerk-section anim-fade-up">
+    <div class="netzwerk-section scroll-reveal">
       <h3 class="netzwerk-title">Netzwerktreffen</h3>
       <div class="netzwerk-grid">
         <div class="netzwerk-card" data-type="netzwerk">
@@ -2633,7 +2645,7 @@ ul, ol { list-style: none; }
     </div>
 
     <!-- Venue & Certification -->
-    <div class="event-venue anim-fade-up">
+    <div class="event-venue scroll-reveal">
       <p><strong>Seminarort:</strong> Hindenburgstr. 129/1, 73728 Esslingen am Neckar</p>
       <div class="cert-badges">
         <span class="cert-badge">VOD-zertifiziert</span>
@@ -2658,39 +2670,39 @@ ul, ol { list-style: none; }
   <div class="container">
     <div class="membership-content">
       <div class="section-label" style="justify-content:center;">Mitgliedschaft</div>
-      <h2 class="anim-fade-up">Werden Sie Teil<br>des <em>Netzwerks.</em></h2>
-      <p class="membership-subtitle anim-fade-up">CiO steht allen christlichen Osteopath:innen offen, die sich fachlich und geistlich weiterentwickeln m&ouml;chten&nbsp;&mdash; unabh&auml;ngig von Konfession oder Erfahrungsstufe.</p>
+      <h2 class="scroll-reveal">Werden Sie Teil<br>des <em>Netzwerks.</em></h2>
+      <p class="membership-subtitle scroll-reveal">CiO steht allen christlichen Osteopath:innen offen, die sich fachlich und geistlich weiterentwickeln m&ouml;chten&nbsp;&mdash; unabh&auml;ngig von Konfession oder Erfahrungsstufe.</p>
 
       <div class="benefits-list">
-        <div class="benefit-item anim-fade-up">
+        <div class="benefit-item scroll-reveal">
           <div class="benefit-icon">&#10022;</div>
           <div>
             <h4>Verg&uuml;nstigte Fortbildungen</h4>
             <p>Exklusive Preise f&uuml;r alle Seminare, Workshops und Retreats des Vereins.</p>
           </div>
         </div>
-        <div class="benefit-item anim-fade-up">
+        <div class="benefit-item scroll-reveal">
           <div class="benefit-icon">&#10022;</div>
           <div>
             <h4>Netzwerk &amp; Austausch</h4>
             <p>Zugang zum internen Therapeut:innen-Netzwerk, regelm&auml;&szlig;ige Treffen und kollegiale Beratung.</p>
           </div>
         </div>
-        <div class="benefit-item anim-fade-up">
+        <div class="benefit-item scroll-reveal">
           <div class="benefit-icon">&#10022;</div>
           <div>
             <h4>Therapeuten-Verzeichnis</h4>
             <p>Sichtbarkeit im CiO-Therapeutenverzeichnis&nbsp;&mdash; Patient:innen finden Sie gezielt.</p>
           </div>
         </div>
-        <div class="benefit-item anim-fade-up">
+        <div class="benefit-item scroll-reveal">
           <div class="benefit-icon">&#10022;</div>
           <div>
             <h4>Geistliche Gemeinschaft</h4>
             <p>Gemeinsame Gebetszeiten, Retreats und ein Raum f&uuml;r geistliche Reflexion im Berufsalltag.</p>
           </div>
         </div>
-        <div class="benefit-item anim-fade-up">
+        <div class="benefit-item scroll-reveal">
           <div class="benefit-icon">&#10022;</div>
           <div>
             <h4>Stimme &amp; Mitgestaltung</h4>
@@ -2699,7 +2711,7 @@ ul, ol { list-style: none; }
         </div>
       </div>
 
-      <div class="membership-contact anim-fade-up">
+      <div class="membership-contact scroll-reveal">
         <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Mitgliedschaft%20CiO" class="cta-btn">Jetzt Mitglied werden &rarr;</a>
         <p class="contact-info">Oder rufen Sie uns an: <a href="tel:+4907118209390">0711-8209390</a></p>
       </div>
@@ -2712,14 +2724,14 @@ ul, ol { list-style: none; }
 <!-- ======== SECTION: KONTAKT ======== -->
 <section class="section-contact" id="kontakt">
   <div class="container">
-    <div class="section-heading anim-fade-up">
+    <div class="section-heading scroll-reveal">
       <div class="section-label" style="justify-content:center;">Kontakt</div>
       <h2>Sprechen Sie<br>uns <em>an.</em></h2>
       <p class="subtitle">Fragen zur Mitgliedschaft, zu Veranstaltungen oder zum Verein? Wir freuen uns auf Ihre Nachricht.</p>
     </div>
 
     <div class="contact-grid">
-      <div class="contact-info-block anim-fade-up">
+      <div class="contact-info-block scroll-reveal from-left">
         <h3>So erreichen Sie uns</h3>
         <p>Ob Sie Interesse an einer Mitgliedschaft haben, Fragen zu unseren Fortbildungen stellen oder einfach mehr erfahren m&ouml;chten&nbsp;&mdash; schreiben Sie uns.</p>
 
@@ -2748,7 +2760,7 @@ ul, ol { list-style: none; }
         </div>
       </div>
 
-      <div class="contact-form-block anim-fade-up">
+      <div class="contact-form-block scroll-reveal from-right">
         <form id="contactForm" onsubmit="submitContactForm(event)">
           <div class="form-group">
             <label for="contact-name">Name</label>
@@ -3005,86 +3017,19 @@ ul, ol { list-style: none; }
   });
 
   /* ========================================
-     GSAP — SCROLL ANIMATIONS
+     CSS SCROLL REVEAL (IntersectionObserver)
      ======================================== */
-  gsap.utils.toArray('.anim-fade-up').forEach(function(el) {
-    gsap.from(el, {
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 88%',
-        toggleActions: 'play none none none'
-      },
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      ease: 'power3.out'
+  var scrollObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        scrollObserver.unobserve(entry.target);
+      }
     });
-  });
+  }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
 
-  // Value cards stagger
-  ScrollTrigger.create({
-    trigger: '.value-cards',
-    start: 'top 85%',
-    onEnter: function() {
-      gsap.from('.value-card', {
-        opacity: 0,
-        y: 60,
-        scale: 0.95,
-        duration: 0.8,
-        ease: 'power3.out',
-        stagger: 0.15
-      });
-    },
-    once: true
-  });
-
-  // Team cards stagger
-  ScrollTrigger.create({
-    trigger: '.team-grid',
-    start: 'top 85%',
-    onEnter: function() {
-      gsap.from('.team-card', {
-        opacity: 0,
-        y: 60,
-        rotateX: 5,
-        duration: 0.9,
-        ease: 'power3.out',
-        stagger: 0.12
-      });
-    },
-    once: true
-  });
-
-  // Event cards stagger
-  ScrollTrigger.create({
-    trigger: '.events-grid',
-    start: 'top 85%',
-    onEnter: function() {
-      gsap.from('.event-card', {
-        opacity: 0,
-        y: 50,
-        duration: 0.8,
-        ease: 'power3.out',
-        stagger: 0.1
-      });
-    },
-    once: true
-  });
-
-  // Benefits stagger
-  ScrollTrigger.create({
-    trigger: '.benefits-list',
-    start: 'top 85%',
-    onEnter: function() {
-      gsap.from('.benefit-item', {
-        opacity: 0,
-        x: -30,
-        duration: 0.7,
-        ease: 'power3.out',
-        stagger: 0.1
-      });
-    },
-    once: true
+  document.querySelectorAll('.scroll-reveal').forEach(function(el) {
+    scrollObserver.observe(el);
   });
 
   /* ========================================
@@ -3106,35 +3051,7 @@ ul, ol { list-style: none; }
     });
   });
 
-  // Section headings parallax
-  gsap.utils.toArray('.section-heading h2, .membership-content h2').forEach(function(h2) {
-    gsap.from(h2, {
-      scrollTrigger: {
-        trigger: h2,
-        start: 'top 85%',
-        toggleActions: 'play none none none'
-      },
-      opacity: 0,
-      y: 40,
-      duration: 1.2,
-      ease: 'power4.out'
-    });
-  });
-
-  // Vision quote special animation
-  ScrollTrigger.create({
-    trigger: '.vision-quote',
-    start: 'top 80%',
-    onEnter: function() {
-      gsap.from('.vision-quote', {
-        opacity: 0,
-        y: 30,
-        duration: 1.2,
-        ease: 'power3.out'
-      });
-    },
-    once: true
-  });
+  // Section headings and vision quote are handled by the IntersectionObserver above
 
   /* ========================================
      3D CARD TILT EFFECT
@@ -3187,7 +3104,7 @@ ul, ol { list-style: none; }
       eventCards.forEach(function(card) {
         if (filter === 'all' || card.getAttribute('data-type') === filter) {
           card.style.display = '';
-          gsap.from(card, { opacity: 0, y: 20, duration: 0.4, ease: 'power2.out' });
+          gsap.fromTo(card, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
         } else {
           card.style.display = 'none';
         }
@@ -3199,7 +3116,7 @@ ul, ol { list-style: none; }
       } else {
         netzwerkSection.style.display = '';
         if (filter === 'netzwerk') {
-          gsap.from('.netzwerk-card', { opacity: 0, x: -15, duration: 0.4, stagger: 0.08 });
+          gsap.fromTo('.netzwerk-card', { opacity: 0, x: -15 }, { opacity: 1, x: 0, duration: 0.4, stagger: 0.08 });
         }
       }
 
@@ -3232,29 +3149,29 @@ ul, ol { list-style: none; }
   });
 
   /* ========================================
-     FOOTER REVEAL ANIMATION
+     FOOTER REVEAL (via IntersectionObserver)
      ======================================== */
-  ScrollTrigger.create({
-    trigger: '.footer',
-    start: 'top 90%',
-    onEnter: function() {
-      gsap.from('.footer-grid > div', {
-        opacity: 0,
-        y: 30,
-        duration: 0.7,
-        ease: 'power3.out',
-        stagger: 0.1
-      });
-      gsap.from('.footer-bottom', {
-        opacity: 0,
-        y: 20,
-        duration: 0.6,
-        ease: 'power3.out',
-        delay: 0.5
-      });
-    },
-    once: true
-  });
+  var footerObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.footer-grid > div, .footer-bottom').forEach(function(el, i) {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(20px)';
+          el.style.transition = 'opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)';
+          el.style.transitionDelay = (i * 0.1) + 's';
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+            });
+          });
+        });
+        footerObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  var footerEl = document.querySelector('.footer');
+  if (footerEl) footerObserver.observe(footerEl);
 
   /* ========================================
      WAVE DIVIDERS PARALLAX
@@ -3378,22 +3295,7 @@ ul, ol { list-style: none; }
     form.reset();
   };
 
-  /* ========================================
-     CONTACT SECTION ANIMATIONS
-     ======================================== */
-  ScrollTrigger.create({
-    trigger: '.section-contact',
-    start: 'top 85%',
-    onEnter: function() {
-      gsap.from('.contact-info-block', {
-        opacity: 0, x: -30, duration: 0.8, ease: 'power3.out'
-      });
-      gsap.from('.contact-form-block', {
-        opacity: 0, x: 30, duration: 0.8, ease: 'power3.out', delay: 0.15
-      });
-    },
-    once: true
-  });
+  // Contact section animations handled by IntersectionObserver above
 
 })();
 </script>
