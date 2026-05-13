@@ -44,6 +44,141 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ─── GLOBAL TEXTURE OVERLAY ─── */
+.texture-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
+  z-index: 0;
+}
+
+/* ─── SECTION DIVIDERS ─── */
+.section-divider {
+  position: relative;
+  height: 1px;
+  max-width: 200px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  overflow: visible;
+}
+.section-divider::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+.section-divider-dark {
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.4), transparent);
+}
+.section-divider-dark::before {
+  background: var(--gold-light);
+}
+
+/* ─── BACK TO TOP ─── */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  background: var(--navy);
+  color: var(--gold-light);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s var(--ease-out);
+  z-index: 999;
+  box-shadow: 0 4px 20px rgba(15, 27, 61, 0.3);
+}
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.back-to-top:hover {
+  background: var(--navy-light);
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(15, 27, 61, 0.4);
+}
+.back-to-top svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* ─── QUOTE MARQUEE ─── */
+.quote-marquee {
+  overflow: hidden;
+  padding: 2.5rem 0;
+  background: var(--navy);
+  position: relative;
+  border-top: 1px solid rgba(201, 169, 110, 0.1);
+  border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+}
+.quote-marquee-track {
+  display: flex;
+  gap: 4rem;
+  animation: marqueeScroll 40s linear infinite;
+  width: max-content;
+}
+.quote-marquee-item {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.quote-marquee-item .marquee-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── GLOW EFFECTS ─── */
+.glow-card {
+  position: relative;
+}
+.glow-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(180, 67, 108, 0.15), rgba(201, 169, 110, 0.15));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+  filter: blur(12px);
+}
+.glow-card:hover::after {
+  opacity: 1;
+}
+
 /* ─── REVEAL ANIMATIONS ─── */
 .reveal {
   opacity: 0;
@@ -198,6 +333,17 @@ body {
   inset: 0;
   overflow: hidden;
 }
+.hero-mouse-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(180, 67, 108, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: left 0.8s ease-out, top 0.8s ease-out;
+  z-index: 1;
+}
 .hero-bg::before {
   content: '';
   position: absolute;
@@ -260,20 +406,57 @@ body {
 .hero-cross {
   position: absolute;
   width: 1px;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, rgba(201, 169, 110, 0.2), transparent);
-  top: 15%;
-  right: 15%;
+  height: 180px;
+  background: linear-gradient(to bottom, transparent, rgba(201, 169, 110, 0.25), transparent);
+  top: 12%;
+  right: 12%;
+  animation: crossFade 6s ease-in-out infinite alternate;
 }
 .hero-cross::after {
   content: '';
   position: absolute;
-  width: 60px;
+  width: 80px;
   height: 1px;
-  background: linear-gradient(to right, transparent, rgba(201, 169, 110, 0.2), transparent);
+  background: linear-gradient(to right, transparent, rgba(201, 169, 110, 0.25), transparent);
   top: 35%;
   left: 50%;
   transform: translateX(-50%);
+}
+.hero-cross-2 {
+  position: absolute;
+  width: 1px;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, rgba(201, 169, 110, 0.12), transparent);
+  bottom: 20%;
+  left: 10%;
+  animation: crossFade 6s ease-in-out infinite alternate-reverse;
+}
+.hero-cross-2::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201, 169, 110, 0.12), transparent);
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@keyframes crossFade {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Hero bottom gradient transition */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--white));
+  z-index: 3;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -426,9 +609,10 @@ body {
 .stats-bar {
   background: var(--white);
   border-bottom: 1px solid rgba(0,0,0,0.06);
-  padding: 3rem 2rem;
+  padding: 3.5rem 2rem;
   position: relative;
   z-index: 10;
+  box-shadow: 0 8px 40px rgba(15, 27, 61, 0.04);
 }
 .stats-grid {
   max-width: 1100px;
@@ -512,7 +696,12 @@ section {
 }
 
 /* ─── UNSER ZIEL ─── */
-#ziel { background: var(--cream); }
+#ziel {
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+#ziel .texture-overlay { opacity: 0.015; }
 .ziel-grid {
   max-width: 1200px;
   margin: 0 auto;
@@ -557,16 +746,28 @@ section {
   position: absolute;
   bottom: -2rem;
   right: -2rem;
-  background: var(--navy);
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
   color: var(--white);
-  padding: 1.5rem 2rem;
+  padding: 2rem 2rem 1.5rem;
   border-radius: 16px;
   max-width: 320px;
   font-family: var(--font-display);
   font-size: 0.95rem;
   font-style: italic;
   line-height: 1.6;
-  box-shadow: 0 20px 40px rgba(15, 27, 61, 0.2);
+  box-shadow: 0 20px 50px rgba(15, 27, 61, 0.25);
+  border: 1px solid rgba(201, 169, 110, 0.15);
+}
+.ziel-quote-card::before {
+  content: '\201C';
+  position: absolute;
+  top: -8px;
+  left: 16px;
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: var(--gold);
+  opacity: 0.4;
+  line-height: 1;
 }
 .ziel-quote-card cite {
   display: block;
@@ -681,17 +882,23 @@ section {
   background: var(--white);
   border-radius: 20px;
   overflow: hidden;
-  transition: all 0.4s var(--ease-out);
+  transition: all 0.5s var(--ease-out);
   position: relative;
   border: 1px solid rgba(0,0,0,0.04);
 }
 .event-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(15, 27, 61, 0.1);
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 25px 60px rgba(15, 27, 61, 0.12), 0 0 0 1px rgba(180, 67, 108, 0.08);
 }
 .event-card-accent {
   height: 4px;
-  background: linear-gradient(90deg, var(--rose), var(--gold));
+  background: linear-gradient(90deg, var(--rose), var(--gold), var(--rose));
+  background-size: 200% 100%;
+  animation: accentShimmer 3s ease-in-out infinite;
+}
+@keyframes accentShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 .event-card-body {
   padding: 2rem;
@@ -1027,13 +1234,28 @@ section {
   background: var(--white);
   border-radius: 16px;
   padding: 1.5rem;
-  transition: all 0.3s var(--ease-out);
+  transition: all 0.4s var(--ease-out);
   border: 1px solid rgba(0,0,0,0.04);
+  position: relative;
+}
+.therapeut-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(to bottom, var(--rose), var(--gold));
+  border-radius: 3px 0 0 3px;
+  transition: height 0.4s var(--ease-out);
 }
 .therapeut-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(15, 27, 61, 0.07);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(15, 27, 61, 0.08);
   border-color: var(--rose-pale);
+}
+.therapeut-card:hover::before {
+  height: 100%;
 }
 .therapeut-card h4 {
   font-family: var(--font-display);
@@ -1151,6 +1373,17 @@ section {
   position: relative;
   overflow: hidden;
 }
+.kontakt-map::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(180, 67, 108, 0.06) 0%, transparent 70%);
+  animation: mapPulse 4s ease-in-out infinite;
+}
+@keyframes mapPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.6; }
+}
 .kontakt-map-pin {
   text-align: center;
 }
@@ -1198,9 +1431,30 @@ section {
 /* ─── FOOTER ─── */
 .footer {
   background: #0a1228;
-  padding: 2rem;
+  padding: 3rem 2rem 2rem;
   text-align: center;
+  position: relative;
 }
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.footer-logo {
+  margin-bottom: 1.5rem;
+}
+.footer-logo img {
+  height: 32px;
+  opacity: 0.4;
+  filter: grayscale(100%) brightness(2);
+  transition: opacity 0.3s ease;
+}
+.footer-logo img:hover { opacity: 0.7; }
 .footer p {
   font-size: 0.75rem;
   color: rgba(255,255,255,0.3);
@@ -1209,13 +1463,18 @@ section {
 .footer a {
   color: rgba(255,255,255,0.4);
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 .footer a:hover { color: var(--rose-light); }
 .footer-links {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+.footer-links a {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
 }
 
 /* ─── SPEAKER AVATARS (Event Cards) ─── */
@@ -1318,7 +1577,33 @@ section {
 }
 
 /* ─── TEAM / DOZENTEN SECTION ─── */
-#team { background: var(--cream); }
+#team {
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+#team::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(180, 67, 108, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+#team::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 169, 110, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
 
 .team-grid {
   max-width: 1100px;
@@ -1326,21 +1611,41 @@ section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+  position: relative;
+  z-index: 1;
 }
 .team-card {
-  background: var(--white);
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 24px;
   padding: 2.5rem 2rem 2rem;
   text-align: center;
-  transition: all 0.4s var(--ease-out);
-  border: 1px solid transparent;
+  transition: all 0.5s var(--ease-out);
+  border: 1px solid rgba(201, 169, 110, 0.12);
   position: relative;
   overflow: hidden;
 }
+.team-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--rose), var(--gold));
+  transform: scaleX(0);
+  transition: transform 0.5s var(--ease-out);
+  transform-origin: center;
+}
 .team-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(15, 27, 61, 0.08);
-  border-color: var(--stone);
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(15, 27, 61, 0.1), 0 0 0 1px rgba(201, 169, 110, 0.15);
+  border-color: rgba(201, 169, 110, 0.25);
+  background: rgba(255, 255, 255, 0.9);
+}
+.team-card:hover::before {
+  transform: scaleX(1);
 }
 .team-card-img {
   width: 120px;
@@ -1518,6 +1823,8 @@ section {
     <div class="hero-orb"></div>
     <div class="hero-grain"></div>
     <div class="hero-cross"></div>
+    <div class="hero-cross-2"></div>
+    <div class="hero-mouse-glow" id="heroGlow"></div>
   </div>
   <div class="hero-content">
     <div class="hero-badge">Netzwerk christlicher Osteopathen</div>
@@ -1561,8 +1868,12 @@ section {
   </div>
 </div>
 
+<!-- ═══ DIVIDER ═══ -->
+<div style="padding: 1rem 0;"><div class="section-divider"></div></div>
+
 <!-- ═══ UNSER ZIEL ═══ -->
 <section id="ziel">
+  <div class="texture-overlay"></div>
   <div class="section-header reveal">
     <div class="section-tag">Unsere Mission</div>
     <h2 class="section-title">Geistlich wachsen, <em>fachlich</em> exzellent</h2>
@@ -1630,6 +1941,20 @@ section {
     </p>
   </div>
 </section>
+
+<!-- ═══ QUOTE MARQUEE ═══ -->
+<div class="quote-marquee">
+  <div class="quote-marquee-track">
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>I love my fellow man because I see God in his face and in his form — A. T. Still</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>Geistlich wachsen, fachlich exzellent — Christen in der Osteopathie</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>I do not wish to be classed with any 'ism' or 'ist' — A. T. Still</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>Netzwerk · Fortbildung · Gemeinschaft — Seit 2017</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>I love my fellow man because I see God in his face and in his form — A. T. Still</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>Geistlich wachsen, fachlich exzellent — Christen in der Osteopathie</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>I do not wish to be classed with any 'ism' or 'ist' — A. T. Still</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>Netzwerk · Fortbildung · Gemeinschaft — Seit 2017</div>
+  </div>
+</div>
 
 <!-- ═══ TEAM / DOZENTEN ═══ -->
 <section id="team">
@@ -1957,6 +2282,9 @@ section {
   </div>
 </section>
 
+<!-- ═══ DIVIDER ═══ -->
+<div style="padding: 1rem 0; background: var(--cream-warm);"><div class="section-divider"></div></div>
+
 <!-- ═══ WAS IST OSTEOPATHIE ═══ -->
 <section id="osteopathie">
   <div class="section-header reveal">
@@ -2091,8 +2419,16 @@ section {
   </div>
 </section>
 
+<!-- ═══ BACK TO TOP ═══ -->
+<button class="back-to-top" id="backToTop" aria-label="Nach oben scrollen">
+  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
 <!-- ═══ FOOTER ═══ -->
 <footer class="footer">
+  <div class="footer-logo">
+    <img src="img/cropped-CiO_400x180.png" alt="CiO Logo">
+  </div>
   <div class="footer-links">
     <a href="https://christen-in-der-osteopathie.de/impressum/">Impressum</a>
     <a href="https://christen-in-der-osteopathie.de/datenschutz/">Datenschutz</a>
@@ -2289,6 +2625,46 @@ const sectionObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
 sections.forEach(s => sectionObserver.observe(s));
+
+// ─── HERO MOUSE GLOW ───
+const heroEl = document.querySelector('.hero');
+const heroGlow = document.getElementById('heroGlow');
+if (heroEl && heroGlow) {
+  heroEl.addEventListener('mousemove', (e) => {
+    const rect = heroEl.getBoundingClientRect();
+    heroGlow.style.left = (e.clientX - rect.left) + 'px';
+    heroGlow.style.top = (e.clientY - rect.top) + 'px';
+  });
+}
+
+// ─── BACK TO TOP ───
+const backToTop = document.getElementById('backToTop');
+if (backToTop) {
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 600);
+  });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// ─── PARALLAX ON SCROLL ───
+const parallaxElements = document.querySelectorAll('.ziel-img-wrapper');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  parallaxElements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    const center = rect.top + rect.height / 2;
+    const viewCenter = window.innerHeight / 2;
+    const offset = (center - viewCenter) * 0.06;
+    el.style.transform = `translateY(${offset}px)`;
+  });
+}, { passive: true });
+
+// ─── STAGGERED REVEALS ───
+document.querySelectorAll('.team-card, .osteo-card, .event-card, .netzwerk-card').forEach((card, i) => {
+  card.style.transitionDelay = (i % 3) * 0.1 + 's';
+});
 </script>
 </body>
 </html>

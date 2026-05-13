@@ -4,7 +4,7 @@
     {
       "name": "cio-site",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8091"],
+      "runtimeArgs": ["-m", "http.server", "8091", "--directory", "/Users/benjaminrumold/Downloads/cio-redesign"],
       "port": 8091
     }
   ]
