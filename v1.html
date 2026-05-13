@@ -1,0 +1,2670 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christen in der Osteopathie — Netzwerk für Glaube & Heilkunst</title>
+<meta name="description" content="Netzwerkbildung von Christen mit osteopathischer Ausbildung. Fortbildungen, Netzwerktreffen und Therapeutenverzeichnis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #0f1b3d;
+  --navy-light: #1a2d5e;
+  --navy-mid: #253a6e;
+  --rose: #b4436c;
+  --rose-light: #d4698e;
+  --rose-glow: #e8a0b8;
+  --rose-pale: #f5dce6;
+  --gold: #c9a96e;
+  --gold-light: #e0c992;
+  --cream: #faf7f2;
+  --cream-warm: #f5efe6;
+  --stone: #e8e2d8;
+  --text-dark: #1a1a2e;
+  --text-body: #3a3a4a;
+  --text-muted: #6b6b7b;
+  --white: #ffffff;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-body);
+  background: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── GLOBAL TEXTURE OVERLAY ─── */
+.texture-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
+  z-index: 0;
+}
+
+/* ─── SECTION DIVIDERS ─── */
+.section-divider {
+  position: relative;
+  height: 1px;
+  max-width: 200px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  overflow: visible;
+}
+.section-divider::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+.section-divider-dark {
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 110, 0.4), transparent);
+}
+.section-divider-dark::before {
+  background: var(--gold-light);
+}
+
+/* ─── BACK TO TOP ─── */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  background: var(--navy);
+  color: var(--gold-light);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s var(--ease-out);
+  z-index: 999;
+  box-shadow: 0 4px 20px rgba(15, 27, 61, 0.3);
+}
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.back-to-top:hover {
+  background: var(--navy-light);
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(15, 27, 61, 0.4);
+}
+.back-to-top svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+/* ─── QUOTE MARQUEE ─── */
+.quote-marquee {
+  overflow: hidden;
+  padding: 2.5rem 0;
+  background: var(--navy);
+  position: relative;
+  border-top: 1px solid rgba(201, 169, 110, 0.1);
+  border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+}
+.quote-marquee-track {
+  display: flex;
+  gap: 4rem;
+  animation: marqueeScroll 40s linear infinite;
+  width: max-content;
+}
+.quote-marquee-item {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.4);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.quote-marquee-item .marquee-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ─── GLOW EFFECTS ─── */
+.glow-card {
+  position: relative;
+}
+.glow-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(180, 67, 108, 0.15), rgba(201, 169, 110, 0.15));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+  filter: blur(12px);
+}
+.glow-card:hover::after {
+  opacity: 1;
+}
+
+/* ─── REVEAL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ─── NAVIGATION ─── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.5s var(--ease-out);
+}
+.nav.scrolled {
+  background: rgba(15, 27, 61, 0.92);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  padding: 0.6rem 2rem;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+.nav-logo img {
+  height: 48px;
+  transition: height 0.4s var(--ease-out);
+}
+.nav.scrolled .nav-logo img { height: 36px; }
+.nav-logo-text {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+.nav-logo-text span {
+  display: block;
+  font-size: 0.65rem;
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 0.9rem;
+  border-radius: 100px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--white);
+  background: rgba(255,255,255,0.12);
+}
+.nav-cta {
+  background: var(--rose) !important;
+  color: var(--white) !important;
+  padding: 0.5rem 1.2rem !important;
+}
+.nav-cta:hover {
+  background: var(--rose-light) !important;
+  transform: translateY(-1px);
+}
+
+/* Mobile menu */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; }
+.nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--navy);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.hero-mouse-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(180, 67, 108, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: left 0.8s ease-out, top 0.8s ease-out;
+  z-index: 1;
+}
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(180, 67, 108, 0.15) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 30%, rgba(201, 169, 110, 0.1) 0%, transparent 40%),
+              radial-gradient(ellipse at 50% 80%, rgba(26, 45, 94, 0.8) 0%, transparent 50%);
+  animation: heroShift 20s ease-in-out infinite alternate;
+}
+@keyframes heroShift {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-5%, 3%) rotate(3deg); }
+}
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px;
+}
+
+/* Floating orbs */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.2;
+  animation: orbFloat 15s ease-in-out infinite;
+}
+.hero-orb:nth-child(1) {
+  width: 500px; height: 500px;
+  background: var(--rose);
+  top: 10%; right: -10%;
+  animation-delay: 0s;
+}
+.hero-orb:nth-child(2) {
+  width: 400px; height: 400px;
+  background: var(--gold);
+  bottom: 10%; left: -5%;
+  animation-delay: -5s;
+  animation-duration: 18s;
+}
+.hero-orb:nth-child(3) {
+  width: 300px; height: 300px;
+  background: var(--navy-mid);
+  top: 50%; left: 40%;
+  animation-delay: -10s;
+  animation-duration: 22s;
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(30px, -30px); }
+  66% { transform: translate(-20px, 20px); }
+}
+
+/* Decorative cross pattern */
+.hero-cross {
+  position: absolute;
+  width: 1px;
+  height: 180px;
+  background: linear-gradient(to bottom, transparent, rgba(201, 169, 110, 0.25), transparent);
+  top: 12%;
+  right: 12%;
+  animation: crossFade 6s ease-in-out infinite alternate;
+}
+.hero-cross::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201, 169, 110, 0.25), transparent);
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.hero-cross-2 {
+  position: absolute;
+  width: 1px;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, rgba(201, 169, 110, 0.12), transparent);
+  bottom: 20%;
+  left: 10%;
+  animation: crossFade 6s ease-in-out infinite alternate-reverse;
+}
+.hero-cross-2::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201, 169, 110, 0.12), transparent);
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@keyframes crossFade {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Hero bottom gradient transition */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--white));
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  padding: 2rem;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 100px;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-out) 0.3s forwards;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 1.2s var(--ease-out) 0.5s forwards;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--rose-light);
+}
+.hero h1 .gold {
+  color: var(--gold-light);
+}
+.hero-sub {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.65);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeUp 1.2s var(--ease-out) 0.7s forwards;
+}
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 1.2s var(--ease-out) 0.9s forwards;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2rem;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.4s var(--ease-out);
+}
+.btn-primary {
+  background: var(--rose);
+  color: var(--white);
+  box-shadow: 0 4px 20px rgba(180, 67, 108, 0.3);
+}
+.btn-primary:hover {
+  background: var(--rose-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(180, 67, 108, 0.4);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.4);
+  transform: translateY(-2px);
+}
+.btn-dark {
+  background: var(--navy);
+  color: var(--white);
+}
+.btn-dark:hover {
+  background: var(--navy-light);
+  transform: translateY(-2px);
+}
+
+/* Hero scroll indicator */
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: fadeUp 1.2s var(--ease-out) 1.5s forwards;
+  opacity: 0;
+}
+.hero-scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ─── STATS BAR ─── */
+.stats-bar {
+  background: var(--white);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding: 3.5rem 2rem;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 8px 40px rgba(15, 27, 61, 0.04);
+}
+.stats-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+.stat-item {
+  text-align: center;
+  position: relative;
+}
+.stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: var(--stone);
+}
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+.stat-number .counter { display: inline; }
+.stat-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ─── SECTIONS ─── */
+section {
+  padding: 7rem 2rem;
+  position: relative;
+}
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 4rem;
+}
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rose);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.section-tag::before, .section-tag::after {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--rose-light);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  color: var(--navy);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--rose);
+}
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ─── UNSER ZIEL ─── */
+#ziel {
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+#ziel .texture-overlay { opacity: 0.015; }
+.ziel-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.ziel-text p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: var(--text-body);
+}
+.ziel-text p:first-of-type {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--navy);
+  line-height: 1.6;
+}
+.ziel-visual {
+  position: relative;
+}
+.ziel-img-wrapper {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(15, 27, 61, 0.12);
+}
+.ziel-img-wrapper img {
+  width: 100%;
+  display: block;
+}
+.ziel-img-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(180, 67, 108, 0.1), transparent 60%);
+  pointer-events: none;
+}
+.ziel-quote-card {
+  position: absolute;
+  bottom: -2rem;
+  right: -2rem;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  color: var(--white);
+  padding: 2rem 2rem 1.5rem;
+  border-radius: 16px;
+  max-width: 320px;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  line-height: 1.6;
+  box-shadow: 0 20px 50px rgba(15, 27, 61, 0.25);
+  border: 1px solid rgba(201, 169, 110, 0.15);
+}
+.ziel-quote-card::before {
+  content: '\201C';
+  position: absolute;
+  top: -8px;
+  left: 16px;
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: var(--gold);
+  opacity: 0.4;
+  line-height: 1;
+}
+.ziel-quote-card cite {
+  display: block;
+  margin-top: 0.75rem;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+/* ─── WAS WIR GLAUBEN ─── */
+#glauben {
+  background: var(--navy);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+#glauben .section-tag { color: var(--gold-light); }
+#glauben .section-tag::before, #glauben .section-tag::after { background: var(--gold); }
+#glauben .section-title { color: var(--white); }
+#glauben .section-title em { color: var(--gold-light); }
+#glauben .section-subtitle { color: rgba(255,255,255,0.6); }
+
+.glauben-deco {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 169, 110, 0.06);
+  pointer-events: none;
+}
+.glauben-deco::before {
+  content: '';
+  position: absolute;
+  inset: 60px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 169, 110, 0.04);
+}
+
+.creed-container {
+  max-width: 750px;
+  margin: 0 auto;
+  text-align: center;
+}
+.creed-text {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 2;
+}
+.creed-text .creed-section {
+  margin-bottom: 1.5rem;
+}
+.creed-note {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  max-width: 550px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── VERANSTALTUNGEN ─── */
+#veranstaltungen { background: var(--cream-warm); }
+
+.events-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+}
+.events-tab {
+  padding: 0.65rem 1.5rem;
+  border-radius: 100px;
+  border: 1px solid var(--stone);
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.events-tab.active {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+.events-tab:hover:not(.active) {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
+.events-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.5rem;
+}
+.event-card {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.5s var(--ease-out);
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.event-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 25px 60px rgba(15, 27, 61, 0.12), 0 0 0 1px rgba(180, 67, 108, 0.08);
+}
+.event-card-accent {
+  height: 4px;
+  background: linear-gradient(90deg, var(--rose), var(--gold), var(--rose));
+  background-size: 200% 100%;
+  animation: accentShimmer 3s ease-in-out infinite;
+}
+@keyframes accentShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.event-card-body {
+  padding: 2rem;
+}
+.event-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rose);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.event-date svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--rose);
+}
+.event-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+.event-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.event-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.event-meta-item svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--text-muted);
+  flex-shrink: 0;
+}
+.event-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+.event-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--stone);
+}
+.event-price {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+.event-price small {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  display: block;
+  font-weight: 400;
+}
+.event-btn {
+  padding: 0.55rem 1.25rem;
+  font-size: 0.78rem;
+}
+.event-badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.event-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.badge-vod {
+  background: rgba(180, 67, 108, 0.08);
+  color: var(--rose);
+}
+.badge-rabatt {
+  background: rgba(201, 169, 110, 0.12);
+  color: var(--gold);
+}
+
+/* Netzwerktreffen cards */
+.netzwerk-card {
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  color: var(--white);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.4s var(--ease-out);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.netzwerk-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(15, 27, 61, 0.3);
+}
+.netzwerk-card .event-date {
+  color: var(--gold-light);
+}
+.netzwerk-card .event-date svg { stroke: var(--gold-light); }
+.netzwerk-card h3 {
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+.netzwerk-card p {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+.netzwerk-card .btn-outline {
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* AGB toggle */
+.agb-toggle {
+  max-width: 1200px;
+  margin: 3rem auto 0;
+  text-align: center;
+}
+.agb-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.agb-btn:hover { background: rgba(0,0,0,0.04); color: var(--text-dark); }
+.agb-btn svg {
+  width: 16px; height: 16px;
+  transition: transform 0.3s ease;
+}
+.agb-btn.active svg { transform: rotate(180deg); }
+.agb-content {
+  max-width: 800px;
+  margin: 1rem auto 0;
+  text-align: left;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s var(--ease-out), padding 0.5s var(--ease-out);
+  padding: 0 2rem;
+}
+.agb-content.open {
+  max-height: 800px;
+  padding: 1.5rem 2rem;
+}
+
+/* ─── WAS IST OSTEOPATHIE ─── */
+#osteopathie { background: var(--white); }
+
+.osteo-intro {
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+.osteo-intro p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-body);
+}
+
+.osteo-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.osteo-card {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: all 0.4s var(--ease-out);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+.osteo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rose), var(--gold));
+  transform: scaleX(0);
+  transition: transform 0.4s var(--ease-out);
+}
+.osteo-card:hover {
+  background: var(--white);
+  border-color: var(--stone);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(15, 27, 61, 0.06);
+}
+.osteo-card:hover::before { transform: scaleX(1); }
+.osteo-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.osteo-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--gold-light);
+  fill: none;
+  stroke-width: 1.5;
+}
+.osteo-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.75rem;
+}
+.osteo-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.osteo-bottom {
+  max-width: 800px;
+  margin: 4rem auto 0;
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+.osteo-bottom h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 0.75rem;
+}
+.osteo-bottom p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+/* ─── THERAPEUTENLISTE ─── */
+#therapeuten {
+  background: var(--cream-warm);
+  padding-bottom: 5rem;
+}
+
+.therapeuten-search {
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  position: relative;
+}
+.therapeuten-search input {
+  width: 100%;
+  padding: 1rem 1.5rem 1rem 3.25rem;
+  border: 2px solid var(--stone);
+  border-radius: 16px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background: var(--white);
+  transition: all 0.3s ease;
+  color: var(--text-dark);
+}
+.therapeuten-search input:focus {
+  outline: none;
+  border-color: var(--rose);
+  box-shadow: 0 0 0 4px rgba(180, 67, 108, 0.08);
+}
+.therapeuten-search input::placeholder { color: var(--text-muted); }
+.therapeuten-search svg {
+  position: absolute;
+  left: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  stroke: var(--text-muted);
+}
+.search-count {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.therapeuten-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+.therapeut-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.4s var(--ease-out);
+  border: 1px solid rgba(0,0,0,0.04);
+  position: relative;
+}
+.therapeut-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(to bottom, var(--rose), var(--gold));
+  border-radius: 3px 0 0 3px;
+  transition: height 0.4s var(--ease-out);
+}
+.therapeut-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(15, 27, 61, 0.08);
+  border-color: var(--rose-pale);
+}
+.therapeut-card:hover::before {
+  height: 100%;
+}
+.therapeut-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.25rem;
+}
+.therapeut-qual {
+  font-size: 0.75rem;
+  color: var(--rose);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.therapeut-praxis {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+.therapeut-details {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.therapeut-details a {
+  color: var(--rose);
+  text-decoration: none;
+}
+.therapeut-details a:hover { text-decoration: underline; }
+.therapeut-plz {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  background: var(--cream);
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+.therapeuten-more {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* ─── KONTAKT ─── */
+#kontakt {
+  background: var(--navy);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+#kontakt .section-tag { color: var(--gold-light); }
+#kontakt .section-tag::before, #kontakt .section-tag::after { background: var(--gold); }
+#kontakt .section-title { color: var(--white); }
+#kontakt .section-title em { color: var(--rose-light); }
+
+.kontakt-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+.kontakt-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+.kontakt-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.kontakt-item-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.kontakt-item-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--gold-light);
+}
+.kontakt-item-text {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.7);
+}
+.kontakt-item-text a {
+  color: var(--rose-light);
+  text-decoration: none;
+}
+.kontakt-item-text a:hover { text-decoration: underline; }
+.kontakt-item-text strong {
+  color: var(--white);
+  font-weight: 500;
+}
+
+.kontakt-map {
+  background: rgba(255,255,255,0.04);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+}
+.kontakt-map::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(180, 67, 108, 0.06) 0%, transparent 70%);
+  animation: mapPulse 4s ease-in-out infinite;
+}
+@keyframes mapPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.6; }
+}
+.kontakt-map-pin {
+  text-align: center;
+}
+.kontakt-map-pin svg {
+  width: 48px;
+  height: 48px;
+  stroke: var(--rose-light);
+  margin-bottom: 0.75rem;
+}
+.kontakt-map-pin p {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* Zertifizierungen */
+.zert-bar {
+  max-width: 900px;
+  margin: 3rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.zert-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.zert-item img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--white);
+  padding: 4px;
+}
+.zert-item span {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  background: #0a1228;
+  padding: 3rem 2rem 2rem;
+  text-align: center;
+  position: relative;
+}
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.footer-logo {
+  margin-bottom: 1.5rem;
+}
+.footer-logo img {
+  height: 32px;
+  opacity: 0.4;
+  filter: grayscale(100%) brightness(2);
+  transition: opacity 0.3s ease;
+}
+.footer-logo img:hover { opacity: 0.7; }
+.footer p {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+  line-height: 1.8;
+}
+.footer a {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.footer a:hover { color: var(--rose-light); }
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+.footer-links a {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+/* ─── SPEAKER AVATARS (Event Cards) ─── */
+.event-speakers {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.event-speakers-avatars {
+  display: flex;
+  align-items: center;
+}
+.speaker-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold-light);
+  transition: transform 0.3s var(--ease-out);
+  position: relative;
+  z-index: 1;
+  background: var(--cream);
+}
+.speaker-avatar:not(:first-child) {
+  margin-left: -10px;
+}
+.speaker-avatar:hover {
+  transform: scale(1.15);
+  z-index: 2;
+}
+.speaker-initials {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 2px solid var(--gold-light);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  transition: transform 0.3s var(--ease-out);
+}
+.speaker-initials:not(:first-child) {
+  margin-left: -10px;
+}
+.speaker-initials:hover {
+  transform: scale(1.15);
+  z-index: 2;
+}
+.speaker-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.speaker-info .speaker-names {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+.speaker-info .speaker-roles {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Book cover thumbnail in event card */
+.event-book-thumb {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--cream);
+  border-radius: 10px;
+  border: 1px solid var(--stone);
+}
+.event-book-thumb img {
+  width: 52px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.event-book-thumb .book-info {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.event-book-thumb .book-info strong {
+  color: var(--text-dark);
+  display: block;
+  font-size: 0.75rem;
+}
+
+/* ─── TEAM / DOZENTEN SECTION ─── */
+#team {
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+#team::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(180, 67, 108, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+#team::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 169, 110, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.team-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+.team-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+  transition: all 0.5s var(--ease-out);
+  border: 1px solid rgba(201, 169, 110, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+.team-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--rose), var(--gold));
+  transform: scaleX(0);
+  transition: transform 0.5s var(--ease-out);
+  transform-origin: center;
+}
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(15, 27, 61, 0.1), 0 0 0 1px rgba(201, 169, 110, 0.15);
+  border-color: rgba(201, 169, 110, 0.25);
+  background: rgba(255, 255, 255, 0.9);
+}
+.team-card:hover::before {
+  transform: scaleX(1);
+}
+.team-card-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1.25rem;
+  display: block;
+  border: 3px solid var(--gold-light);
+  box-shadow: 0 8px 24px rgba(15, 27, 61, 0.1);
+  transition: transform 0.4s var(--ease-out);
+}
+.team-card:hover .team-card-img {
+  transform: scale(1.05);
+}
+.team-card-initials {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  border: 3px solid var(--gold-light);
+  box-shadow: 0 8px 24px rgba(15, 27, 61, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin: 0 auto 1.25rem;
+  transition: transform 0.4s var(--ease-out);
+  position: relative;
+  letter-spacing: 0.03em;
+}
+.team-card-initials::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 169, 110, 0.2);
+}
+.team-card:hover .team-card-initials {
+  transform: scale(1.05);
+}
+.team-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.35rem;
+  line-height: 1.2;
+}
+.team-card-gold-line {
+  width: 30px;
+  height: 2px;
+  background: var(--gold);
+  margin: 0.5rem auto 0.75rem;
+  border-radius: 2px;
+}
+.team-card-role {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--rose);
+  letter-spacing: 0.03em;
+  margin-bottom: 0.35rem;
+}
+.team-card-qual {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .ziel-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .ziel-visual { order: -1; }
+  .osteo-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+  .osteo-bottom { grid-template-columns: 1fr; }
+  .kontakt-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .team-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 27, 61, 0.98);
+    backdrop-filter: blur(20px);
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 999;
+  }
+  .nav-links.open a {
+    font-size: 1.2rem;
+    padding: 0.75rem 2rem;
+  }
+  .nav-toggle { display: flex; }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .stat-item:nth-child(2)::after { display: none; }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+  .therapeuten-grid {
+    grid-template-columns: 1fr;
+  }
+
+  section { padding: 4rem 1.25rem; }
+
+  .hero h1 { font-size: 2.4rem; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-content { padding: 1rem; }
+
+  .ziel-quote-card {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 1rem;
+  }
+
+  .events-tabs { flex-wrap: wrap; }
+}
+
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-item::after { display: none; }
+  .stat-number { font-size: 2.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="nav" id="mainNav">
+  <a href="#" class="nav-logo">
+    <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2017/07/cropped-CiO_400x180.png" alt="CiO Logo">
+    <div class="nav-logo-text">
+      Christen in der Osteopathie
+      <span>Netzwerk &bull; Fortbildung &bull; Gemeinschaft</span>
+    </div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#ziel">Unser Ziel</a></li>
+    <li><a href="#glauben">Glaube</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#veranstaltungen">Veranstaltungen</a></li>
+    <li><a href="#osteopathie">Osteopathie</a></li>
+    <li><a href="#therapeuten">Therapeuten</a></li>
+    <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-orb"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-cross"></div>
+    <div class="hero-cross-2"></div>
+    <div class="hero-mouse-glow" id="heroGlow"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">Netzwerk christlicher Osteopathen</div>
+    <h1>Glaube trifft <em>Heilkunst</em></h1>
+    <p class="hero-sub">
+      Netzwerkbildung von Christen mit osteopathischer Ausbildung — geistlich wachsen, fachlich austauschen, gemeinsam fortbilden.
+    </p>
+    <div class="hero-actions">
+      <a href="#veranstaltungen" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Veranstaltungen 2026/27
+      </a>
+      <a href="#therapeuten" class="btn btn-outline">Therapeut finden</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    Entdecken
+  </div>
+</section>
+
+<!-- ═══ STATS BAR ═══ -->
+<div class="stats-bar reveal">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number"><span class="counter" data-target="40">0</span>+</div>
+      <div class="stat-label">Therapeuten im Netzwerk</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span class="counter" data-target="6">0</span></div>
+      <div class="stat-label">Fortbildungen 2026/27</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span class="counter" data-target="3">0</span></div>
+      <div class="stat-label">Länder (D · A · CH)</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">Seit <span class="counter" data-target="2017">0</span></div>
+      <div class="stat-label">Netzwerk aktiv</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DIVIDER ═══ -->
+<div style="padding: 1rem 0;"><div class="section-divider"></div></div>
+
+<!-- ═══ UNSER ZIEL ═══ -->
+<section id="ziel">
+  <div class="texture-overlay"></div>
+  <div class="section-header reveal">
+    <div class="section-tag">Unsere Mission</div>
+    <h2 class="section-title">Geistlich wachsen, <em>fachlich</em> exzellent</h2>
+  </div>
+  <div class="ziel-grid">
+    <div class="ziel-text reveal-left">
+      <p>Netzwerkbildung von Christen mit osteopathischer Ausbildung — mit dem Ziel, geistlich zu wachsen, uns fachlich auszutauschen und fortzubilden.</p>
+      <p>Dies geschieht durch osteopathische Fortbildungsangebote, die von einem geistlichen Programm umrahmt werden: Gottesdienstbesuch, Gebetsgemeinschaft und gemeinsames Lesen der Bibel.</p>
+      <p>Unsere Fortbildungen enthalten keine esoterischen Inhalte. Wir sehen uns in der Tradition A.&nbsp;T.&nbsp;Stills, dem Begründer der Osteopathie, und arbeiten auf Grundlage der naturwissenschaftlichen Prinzipien — den Naturgesetzen, die Gott geschaffen hat.</p>
+    </div>
+    <div class="ziel-visual reveal-right">
+      <div class="ziel-img-wrapper">
+        <img src="img/netzwerk-dunkelrot_400-300x204.jpg" alt="Netzwerk Illustration" loading="lazy">
+      </div>
+      <div class="ziel-quote-card">
+        &ldquo;I love my fellow man because I see God in his face and in his form.&rdquo;
+        <cite>A.&nbsp;T.&nbsp;Still — Gründer der Osteopathie</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WAS WIR GLAUBEN ═══ -->
+<section id="glauben">
+  <div class="glauben-deco"></div>
+  <div class="section-header reveal">
+    <div class="section-tag">Fundament</div>
+    <h2 class="section-title">Was wir <em>glauben</em></h2>
+    <p class="section-subtitle">Unser gemeinsames Bekenntnis — das Apostolische Glaubensbekenntnis</p>
+  </div>
+  <div class="creed-container reveal">
+    <div class="creed-text">
+      <div class="creed-section">
+        Ich glaube an Gott, den Vater,<br>
+        den Allmächtigen,<br>
+        den Schöpfer des Himmels und der Erde.
+      </div>
+      <div class="creed-section">
+        Und an Jesus Christus,<br>
+        seinen eingeborenen Sohn, unsern Herrn,<br>
+        empfangen durch den Heiligen Geist,<br>
+        geboren von der Jungfrau Maria,<br>
+        gelitten unter Pontius Pilatus,<br>
+        gekreuzigt, gestorben und begraben,<br>
+        hinabgestiegen in das Reich des Todes,<br>
+        am dritten Tage auferstanden von den Toten,<br>
+        aufgefahren in den Himmel;<br>
+        er sitzt zur Rechten Gottes,<br>
+        des allmächtigen Vaters;<br>
+        von dort wird er kommen,<br>
+        zu richten die Lebenden und die Toten.
+      </div>
+      <div class="creed-section">
+        Ich glaube an den Heiligen Geist,<br>
+        die heilige christliche Kirche,<br>
+        Gemeinschaft der Heiligen,<br>
+        Vergebung der Sünden,<br>
+        Auferstehung der Toten<br>
+        und das ewige Leben.<br><br>
+        Amen.
+      </div>
+    </div>
+    <p class="creed-note">
+      Das Apostolische Glaubensbekenntnis geht auf die Aussagen der Apostel über Jesus Christus zurück. Auf diese Sätze haben sich die Christen der frühen Kirche geeinigt, um sich in ihrem Glauben zu vergewissern. Sie wurden über die Jahrhunderte weitergegeben und bilden auch unsere Glaubensgrundlage.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ QUOTE MARQUEE ═══ -->
+<div class="quote-marquee">
+  <div class="quote-marquee-track">
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>I love my fellow man because I see God in his face and in his form — A. T. Still</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>Geistlich wachsen, fachlich exzellent — Christen in der Osteopathie</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>I do not wish to be classed with any 'ism' or 'ist' — A. T. Still</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>Netzwerk · Fortbildung · Gemeinschaft — Seit 2017</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>I love my fellow man because I see God in his face and in his form — A. T. Still</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>Geistlich wachsen, fachlich exzellent — Christen in der Osteopathie</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>I do not wish to be classed with any 'ism' or 'ist' — A. T. Still</div>
+    <div class="quote-marquee-item"><span class="marquee-dot"></span>Netzwerk · Fortbildung · Gemeinschaft — Seit 2017</div>
+  </div>
+</div>
+
+<!-- ═══ TEAM / DOZENTEN ═══ -->
+<section id="team">
+  <div class="section-header reveal">
+    <div class="section-tag">Unser Team</div>
+    <h2 class="section-title">Die Menschen hinter <em>CiO</em></h2>
+    <p class="section-subtitle">Erfahrene Therapeuten und Dozenten, die Glaube und Fachkompetenz verbinden</p>
+  </div>
+
+  <div class="team-grid">
+    <div class="team-card reveal">
+      <img class="team-card-img" src="https://christen-in-der-osteopathie.de/wp-content/uploads/2023/08/Portrait_2023-211x300.jpg" alt="Michaela Dippon" loading="lazy">
+      <h3>Michaela Dippon M.Sc., D.O.</h3>
+      <div class="team-card-gold-line"></div>
+      <div class="team-card-role">Gründerin & Leitung</div>
+      <div class="team-card-qual">Osteopathin, Physiotherapeutin, Heilpraktikerin</div>
+    </div>
+    <div class="team-card reveal" style="transition-delay: 0.1s">
+      <div class="team-card-initials" aria-label="Johanna Adam">JA</div>
+      <h3>Johanna Adam</h3>
+      <div class="team-card-gold-line"></div>
+      <div class="team-card-role">Dozentin</div>
+      <div class="team-card-qual">Heilpraktikerin</div>
+    </div>
+    <div class="team-card reveal" style="transition-delay: 0.2s">
+      <div class="team-card-initials" aria-label="Nelli Bär">NB</div>
+      <h3>Nelli Bär</h3>
+      <div class="team-card-gold-line"></div>
+      <div class="team-card-role">Dozentin</div>
+      <div class="team-card-qual">Heilpraktikerin, Physiotherapeutin</div>
+    </div>
+    <div class="team-card reveal" style="transition-delay: 0.3s">
+      <div class="team-card-initials" aria-label="Madeleine Krumpein">MK</div>
+      <h3>Madeleine Krumpein</h3>
+      <div class="team-card-gold-line"></div>
+      <div class="team-card-role">Dozentin</div>
+      <div class="team-card-qual">Heilpraktikerin, Physiotherapeutin</div>
+    </div>
+    <div class="team-card reveal" style="transition-delay: 0.4s">
+      <div class="team-card-initials" aria-label="Luc Fieuw">LF</div>
+      <h3>Luc Fieuw</h3>
+      <div class="team-card-gold-line"></div>
+      <div class="team-card-role">Dozent</div>
+      <div class="team-card-qual">Osteopath</div>
+    </div>
+    <div class="team-card reveal" style="transition-delay: 0.5s">
+      <div class="team-card-initials" aria-label="Dr. Astrid Kühn-Letkemann">AK</div>
+      <h3>Dr. Astrid Kühn-Letkemann</h3>
+      <div class="team-card-gold-line"></div>
+      <div class="team-card-role">Dozentin</div>
+      <div class="team-card-qual">Fachärztin für Gynäkologie, Osteopathie</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VERANSTALTUNGEN ═══ -->
+<section id="veranstaltungen">
+  <div class="section-header reveal">
+    <div class="section-tag">Programm 2026 / 2027</div>
+    <h2 class="section-title">Fortbildungen & <em>Netzwerktreffen</em></h2>
+    <p class="section-subtitle">VOD- und BVO-zertifizierte Fortbildungen mit 10% Rabatt für Verbandsmitglieder</p>
+  </div>
+
+  <div class="events-tabs reveal">
+    <button class="events-tab active" data-filter="all">Alle</button>
+    <button class="events-tab" data-filter="fortbildung">Fortbildungen</button>
+    <button class="events-tab" data-filter="netzwerk">Netzwerktreffen</button>
+  </div>
+
+  <div class="events-grid" id="eventsGrid">
+
+    <!-- Fortbildung 1 -->
+    <div class="event-card reveal" data-type="fortbildung">
+      <div class="event-card-accent"></div>
+      <div class="event-card-body">
+        <div class="event-date">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          03. – 04. Juli 2026
+        </div>
+        <h3>Der Fuß als Schlüssel zur Körperstatik</h3>
+        <div class="event-speakers">
+          <div class="event-speakers-avatars">
+            <div class="speaker-initials">NB</div>
+            <div class="speaker-initials">MK</div>
+            <img class="speaker-avatar" src="https://christen-in-der-osteopathie.de/wp-content/uploads/2023/08/Portrait_2023-211x300.jpg" alt="Michaela Dippon">
+          </div>
+          <div class="speaker-info">
+            <span class="speaker-names">Nelli Bär, M. Krumpein, M. Dippon</span>
+          </div>
+        </div>
+        <div class="event-card-meta">
+          <div class="event-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Esslingen
+          </div>
+        </div>
+        <p>Osteopathische Perspektiven, Befundung und Integration. Der Fuß als Basis von Haltung und Bewegung — Theorie, praktische Techniken und interdisziplinärer Austausch.</p>
+        <div class="event-footer">
+          <div class="event-price">370 € <small>inkl. Skript &amp; Verpflegung</small></div>
+          <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Anmeldung%20Fuß-Kurs%2003.-04.07.2026" class="btn btn-primary event-btn">Anmelden</a>
+        </div>
+        <div class="event-badges">
+          <span class="event-badge badge-vod">VOD-zertifiziert</span>
+          <span class="event-badge badge-rabatt">10% VOD/BVO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Netzwerktreffen 1 -->
+    <div class="netzwerk-card reveal" data-type="netzwerk">
+      <div class="event-date">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        03. Juli 2026, 18 Uhr
+      </div>
+      <h3>Netzwerktreffen Esslingen</h3>
+      <p>Thema: Osteopathischer Befund und Behandlung<br>Referent: Thomas Braun<br>Ort: Hindenburgstr. 129/1, 73728 Esslingen</p>
+      <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Anmeldung%20Netzwerktreffen%2003.07.2026" class="btn btn-outline event-btn">Anmelden</a>
+    </div>
+
+    <!-- Fortbildung 2: Trauma -->
+    <div class="event-card reveal" data-type="fortbildung">
+      <div class="event-card-accent"></div>
+      <div class="event-card-body">
+        <div class="event-date">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          16. – 18. Oktober 2026
+        </div>
+        <h3>Trauma — verstehen und begegnen</h3>
+        <div class="event-speakers">
+          <div class="event-speakers-avatars">
+            <div class="speaker-initials">JA</div>
+            <img class="speaker-avatar" src="https://christen-in-der-osteopathie.de/wp-content/uploads/2023/08/Portrait_2023-211x300.jpg" alt="Michaela Dippon">
+          </div>
+          <div class="speaker-info">
+            <span class="speaker-names">Johanna Adam & Michaela Dippon</span>
+          </div>
+        </div>
+        <div class="event-card-meta">
+          <div class="event-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Esslingen
+          </div>
+        </div>
+        <p>Umgang mit traumatisierten Patienten in der osteopathischen Behandlung. Dissoziation erkennen, sichere Berührung, Notfallkoffer für die Praxis.</p>
+        <div class="event-footer">
+          <div class="event-price">580 € <small>inkl. Skript &amp; Verpflegung</small></div>
+          <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Anmeldung%20Trauma-Kurs%2016.-18.10.2026" class="btn btn-primary event-btn">Anmelden</a>
+        </div>
+        <div class="event-badges">
+          <span class="event-badge badge-vod">VOD/BVO-zertifiziert</span>
+          <span class="event-badge badge-rabatt">10% VOD/BVO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Netzwerktreffen 2 -->
+    <div class="netzwerk-card reveal" data-type="netzwerk">
+      <div class="event-date">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        17. Oktober 2026, 18 Uhr
+      </div>
+      <h3>Netzwerktreffen Esslingen</h3>
+      <p>Thema: CFS (Chronisches Fatigue-Syndrom)<br>Referentin: Nelli Bär<br>Ort: Hindenburgstr. 129/1, 73728 Esslingen</p>
+      <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Anmeldung%20Netzwerktreffen%2017.10.2026" class="btn btn-outline event-btn">Anmelden</a>
+    </div>
+
+    <!-- Fortbildung 3: Kiefergelenk -->
+    <div class="event-card reveal" data-type="fortbildung">
+      <div class="event-card-accent"></div>
+      <div class="event-card-body">
+        <div class="event-date">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          20. – 22. November 2026
+        </div>
+        <h3>Das Kiefergelenk — Zahnmedizin &amp; Osteopathie</h3>
+        <div class="event-speakers">
+          <div class="event-speakers-avatars">
+            <div class="speaker-initials">MH</div>
+            <div class="speaker-initials">WR</div>
+            <img class="speaker-avatar" src="https://christen-in-der-osteopathie.de/wp-content/uploads/2023/08/Portrait_2023-211x300.jpg" alt="Michaela Dippon">
+          </div>
+          <div class="speaker-info">
+            <span class="speaker-names">Dr. M. Hoch, W. Riek, M. Dippon</span>
+          </div>
+        </div>
+        <div class="event-card-meta">
+          <div class="event-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Esslingen
+          </div>
+        </div>
+        <p>Interdisziplinäre Fortbildung zu CMD, Diagnostik, Schienenversorgung und osteopathischer Behandlung des Kiefergelenks.</p>
+        <div class="event-footer">
+          <div class="event-price">580 € <small>inkl. Skript &amp; Verpflegung</small></div>
+          <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Anmeldung%20Kiefergelenk-Kurs%2020.-22.11.2026" class="btn btn-primary event-btn">Anmelden</a>
+        </div>
+        <div class="event-badges">
+          <span class="event-badge badge-vod">BVO/VOD-zertifiziert</span>
+          <span class="event-badge badge-rabatt">10% VOD/BVO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fortbildung 4: MAN IS TRIUNE -->
+    <div class="event-card reveal" data-type="fortbildung">
+      <div class="event-card-accent"></div>
+      <div class="event-card-body">
+        <div class="event-date">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          27. Februar 2027
+        </div>
+        <h3>A.&nbsp;T.&nbsp;Stills MAN IS TRIUNE</h3>
+        <div class="event-speakers">
+          <div class="event-speakers-avatars">
+            <img class="speaker-avatar" src="https://christen-in-der-osteopathie.de/wp-content/uploads/2023/08/Portrait_2023-211x300.jpg" alt="Michaela Dippon">
+          </div>
+          <div class="speaker-info">
+            <span class="speaker-names">Michaela Dippon M.Sc., D.O.</span>
+          </div>
+        </div>
+        <div class="event-card-meta">
+          <div class="event-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Esslingen
+          </div>
+        </div>
+        <p>Der Einfluss auf den Gesundheitsbegriff in der Osteopathie. Das Menschenbild A.&nbsp;T.&nbsp;Stills im christlichen Kontext und seine Bedeutung für die therapeutische Arbeit.</p>
+        <div class="event-book-thumb">
+          <img src="img/Coverpreview-300x213.jpg" alt="MAN IS TRIUNE Buch-Cover" loading="lazy">
+          <div class="book-info">
+            <strong>MAN IS TRIUNE</strong>
+            Optional mit Buch erhältlich (+20 €)
+          </div>
+        </div>
+        <div class="event-footer">
+          <div class="event-price">120 € <small>140 € inkl. Buch</small></div>
+          <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Anmeldung%20MAN%20IS%20TRIUNE%2027.02.2027" class="btn btn-primary event-btn">Anmelden</a>
+        </div>
+        <div class="event-badges">
+          <span class="event-badge badge-vod">VOD/BVO-zertifiziert</span>
+          <span class="event-badge badge-rabatt">10% VOD/BVO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fortbildung 5: Schwangerschaft -->
+    <div class="event-card reveal" data-type="fortbildung">
+      <div class="event-card-accent"></div>
+      <div class="event-card-body">
+        <div class="event-date">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          11. – 13. Juni 2027
+        </div>
+        <h3>Schwangerschaft — Geburt — Postpartum</h3>
+        <div class="event-speakers">
+          <div class="event-speakers-avatars">
+            <div class="speaker-initials">LF</div>
+            <div class="speaker-initials">AK</div>
+          </div>
+          <div class="speaker-info">
+            <span class="speaker-names">Luc Fieuw & Dr. A. Kühn-Letkemann</span>
+          </div>
+        </div>
+        <div class="event-card-meta">
+          <div class="event-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Marburg
+          </div>
+        </div>
+        <p>Ganzheitliche osteopathische Betreuung in Schwangerschaft, Geburt und Wochenbett. Interdisziplinärer Ansatz mit Gynäkologie und Osteopathie.</p>
+        <div class="event-footer">
+          <div class="event-price">580 € <small>inkl. Skript &amp; Verpflegung</small></div>
+          <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Anmeldung%20Schwangerschaft-Kurs%2011.-13.06.2027" class="btn btn-primary event-btn">Anmelden</a>
+        </div>
+        <div class="event-badges">
+          <span class="event-badge badge-vod">VOD-zertifiziert</span>
+          <span class="event-badge badge-rabatt">10% VOD/BVO</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fortbildung 6: Gefühle (kein Termin) -->
+    <div class="event-card reveal" data-type="fortbildung" style="opacity:0.7">
+      <div class="event-card-accent" style="background: linear-gradient(90deg, var(--stone), var(--text-muted));"></div>
+      <div class="event-card-body">
+        <div class="event-date" style="color: var(--text-muted);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Termin wird bekanntgegeben
+        </div>
+        <h3>Gefühle — verstehen und begegnen</h3>
+        <div class="event-speakers">
+          <div class="event-speakers-avatars">
+            <img class="speaker-avatar" src="https://christen-in-der-osteopathie.de/wp-content/uploads/2023/08/Portrait_2023-211x300.jpg" alt="Michaela Dippon">
+            <div class="speaker-initials">JA</div>
+          </div>
+          <div class="speaker-info">
+            <span class="speaker-names">Michaela Dippon & Johanna Adam</span>
+          </div>
+        </div>
+        <p>Über die Bedeutung der Gefühle in der osteopathischen Behandlung. Grundwortschatz der Gefühle, Ausdrucksformen im Körper, Zusammenhänge zwischen Körper, Seele und Geist.</p>
+        <div class="event-footer">
+          <div class="event-price" style="color: var(--text-muted);">TBA</div>
+          <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Interesse%20Kurs%20Gefühle" class="btn btn-dark event-btn">Interesse melden</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AGB -->
+  <div class="agb-toggle reveal">
+    <button class="agb-btn" id="agbToggle">
+      Allgemeine Geschäftsbedingungen
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="agb-content" id="agbContent">
+      <p><strong>Allgemeine Geschäftsbedingungen zur Teilnahme an Fortbildungen von „Christen in der Osteopathie"</strong></p>
+      <p>Ein Kursplatz gilt als bestätigt, wenn eine verbindliche Anmeldung vorliegt, die Zugangsvoraussetzungen zur Kursteilnahme erfüllt sind und der Kursplatz von „Christen in der Osteopathie" bestätigt wurde.</p>
+      <p>Im Falle einer Absage wird eine Bearbeitungsgebühr fällig. Bis zu 4 Wochen vor Beginn der Fortbildung beträgt die Bearbeitungsgebühr 50 €. Bei weniger als 4 Wochen vor Kursbeginn ist, unabhängig vom Grund der Absage, die volle Kursgebühr zu begleichen. Es sei denn der Kursplatz wird von jemand, der die Teilnahmebedingungen erfüllt, besetzt. Absagen müssen schriftlich erfolgen.</p>
+      <p>Bei nicht fristgerechter beglichener Kursgebühr kann der Kursplatz gegen Berechnung der oben genannten Bearbeitungsgebühr weiter vergeben werden.</p>
+      <p>Sollten Fortbildungen durch Krankheiten von Dozenten/innen, durch Unterbelegung oder anderen nicht von Christen in der Osteopathie zu vertretenden Gründen kurzfristig abgesagt werden müssen, erhalten die Teilnehmer/innen ihre bereits gezahlten Teilnahmegebühren zurück. Weitere Ansprüche sind ausgeschlossen.</p>
+      <p>In den Veranstaltungsräumen halten sich die Teilnehmer/innen auf eigene Gefahr auf. Bei Übungen und Demonstrationen handeln sie auf eigene Gefahr und eigenes Risiko.</p>
+      <p style="margin-top:0.75rem; font-style:italic;">Esslingen, den 12.08.2017</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DIVIDER ═══ -->
+<div style="padding: 1rem 0; background: var(--cream-warm);"><div class="section-divider"></div></div>
+
+<!-- ═══ WAS IST OSTEOPATHIE ═══ -->
+<section id="osteopathie">
+  <div class="section-header reveal">
+    <div class="section-tag">Hintergrund</div>
+    <h2 class="section-title">Was ist <em>Osteopathie</em>?</h2>
+    <p class="section-subtitle">Eine ganzheitliche manuelle Therapie, gegründet 1874 von Dr. A.&nbsp;T.&nbsp;Still</p>
+  </div>
+
+  <div class="osteo-intro reveal">
+    <p>Die Osteopathie wurde von dem amerikanischen Arzt Dr. A.&nbsp;T.&nbsp;Still entwickelt. Er ging davon aus, dass Gott den Menschen so gut geschaffen hatte, dass man weder etwas hinzuzufügen noch etwas wegzunehmen bräuchte. Dr. Still sah im Osteopathen eine Art Mechaniker, der den menschlichen Organismus gewissenhaft wartet.</p>
+  </div>
+
+  <div class="osteo-grid">
+    <div class="osteo-card reveal">
+      <div class="osteo-icon">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 18V6a2 2 0 00-2-2H8a2 2 0 00-2 2v12"/><path d="M4 20h16"/><path d="M12 4v8"/><circle cx="12" cy="14" r="2"/></svg>
+      </div>
+      <h3>Parietal</h3>
+      <p>Behandlung von Funktionsstörungen im Bereich des Skelettsystems durch Gelenkmobilisationen unter Berücksichtigung von Faszien, Nerven und dem Gefäßsystem.</p>
+    </div>
+    <div class="osteo-card reveal" style="transition-delay: 0.1s">
+      <div class="osteo-icon">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 4 6 4 10c0 6 8 12 8 12s8-6 8-12c0-4-4-8-8-8z"/><path d="M12 6v4"/><path d="M10 10h4"/></svg>
+      </div>
+      <h3>Viszeral</h3>
+      <p>Behandlung der inneren Organe unter Berücksichtigung ihrer Zusammenhänge zum Gesamtorganismus und den umgebenden Strukturen.</p>
+    </div>
+    <div class="osteo-card reveal" style="transition-delay: 0.2s">
+      <div class="osteo-icon">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M12 13v8"/><path d="M9 18h6"/></svg>
+      </div>
+      <h3>Cranio-Sacral</h3>
+      <p>Behandlung von Schädel, Becken, Hirnmembranen, Nerven und der Hirn- und Rückenmarksflüssigkeit als zusammenhängendes System.</p>
+    </div>
+  </div>
+
+  <div class="osteo-bottom reveal">
+    <div>
+      <h3>Ziel der Osteopathie</h3>
+      <p>Osteopathen heilen nicht, sondern unterstützen den Körper beim Prozess der Selbstheilung, indem Hindernisse beseitigt und die Durchblutung ermöglicht wird. Die Osteopathie sieht sich nicht in Konkurrenz zur Schulmedizin.</p>
+    </div>
+    <div>
+      <h3>Ausbildung</h3>
+      <p>Die Ausbildung dauert mindestens 4 Jahre (1.350 Stunden) mit Prüfung durch eine unabhängige Kommission. In Deutschland ist die Ausübung nur Ärzten und Heilpraktikern erlaubt.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THERAPEUTENLISTE ═══ -->
+<section id="therapeuten">
+  <div class="section-header reveal">
+    <div class="section-tag">Verzeichnis</div>
+    <h2 class="section-title"><em>Therapeuten</em> finden</h2>
+    <p class="section-subtitle">Christliche Osteopathen in Deutschland, Österreich und der Schweiz</p>
+  </div>
+
+  <div class="therapeuten-search reveal">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="therapSearch" placeholder="Nach Name, Ort oder PLZ suchen …">
+  </div>
+  <div class="search-count" id="searchCount">40 Therapeuten gefunden</div>
+
+  <div class="therapeuten-grid" id="therapeutenGrid">
+  </div>
+
+  <div class="therapeuten-more" id="showMoreBtn">
+    <button class="btn btn-dark" id="loadMore">Alle Therapeuten anzeigen</button>
+  </div>
+</section>
+
+<!-- ═══ KONTAKT ═══ -->
+<section id="kontakt">
+  <div class="section-header reveal">
+    <div class="section-tag">Verbindung</div>
+    <h2 class="section-title">Kontakt <em>aufnehmen</em></h2>
+  </div>
+
+  <div class="kontakt-grid">
+    <div class="kontakt-info reveal-left">
+      <h3>Christen in der Osteopathie</h3>
+      <div class="kontakt-item">
+        <div class="kontakt-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="kontakt-item-text">
+          <strong>Postanschrift</strong><br>
+          c/o Michaela Dippon<br>
+          Hindenburgstr. 129<br>
+          73728 Esslingen
+        </div>
+      </div>
+      <div class="kontakt-item">
+        <div class="kontakt-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="kontakt-item-text">
+          <strong>E-Mail</strong><br>
+          <a href="mailto:info@Christen-in-der-Osteopathie.de">info@Christen-in-der-Osteopathie.de</a>
+        </div>
+      </div>
+      <div class="kontakt-item">
+        <div class="kontakt-item-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div class="kontakt-item-text">
+          <strong>Telefon</strong><br>
+          <a href="tel:+497118209390">0711 – 820 93 90</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="kontakt-map reveal-right">
+      <div class="kontakt-map-pin">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        <p>Esslingen am Neckar<br>Baden-Württemberg</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="zert-bar reveal">
+    <div class="zert-item">
+      <img src="img/VOD_Logo-netto-150x150.png" alt="VOD Logo">
+      <span>VOD-zertifiziert</span>
+    </div>
+    <div class="zert-item">
+      <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2020/01/bvo-Logo-150x150.jpg" alt="BVO Logo">
+      <span>BVO-zertifiziert</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BACK TO TOP ═══ -->
+<button class="back-to-top" id="backToTop" aria-label="Nach oben scrollen">
+  <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-logo">
+    <img src="img/cropped-CiO_400x180.png" alt="CiO Logo">
+  </div>
+  <div class="footer-links">
+    <a href="https://christen-in-der-osteopathie.de/impressum/">Impressum</a>
+    <a href="https://christen-in-der-osteopathie.de/datenschutz/">Datenschutz</a>
+    <a href="mailto:info@Christen-in-der-Osteopathie.de">Kontakt</a>
+  </div>
+  <p>&copy; 2026 Christen in der Osteopathie &middot; Alle Rechte vorbehalten</p>
+</footer>
+
+<script>
+// ─── THERAPEUTEN DATA ───
+const therapeuten = [
+  { name: "Samuel Matei M.Sc.", qual: "Heilpraktiker, Osteopathie M.Sc.", praxis: "Osteopathie-Praxis SMile", strasse: "Jahnstr. 4", plz: "90602", ort: "Pyrbaum", tel: "0151-42821204", mail: "samuel@osteopathie-smile.de", web: "www.osteopathie-smile.de" },
+  { name: "Christine Müller", qual: "Physiotherapeutin, Heilpraktikerin, Osteopathie", praxis: "Physiotherapie Körperkonzept Auszeit", strasse: "Rötzer Straße 7a", plz: "92431", ort: "Neunburg vorm Walde", tel: "09672-3725", mail: "physioteam-mueller@t-online.de", web: "www.physioteam-müller.de" },
+  { name: "Dagmar Langer", qual: "Osteopathie", praxis: "", strasse: "Kolpingstr. 8", plz: "93093", ort: "Donaustauf", tel: "01523-1850205", mail: "Langer.physio-osteo@web.de", web: "" },
+  { name: "Liane Weidauer-Frings", qual: "Heilpraktikerin, Physiotherapeutin, Osteopathie", praxis: "Praxis für Osteopathie", strasse: "Waldsteinstr. 3", plz: "95145", ort: "Oberkotzau", tel: "09286-800911", mail: "lianeweidauer@t-online.de", web: "www.Osteopathie-Oberkotzau.de" },
+  { name: "Kathrin Sonja Barth B.Sc.", qual: "Osteopathie B.Sc., Heilpraktikerin", praxis: "", strasse: "Briennerstr. 11", plz: "80333", ort: "München", tel: "01577-3596535", mail: "kontakt@kathrinbarth.net", web: "www.kathrinbarth.net" },
+  { name: "Angelika Breig", qual: "Heilpraktikerin, Kinderosteopathie und Osteopathie", praxis: "Praxis für Osteopathie und Naturheilkunde", strasse: "Furtanger 2", plz: "82205", ort: "Gilching", tel: "08105-2418799", mail: "info@fingerspitzengefuehl.info", web: "www.fingerspitzengefuehl.info" },
+  { name: "Birgit Lemnitzer", qual: "Heilpraktikerin, Physiotherapeutin, Osteopathie", praxis: "Praxis für Osteopathie", strasse: "Müller-zu-Bruck-Str. 12", plz: "83052", ort: "Bruckmühl", tel: "08062-7296444", mail: "post@lemnitzer-osteopathie.de", web: "www.lemnitzer-osteopathie.de" },
+  { name: "Cordelia von Pückler", qual: "Physiotherapeutin, Heilpraktikerin, Osteopathie", praxis: "Praxis für Osteopathie-Aschheim", strasse: "Erdingerstraße 18", plz: "85609", ort: "Aschheim", tel: "0152-08255134", mail: "praxis@osteopathie-aschheim.de", web: "www.osteopathie-aschheim.de" },
+  { name: "Pascal Gielen", qual: "Heilpraktiker, Physiotherapeut, Osteopathie", praxis: "Praxis für Osteopathie", strasse: "Am Christberger 6", plz: "87616", ort: "Marktoberdorf", tel: "08342-40160", mail: "", web: "" },
+  { name: "Sr. M. Chiara Waibel osf", qual: "Heilpraktikerin, Physiotherapeutin, Kinderosteopathie", praxis: "", strasse: "Badstr. 1", plz: "88348", ort: "Bad Saulgau", tel: "07581-9008863", mail: "praxis@osteopathie-waibel.de", web: "www.osteopathie-waibel.de" },
+  { name: "Nelli Bär", qual: "Heilpraktikerin, Physiotherapeutin, Osteopathie BA", praxis: "Praxis mit osteopathischem Schwerpunkt", strasse: "Schulerstraße 1", plz: "75180", ort: "Pforzheim-Büchenbronn", tel: "07231-6035930", mail: "info@wissen-und-spueren.de", web: "wissen-und-spueren.de" },
+  { name: "Thomas Braun", qual: "Physiotherapeut, Heilpraktiker, Kinderosteopathie", praxis: "PRO-PHYSIO", strasse: "Julius-Heuss-Str. 15", plz: "75387", ort: "Neubulach", tel: "07053-967666", mail: "", web: "" },
+  { name: "Cornelia Schwarz", qual: "Heilpraktikerin, Physiotherapeutin, Osteopathie", praxis: "", strasse: "Grunbacher Straße 9", plz: "71384", ort: "Weinstadt", tel: "07151-2053530", mail: "cornelia.schwarz@osteopathie.de", web: "" },
+  { name: "Michaela Dippon M.Sc., D.O.", qual: "Osteopathin D.O., Kinderosteopathie, Physiotherapeutin, HP", praxis: "Praxis für Osteopathie", strasse: "Hindenburgstr. 129/1", plz: "73728", ort: "Esslingen", tel: "0711-8209390", mail: "info@praxis-dippon.de", web: "www.praxis-dippon.de" },
+  { name: "Monika Brombacher M.Sc.", qual: "MSc Osteopathie, Kinderphysiotherapeutin, HP", praxis: "OSTEOPATHIE KIDS BROMBACHER", strasse: "Auberlenstr. 48", plz: "70736", ort: "Fellbach", tel: "0711-51045959", mail: "info@osteopathie-kids-brombacher.de", web: "www.osteopathie-kids-brombacher.de" },
+  { name: "Daniela Siemenczuk", qual: "Physiotherapeutin, HP, Osteopathie und Kinderosteopathie", praxis: "Praxis Merits", strasse: "Küferstrasse 15 A", plz: "73240", ort: "Wendlingen", tel: "07024-54800", mail: "", web: "" },
+  { name: "Susanne Kunte", qual: "Heilpraktikerin, Kinderosteopathie", praxis: "Praxis für Osteopathie im Sellawie", strasse: "Hambrückerstr. 30", plz: "76694", ort: "Forst", tel: "0176-23955500", mail: "osteopathie@sellawie.de", web: "www.sellawie.de/osteopathie" },
+  { name: "Margret Karl", qual: "Osteopathie", praxis: "", strasse: "Calwer Str. 23", plz: "71272", ort: "Renningen-Malmsheim", tel: "0172-4501992", mail: "info@osteopathie-malmsheim.de", web: "www.osteopathie-malmsheim.de" },
+  { name: "Silke Kunze", qual: "Physiotherapeutin, Heilpraktikerin, Osteopathie", praxis: "Osteopathie für Erwachsene und Kinder", strasse: "Kirchgasse 4", plz: "70825", ort: "Korntal-Münchingen", tel: "017644554323", mail: "osteopathie@silke-kunze.de", web: "" },
+  { name: "Matthias Munz", qual: "Osteopathie", praxis: "Physio Praxis Munz", strasse: "Schulstr. 2/2", plz: "70839", ort: "Gerlingen", tel: "07156-4373939", mail: "info@physio-munz.de", web: "www.physio-munz.de" },
+  { name: "Sonja Schmid D.O.", qual: "Heilpraktikerin, Kinderkrankenschwester", praxis: "Familienpraxis für Osteopathie", strasse: "Kreuzweg 25", plz: "71665", ort: "Vaihingen/Enz", tel: "01575-3301866", mail: "info@osteopathie-sonja-schmid.de", web: "www.osteopathie-sonja-schmid.de" },
+  { name: "Holger Reuter", qual: "Osteopathie", praxis: "Somamed", strasse: "Gmünder Str. 16", plz: "73614", ort: "Schorndorf", tel: "07181-24232", mail: "praxis@soma-med.de", web: "" },
+  { name: "Johanna Dingler D.O.", qual: "Heilpraktikerin, Physiotherapeutin, Osteopathie", praxis: "", strasse: "Alfred-Leikam-Straße 20", plz: "74523", ort: "Schwäbisch Hall", tel: "0176-14190703", mail: "therapiewerk_sha@icloud.com", web: "www.therapiewerkschwäbischhall.de" },
+  { name: "Madeleine Krumpein", qual: "Heilpraktikerin, Physiotherapeutin, Osteopathie", praxis: "", strasse: "Spitalmühlenstr. 15-17", plz: "74523", ort: "Schwäbisch Hall", tel: "0151-51844863", mail: "info@fobro.de", web: "www.fobro.de" },
+  { name: "Jonathan Ziegner", qual: "Heilpraktiker, Physiotherapeut, Osteopathie", praxis: "", strasse: "Ludwigstr. 36", plz: "74532", ort: "Ilshofen", tel: "07904-944995", mail: "j.ziegner@im-zm.de", web: "www.im-zm.de" },
+  { name: "Kai Stoevesandt", qual: "Osteopathie", praxis: "Ambulantes Zentrum am Entenfang", strasse: "", plz: "76185", ort: "Karlsruhe", tel: "0721-9520621", mail: "k.stoevesandt@azr.de", web: "www.azr.de" },
+  { name: "Jonathan Stentzel", qual: "Physiotherapeut, Heilpraktiker, Osteopathie", praxis: "Zentrum für Osteopathische Medizin", strasse: "Friedrich-Ebert-Anlage 23a", plz: "69117", ort: "Heidelberg", tel: "0622-6513350", mail: "sekretariat@osteopathie-in-heidelberg.de", web: "www.Osteopath-Heidelberg.de" },
+  { name: "Marie Heintzelmann", qual: "Physiotherapeutin, Heilpraktikerin, Osteopathie", praxis: "Physiotherapiepraxis Wegbegleiter", strasse: "Ziegelhüttenweg 77", plz: "67574", ort: "Osthofen", tel: "06242-8093094", mail: "Kontakt@praxis-wegbegleiter.de", web: "www.praxis-wegbegleiter.de" },
+  { name: "Martin Riedel", qual: "Heilpraktiker, Physiotherapeut, Osteopathie", praxis: "Osteopathie am Fliednerplatz", strasse: "Fliednerweg 8", plz: "64367", ort: "Mühltal", tel: "06151-8054422", mail: "info@osteopathie-riedel.de", web: "www.osteopathie-riedel.de" },
+  { name: "Lennart Knabe", qual: "Heilpraktiker, Physiotherapeut, Osteopathie", praxis: "Praxis für Osteopathie", strasse: "Limesstraße 30", plz: "61273", ort: "Wehrheim", tel: "060819558262", mail: "mail@osteopathie-knabe.de", web: "www.osteopathie-knabe.de" },
+  { name: "Dr. med. Astrid Kühn-Letkemann", qual: "Fachärztin für Gynäkologie, Osteopathie", praxis: "MEDIPARG Sachsenhausen", strasse: "Schifferstraße 59", plz: "60594", ort: "Frankfurt", tel: "069-66051483", mail: "osteokuehn@gmail.com", web: "www.osteo-kuehn.de" },
+  { name: "Kristin Peters D.O.", qual: "Heilpraktikerin, Physiotherapeutin, Kinderosteopathie", praxis: "", strasse: "Schillerstr. 8a", plz: "58511", ort: "Lüdenscheid", tel: "02351-4323550", mail: "kristinpeters@t-online.de", web: "" },
+  { name: "Paul Fast", qual: "Physiotherapeut, Heilpraktiker, Osteopathie", praxis: "Medico Praxis", strasse: "Dieselstr. 10", plz: "36041", ort: "Fulda", tel: "0661-9444944", mail: "info@medico-praxis.de", web: "www.medico-praxis.de" },
+  { name: "Inga Fast", qual: "Physiotherapeutin, Heilpraktikerin, Osteopathie", praxis: "Medico Praxis", strasse: "Dieselstr. 10", plz: "36041", ort: "Fulda", tel: "0661-9444944", mail: "info@medico-praxis.de", web: "www.medico-praxis.de" },
+  { name: "Birthe Lange", qual: "Heilpraktikerin, Physiotherapeutin, Osteopathie", praxis: "Praxis für Osteopathie", strasse: "Geibelstr. 48", plz: "30173", ort: "Hannover", tel: "0511-54615401", mail: "birthe.lange@osteopathie.de", web: "www.lange-osteopathie.de" },
+  { name: "Sascha Rieck", qual: "Heilpraktiker, Osteopathie", praxis: "Praxis für Osteopathie", strasse: "Scharnweberstr. 2", plz: "12587", ort: "Berlin", tel: "0152-24761332", mail: "info@osteopathie-cranio.de", web: "www.osteopathie-cranio.de" },
+  { name: "Claudia Stemmler", qual: "Physiotherapie und Osteopathie", praxis: "Praxis für Physiotherapie und Osteopathie", strasse: "Leipziger Straße 2a", plz: "08056", ort: "Zwickau", tel: "0375-39098181", mail: "claudia.stemmler@physiotherapie-stemmler.de", web: "www.physiotherapie-stemmler.de" },
+  { name: "Henriette Arnold", qual: "Physiotherapie", praxis: "Physiotherapie Kirchberg", strasse: "Borbergweg 1", plz: "08107", ort: "Kirchberg", tel: "037602-673803", mail: "", web: "" },
+  { name: "Michael Priber", qual: "Osteopathie", praxis: "Praxis für Osteopathie", strasse: "Markt 9", plz: "08371", ort: "Glauchau", tel: "03763-7766818", mail: "michael.priber@osteopathie.de", web: "www.osteopathie-glauchau.de" },
+  { name: "Thomas Stopp", qual: "Heilpraktiker, Physiotherapeut, Osteopathie", praxis: "Praxis für Physiotherapie Stopp", strasse: "Hohe Straße 6", plz: "08626", ort: "Adorf", tel: "037423-78840", mail: "physiostopp@gmx.de", web: "www.physio-stopp.jimdofree.com" },
+  { name: "Stefanie Appel", qual: "Osteopathie und Kinderosteopathie", praxis: "Physiotherapie Spanke", strasse: "Widukindstr. 4", plz: "42289", ort: "Wuppertal", tel: "0202-550059", mail: "kontakt@physiopraxis-wuppertal.de", web: "www.physiopraxis-wuppertal.de" },
+  { name: "Silke Raffalt", qual: "Osteopathie", praxis: "", strasse: "Weißenbach 188", plz: "8967", ort: "Haus (Österreich)", tel: "+43 664 9140818", mail: "silkeraffalt@gmail.com", web: "" },
+  { name: "Sibylle Siegrist M.Sc.", qual: "Osteopathie M.Sc.", praxis: "Therapie am Bahnhof", strasse: "Bahnhofsplatz 3", plz: "CH-9200", ort: "Gossau (Schweiz)", tel: "+41 71 555 6584", mail: "sibylle.siegrist@gmx.ch", web: "www.therapie-am-bahnhof.ch" }
+];
+
+// ─── RENDER THERAPEUTEN ───
+const grid = document.getElementById('therapeutenGrid');
+const searchInput = document.getElementById('therapSearch');
+const searchCount = document.getElementById('searchCount');
+const loadMoreBtn = document.getElementById('loadMore');
+const showMoreDiv = document.getElementById('showMoreBtn');
+let showAll = false;
+
+function renderTherapeuten(filter = '') {
+  const q = filter.toLowerCase();
+  const filtered = therapeuten.filter(t =>
+    !q || t.name.toLowerCase().includes(q) ||
+    t.ort.toLowerCase().includes(q) ||
+    t.plz.includes(q) ||
+    (t.praxis && t.praxis.toLowerCase().includes(q))
+  );
+  const display = (showAll || q) ? filtered : filtered.slice(0, 12);
+
+  grid.innerHTML = display.map(t => `
+    <div class="therapeut-card">
+      <h4>${t.name}</h4>
+      <div class="therapeut-qual">${t.qual}</div>
+      ${t.praxis ? `<div class="therapeut-praxis">${t.praxis}</div>` : ''}
+      <div class="therapeut-details">
+        ${t.strasse ? t.strasse + '<br>' : ''}${t.plz} ${t.ort}<br>
+        Tel: ${t.tel}
+        ${t.mail ? `<br><a href="mailto:${t.mail}">${t.mail}</a>` : ''}
+        ${t.web ? `<br><a href="https://${t.web}" target="_blank" rel="noopener">${t.web}</a>` : ''}
+      </div>
+      <div class="therapeut-plz">${t.plz} ${t.ort}</div>
+    </div>
+  `).join('');
+
+  searchCount.textContent = `${filtered.length} Therapeut${filtered.length !== 1 ? 'en' : ''} gefunden`;
+  showMoreDiv.style.display = (showAll || q || filtered.length <= 12) ? 'none' : 'block';
+}
+
+searchInput.addEventListener('input', e => renderTherapeuten(e.target.value));
+loadMoreBtn.addEventListener('click', () => { showAll = true; renderTherapeuten(); });
+renderTherapeuten();
+
+// ─── NAV SCROLL ───
+const nav = document.getElementById('mainNav');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+});
+
+// ─── MOBILE NAV ───
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navToggle.classList.remove('active');
+    navLinks.classList.remove('open');
+  });
+});
+
+// ─── REVEAL ON SCROLL ───
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -60px 0px' };
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// ─── COUNTER ANIMATION ───
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const counters = entry.target.querySelectorAll('.counter');
+      counters.forEach(counter => {
+        const target = parseInt(counter.dataset.target);
+        const duration = 2000;
+        const start = performance.now();
+        const animate = (now) => {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 4);
+          counter.textContent = Math.round(eased * target);
+          if (progress < 1) requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+      });
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stats-bar').forEach(el => counterObserver.observe(el));
+
+// ─── EVENT TABS ───
+const tabs = document.querySelectorAll('.events-tab');
+const eventCards = document.querySelectorAll('[data-type]');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const filter = tab.dataset.filter;
+    eventCards.forEach(card => {
+      if (filter === 'all' || card.dataset.type === filter) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+// ─── AGB TOGGLE ───
+const agbToggle = document.getElementById('agbToggle');
+const agbContent = document.getElementById('agbContent');
+agbToggle.addEventListener('click', () => {
+  agbToggle.classList.toggle('active');
+  agbContent.classList.toggle('open');
+});
+
+// ─── ACTIVE NAV HIGHLIGHT ───
+const sections = document.querySelectorAll('section[id]');
+const navItems = document.querySelectorAll('.nav-links a');
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navItems.forEach(item => {
+        item.classList.toggle('active',
+          item.getAttribute('href') === '#' + entry.target.id
+        );
+      });
+    }
+  });
+}, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+sections.forEach(s => sectionObserver.observe(s));
+
+// ─── HERO MOUSE GLOW ───
+const heroEl = document.querySelector('.hero');
+const heroGlow = document.getElementById('heroGlow');
+if (heroEl && heroGlow) {
+  heroEl.addEventListener('mousemove', (e) => {
+    const rect = heroEl.getBoundingClientRect();
+    heroGlow.style.left = (e.clientX - rect.left) + 'px';
+    heroGlow.style.top = (e.clientY - rect.top) + 'px';
+  });
+}
+
+// ─── BACK TO TOP ───
+const backToTop = document.getElementById('backToTop');
+if (backToTop) {
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 600);
+  });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// ─── PARALLAX ON SCROLL ───
+const parallaxElements = document.querySelectorAll('.ziel-img-wrapper');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  parallaxElements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    const center = rect.top + rect.height / 2;
+    const viewCenter = window.innerHeight / 2;
+    const offset = (center - viewCenter) * 0.06;
+    el.style.transform = `translateY(${offset}px)`;
+  });
+}, { passive: true });
+
+// ─── STAGGERED REVEALS ───
+document.querySelectorAll('.team-card, .osteo-card, .event-card, .netzwerk-card').forEach((card, i) => {
+  card.style.transitionDelay = (i % 3) * 0.1 + 's';
+});
+</script>
+</body>
+</html>
