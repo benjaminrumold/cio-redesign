@@ -1218,6 +1218,201 @@ section {
   margin-bottom: 0.75rem;
 }
 
+/* ─── SPEAKER AVATARS (Event Cards) ─── */
+.event-speakers {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.event-speakers-avatars {
+  display: flex;
+  align-items: center;
+}
+.speaker-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold-light);
+  transition: transform 0.3s var(--ease-out);
+  position: relative;
+  z-index: 1;
+  background: var(--cream);
+}
+.speaker-avatar:not(:first-child) {
+  margin-left: -10px;
+}
+.speaker-avatar:hover {
+  transform: scale(1.15);
+  z-index: 2;
+}
+.speaker-initials {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 2px solid var(--gold-light);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  transition: transform 0.3s var(--ease-out);
+}
+.speaker-initials:not(:first-child) {
+  margin-left: -10px;
+}
+.speaker-initials:hover {
+  transform: scale(1.15);
+  z-index: 2;
+}
+.speaker-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.speaker-info .speaker-names {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+.speaker-info .speaker-roles {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Book cover thumbnail in event card */
+.event-book-thumb {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--cream);
+  border-radius: 10px;
+  border: 1px solid var(--stone);
+}
+.event-book-thumb img {
+  width: 52px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.event-book-thumb .book-info {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.event-book-thumb .book-info strong {
+  color: var(--text-dark);
+  display: block;
+  font-size: 0.75rem;
+}
+
+/* ─── TEAM / DOZENTEN SECTION ─── */
+#team { background: var(--cream); }
+
+.team-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.team-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+  transition: all 0.4s var(--ease-out);
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+.team-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(15, 27, 61, 0.08);
+  border-color: var(--stone);
+}
+.team-card-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1.25rem;
+  display: block;
+  border: 3px solid var(--gold-light);
+  box-shadow: 0 8px 24px rgba(15, 27, 61, 0.1);
+  transition: transform 0.4s var(--ease-out);
+}
+.team-card:hover .team-card-img {
+  transform: scale(1.05);
+}
+.team-card-initials {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  border: 3px solid var(--gold-light);
+  box-shadow: 0 8px 24px rgba(15, 27, 61, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin: 0 auto 1.25rem;
+  transition: transform 0.4s var(--ease-out);
+  position: relative;
+  letter-spacing: 0.03em;
+}
+.team-card-initials::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 169, 110, 0.2);
+}
+.team-card:hover .team-card-initials {
+  transform: scale(1.05);
+}
+.team-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.35rem;
+  line-height: 1.2;
+}
+.team-card-gold-line {
+  width: 30px;
+  height: 2px;
+  background: var(--gold);
+  margin: 0.5rem auto 0.75rem;
+  border-radius: 2px;
+}
+.team-card-role {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--rose);
+  letter-spacing: 0.03em;
+  margin-bottom: 0.35rem;
+}
+.team-card-qual {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 1024px) {
   .ziel-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -1225,6 +1420,10 @@ section {
   .osteo-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
   .osteo-bottom { grid-template-columns: 1fr; }
   .kontakt-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .team-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
 }
 
 @media (max-width: 768px) {
@@ -1300,6 +1499,7 @@ section {
   <ul class="nav-links" id="navLinks">
     <li><a href="#ziel">Unser Ziel</a></li>
     <li><a href="#glauben">Glaube</a></li>
+    <li><a href="#team">Team</a></li>
     <li><a href="#veranstaltungen">Veranstaltungen</a></li>
     <li><a href="#osteopathie">Osteopathie</a></li>
     <li><a href="#therapeuten">Therapeuten</a></li>
@@ -1375,7 +1575,7 @@ section {
     </div>
     <div class="ziel-visual reveal-right">
       <div class="ziel-img-wrapper">
-        <img src="http://christen-in-der-osteopathie.de/wp-content/uploads/2018/07/netzwerk-dunkelrot_400-300x204.jpg" alt="Netzwerk Illustration" loading="lazy">
+        <img src="img/netzwerk-dunkelrot_400-300x204.jpg" alt="Netzwerk Illustration" loading="lazy">
       </div>
       <div class="ziel-quote-card">
         &ldquo;I love my fellow man because I see God in his face and in his form.&rdquo;
@@ -1431,6 +1631,60 @@ section {
   </div>
 </section>
 
+<!-- ═══ TEAM / DOZENTEN ═══ -->
+<section id="team">
+  <div class="section-header reveal">
+    <div class="section-tag">Unser Team</div>
+    <h2 class="section-title">Die Menschen hinter <em>CiO</em></h2>
+    <p class="section-subtitle">Erfahrene Therapeuten und Dozenten, die Glaube und Fachkompetenz verbinden</p>
+  </div>
+
+  <div class="team-grid">
+    <div class="team-card reveal">
+      <img class="team-card-img" src="https://christen-in-der-osteopathie.de/wp-content/uploads/2023/08/Portrait_2023-211x300.jpg" alt="Michaela Dippon" loading="lazy">
+      <h3>Michaela Dippon M.Sc., D.O.</h3>
+      <div class="team-card-gold-line"></div>
+      <div class="team-card-role">Gründerin & Leitung</div>
+      <div class="team-card-qual">Osteopathin, Physiotherapeutin, Heilpraktikerin</div>
+    </div>
+    <div class="team-card reveal" style="transition-delay: 0.1s">
+      <div class="team-card-initials" aria-label="Johanna Adam">JA</div>
+      <h3>Johanna Adam</h3>
+      <div class="team-card-gold-line"></div>
+      <div class="team-card-role">Dozentin</div>
+      <div class="team-card-qual">Heilpraktikerin</div>
+    </div>
+    <div class="team-card reveal" style="transition-delay: 0.2s">
+      <div class="team-card-initials" aria-label="Nelli Bär">NB</div>
+      <h3>Nelli Bär</h3>
+      <div class="team-card-gold-line"></div>
+      <div class="team-card-role">Dozentin</div>
+      <div class="team-card-qual">Heilpraktikerin, Physiotherapeutin</div>
+    </div>
+    <div class="team-card reveal" style="transition-delay: 0.3s">
+      <div class="team-card-initials" aria-label="Madeleine Krumpein">MK</div>
+      <h3>Madeleine Krumpein</h3>
+      <div class="team-card-gold-line"></div>
+      <div class="team-card-role">Dozentin</div>
+      <div class="team-card-qual">Heilpraktikerin, Physiotherapeutin</div>
+    </div>
+    <div class="team-card reveal" style="transition-delay: 0.4s">
+      <div class="team-card-initials" aria-label="Luc Fieuw">LF</div>
+      <h3>Luc Fieuw</h3>
+      <div class="team-card-gold-line"></div>
+      <div class="team-card-role">Dozent</div>
+      <div class="team-card-qual">Osteopath</div>
+    </div>
+    <div class="team-card reveal" style="transition-delay: 0.5s">
+      <div class="team-card-initials" aria-label="Dr. Astrid Kühn-Letkemann">AK</div>
+      <h3>Dr. Astrid Kühn-Letkemann</h3>
+      <div class="team-card-gold-line"></div>
+      <div class="team-card-role">Dozentin</div>
+      <div class="team-card-qual">Fachärztin für Gynäkologie, Osteopathie</div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ VERANSTALTUNGEN ═══ -->
 <section id="veranstaltungen">
   <div class="section-header reveal">
@@ -1456,11 +1710,17 @@ section {
           03. – 04. Juli 2026
         </div>
         <h3>Der Fuß als Schlüssel zur Körperstatik</h3>
-        <div class="event-card-meta">
-          <div class="event-meta-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Nelli Bär, M. Krumpein, M. Dippon
+        <div class="event-speakers">
+          <div class="event-speakers-avatars">
+            <div class="speaker-initials">NB</div>
+            <div class="speaker-initials">MK</div>
+            <img class="speaker-avatar" src="https://christen-in-der-osteopathie.de/wp-content/uploads/2023/08/Portrait_2023-211x300.jpg" alt="Michaela Dippon">
           </div>
+          <div class="speaker-info">
+            <span class="speaker-names">Nelli Bär, M. Krumpein, M. Dippon</span>
+          </div>
+        </div>
+        <div class="event-card-meta">
           <div class="event-meta-item">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Esslingen
@@ -1498,11 +1758,16 @@ section {
           16. – 18. Oktober 2026
         </div>
         <h3>Trauma — verstehen und begegnen</h3>
-        <div class="event-card-meta">
-          <div class="event-meta-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Johanna Adam &amp; Michaela Dippon
+        <div class="event-speakers">
+          <div class="event-speakers-avatars">
+            <div class="speaker-initials">JA</div>
+            <img class="speaker-avatar" src="https://christen-in-der-osteopathie.de/wp-content/uploads/2023/08/Portrait_2023-211x300.jpg" alt="Michaela Dippon">
           </div>
+          <div class="speaker-info">
+            <span class="speaker-names">Johanna Adam & Michaela Dippon</span>
+          </div>
+        </div>
+        <div class="event-card-meta">
           <div class="event-meta-item">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Esslingen
@@ -1540,11 +1805,17 @@ section {
           20. – 22. November 2026
         </div>
         <h3>Das Kiefergelenk — Zahnmedizin &amp; Osteopathie</h3>
-        <div class="event-card-meta">
-          <div class="event-meta-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Dr. M. Hoch, W. Riek, M. Dippon
+        <div class="event-speakers">
+          <div class="event-speakers-avatars">
+            <div class="speaker-initials">MH</div>
+            <div class="speaker-initials">WR</div>
+            <img class="speaker-avatar" src="https://christen-in-der-osteopathie.de/wp-content/uploads/2023/08/Portrait_2023-211x300.jpg" alt="Michaela Dippon">
           </div>
+          <div class="speaker-info">
+            <span class="speaker-names">Dr. M. Hoch, W. Riek, M. Dippon</span>
+          </div>
+        </div>
+        <div class="event-card-meta">
           <div class="event-meta-item">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Esslingen
@@ -1571,17 +1842,28 @@ section {
           27. Februar 2027
         </div>
         <h3>A.&nbsp;T.&nbsp;Stills MAN IS TRIUNE</h3>
-        <div class="event-card-meta">
-          <div class="event-meta-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Michaela Dippon M.Sc., D.O.
+        <div class="event-speakers">
+          <div class="event-speakers-avatars">
+            <img class="speaker-avatar" src="https://christen-in-der-osteopathie.de/wp-content/uploads/2023/08/Portrait_2023-211x300.jpg" alt="Michaela Dippon">
           </div>
+          <div class="speaker-info">
+            <span class="speaker-names">Michaela Dippon M.Sc., D.O.</span>
+          </div>
+        </div>
+        <div class="event-card-meta">
           <div class="event-meta-item">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Esslingen
           </div>
         </div>
         <p>Der Einfluss auf den Gesundheitsbegriff in der Osteopathie. Das Menschenbild A.&nbsp;T.&nbsp;Stills im christlichen Kontext und seine Bedeutung für die therapeutische Arbeit.</p>
+        <div class="event-book-thumb">
+          <img src="img/Coverpreview-300x213.jpg" alt="MAN IS TRIUNE Buch-Cover" loading="lazy">
+          <div class="book-info">
+            <strong>MAN IS TRIUNE</strong>
+            Optional mit Buch erhältlich (+20 €)
+          </div>
+        </div>
         <div class="event-footer">
           <div class="event-price">120 € <small>140 € inkl. Buch</small></div>
           <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Anmeldung%20MAN%20IS%20TRIUNE%2027.02.2027" class="btn btn-primary event-btn">Anmelden</a>
@@ -1602,11 +1884,16 @@ section {
           11. – 13. Juni 2027
         </div>
         <h3>Schwangerschaft — Geburt — Postpartum</h3>
-        <div class="event-card-meta">
-          <div class="event-meta-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Luc Fieuw &amp; Dr. A. Kühn-Letkemann
+        <div class="event-speakers">
+          <div class="event-speakers-avatars">
+            <div class="speaker-initials">LF</div>
+            <div class="speaker-initials">AK</div>
           </div>
+          <div class="speaker-info">
+            <span class="speaker-names">Luc Fieuw & Dr. A. Kühn-Letkemann</span>
+          </div>
+        </div>
+        <div class="event-card-meta">
           <div class="event-meta-item">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Marburg
@@ -1633,10 +1920,13 @@ section {
           Termin wird bekanntgegeben
         </div>
         <h3>Gefühle — verstehen und begegnen</h3>
-        <div class="event-card-meta">
-          <div class="event-meta-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Michaela Dippon &amp; Johanna Adam
+        <div class="event-speakers">
+          <div class="event-speakers-avatars">
+            <img class="speaker-avatar" src="https://christen-in-der-osteopathie.de/wp-content/uploads/2023/08/Portrait_2023-211x300.jpg" alt="Michaela Dippon">
+            <div class="speaker-initials">JA</div>
+          </div>
+          <div class="speaker-info">
+            <span class="speaker-names">Michaela Dippon & Johanna Adam</span>
           </div>
         </div>
         <p>Über die Bedeutung der Gefühle in der osteopathischen Behandlung. Grundwortschatz der Gefühle, Ausdrucksformen im Körper, Zusammenhänge zwischen Körper, Seele und Geist.</p>
@@ -1791,7 +2081,7 @@ section {
 
   <div class="zert-bar reveal">
     <div class="zert-item">
-      <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2020/01/VOD_Logo-netto-150x150.png" alt="VOD Logo">
+      <img src="img/VOD_Logo-netto-150x150.png" alt="VOD Logo">
       <span>VOD-zertifiziert</span>
     </div>
     <div class="zert-item">
