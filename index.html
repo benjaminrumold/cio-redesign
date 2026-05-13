@@ -507,6 +507,79 @@ ul, ol { list-style: none; }
   transform: translateY(110%);
 }
 
+/* Hero intro animations — CSS-based for reliability */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFadeScale {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes heroLineReveal {
+  from { transform: translateY(110%); }
+  to { transform: translateY(0); }
+}
+
+.hero-badge,
+.hero-logo,
+.hero-subtitle,
+.hero-ctas .btn-primary,
+.hero-ctas .btn-outline,
+.hero-verse,
+.stat-item {
+  opacity: 0;
+}
+
+.hero-animated .hero-badge {
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0s;
+}
+.hero-animated .hero-logo {
+  animation: heroFadeScale 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.3s;
+}
+.hero-animated .hero-headline .line:nth-child(1) .line-inner {
+  animation: heroLineReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.5s;
+}
+.hero-animated .hero-headline .line:nth-child(2) .line-inner {
+  animation: heroLineReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.68s;
+}
+.hero-animated .hero-subtitle {
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.9s;
+}
+.hero-animated .hero-ctas .btn-primary {
+  animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.1s;
+}
+.hero-animated .hero-ctas .btn-outline {
+  animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.2s;
+}
+.hero-animated .hero-verse {
+  animation: heroFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.4s;
+}
+.hero-animated .stat-item:nth-child(1) {
+  animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.5s;
+}
+.hero-animated .stat-item:nth-child(2) {
+  animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.62s;
+}
+.hero-animated .stat-item:nth-child(3) {
+  animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.74s;
+}
+.hero-animated .stat-item:nth-child(4) {
+  animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 1.86s;
+}
+
 .hero-headline em {
   font-style: italic;
   font-weight: 400;
@@ -2232,20 +2305,29 @@ ul, ol { list-style: none; }
   'use strict';
 
   /* ========================================
-     LOADING SCREEN
-     ======================================== */
-  window.addEventListener('load', function() {
-    setTimeout(function() {
-      document.getElementById('loader').classList.add('hidden');
-      // Start hero animations after loader fades
-      setTimeout(startHeroAnimation, 400);
-    }, 1800);
-  });
-
-  /* ========================================
      REGISTER GSAP PLUGIN
      ======================================== */
   gsap.registerPlugin(ScrollTrigger);
+
+  /* ========================================
+     LOADING SCREEN — dismiss & trigger CSS hero animation
+     ======================================== */
+  function dismissLoader() {
+    var loader = document.getElementById('loader');
+    if (loader.classList.contains('hidden')) return;
+    loader.classList.add('hidden');
+    setTimeout(function() {
+      document.getElementById('hero').classList.add('hero-animated');
+    }, 300);
+  }
+
+  if (document.readyState === 'complete') {
+    setTimeout(dismissLoader, 600);
+  } else {
+    window.addEventListener('load', function() {
+      setTimeout(dismissLoader, 1600);
+    });
+  }
 
   /* ========================================
      NAVBAR SCROLL BEHAVIOR
@@ -2325,37 +2407,7 @@ ul, ol { list-style: none; }
   }
   requestAnimationFrame(animateGlow);
 
-  /* ========================================
-     GSAP — HERO ANIMATIONS
-     ======================================== */
-  function startHeroAnimation() {
-    var tl = gsap.timeline();
-
-    tl.from('.hero-badge', {
-      opacity: 0, y: 20, duration: 0.8, ease: 'power3.out'
-    })
-    .from('.hero-logo', {
-      opacity: 0, scale: 0.85, duration: 1.2, ease: 'power3.out'
-    }, '-=0.4')
-    .to('.hero-headline .line-inner', {
-      y: 0, duration: 1.2, ease: 'power4.out', stagger: 0.18
-    }, '-=0.7')
-    .from('.hero-subtitle', {
-      opacity: 0, y: 30, duration: 0.9, ease: 'power3.out'
-    }, '-=0.6')
-    .from('.hero-ctas .btn-primary', {
-      opacity: 0, y: 20, duration: 0.6, ease: 'power3.out'
-    }, '-=0.4')
-    .from('.hero-ctas .btn-outline', {
-      opacity: 0, y: 20, duration: 0.6, ease: 'power3.out'
-    }, '-=0.4')
-    .from('.hero-verse', {
-      opacity: 0, y: 15, duration: 0.6, ease: 'power3.out'
-    }, '-=0.3')
-    .from('.stat-item', {
-      opacity: 0, y: 30, duration: 0.7, ease: 'power3.out', stagger: 0.12
-    }, '-=0.3');
-  }
+  /* GSAP hero animation replaced by CSS @keyframes (see CSS above) */
 
   /* ========================================
      GSAP — COUNTER ANIMATION
