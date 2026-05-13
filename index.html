@@ -1783,6 +1783,414 @@ ul, ol { list-style: none; }
   z-index: 5;
   filter: blur(2px);
 }
+
+/* ========================================
+   HERO ANIMATED SVG ILLUSTRATION
+   ======================================== */
+.hero-illustration {
+  position: absolute;
+  bottom: 80px;
+  right: 5%;
+  width: 340px;
+  height: 420px;
+  z-index: 2;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.hero-illustration svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Spine line drawing animation */
+.hero-spine-path {
+  stroke: var(--gold);
+  stroke-width: 1.5;
+  fill: none;
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: spineReveal 4s cubic-bezier(0.16, 1, 0.3, 1) 1.5s forwards;
+}
+
+.hero-spine-glow {
+  stroke: var(--gold);
+  stroke-width: 4;
+  fill: none;
+  opacity: 0.3;
+  filter: blur(4px);
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: spineReveal 4s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
+}
+
+@keyframes spineReveal {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Cross light emanation */
+.hero-cross-light {
+  fill: none;
+  stroke: var(--gold-light);
+  stroke-width: 0.8;
+  opacity: 0;
+  animation: crossLightPulse 6s ease-in-out 3s infinite;
+}
+
+@keyframes crossLightPulse {
+  0%, 100% { opacity: 0; transform: scale(0.95); }
+  30% { opacity: 0.5; transform: scale(1); }
+  60% { opacity: 0.2; transform: scale(1.05); }
+}
+
+/* Hands silhouette */
+.hero-hands-outline {
+  fill: none;
+  stroke: rgba(255,255,255,0.12);
+  stroke-width: 1;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: handsReveal 3.5s cubic-bezier(0.16, 1, 0.3, 1) 2s forwards;
+}
+
+@keyframes handsReveal {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Light rays from center */
+.hero-light-ray {
+  stroke: var(--gold);
+  stroke-width: 0.5;
+  fill: none;
+  opacity: 0;
+  transform-origin: center;
+}
+
+.hero-light-ray:nth-child(1) { animation: rayPulse 5s ease-in-out 3.2s infinite; }
+.hero-light-ray:nth-child(2) { animation: rayPulse 5s ease-in-out 3.5s infinite; }
+.hero-light-ray:nth-child(3) { animation: rayPulse 5s ease-in-out 3.8s infinite; }
+.hero-light-ray:nth-child(4) { animation: rayPulse 5s ease-in-out 4.1s infinite; }
+
+@keyframes rayPulse {
+  0%, 100% { opacity: 0; stroke-dashoffset: 40; }
+  40% { opacity: 0.4; stroke-dashoffset: 0; }
+  70% { opacity: 0.15; stroke-dashoffset: -20; }
+}
+
+/* Floating particles around illustration */
+.hero-particle {
+  fill: var(--gold);
+  opacity: 0;
+  animation: particleFloat 8s ease-in-out infinite;
+}
+
+.hero-particle:nth-child(1) { animation-delay: 3s; }
+.hero-particle:nth-child(2) { animation-delay: 4s; }
+.hero-particle:nth-child(3) { animation-delay: 5s; }
+.hero-particle:nth-child(4) { animation-delay: 3.5s; }
+.hero-particle:nth-child(5) { animation-delay: 4.5s; }
+
+@keyframes particleFloat {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
+  20% { opacity: 0.6; }
+  50% { opacity: 0.3; transform: translateY(-30px) scale(1); }
+  80% { opacity: 0; transform: translateY(-60px) scale(0.3); }
+}
+
+@media (max-width: 1024px) {
+  .hero-illustration { width: 240px; height: 300px; opacity: 0.12; right: 2%; bottom: 100px; }
+}
+@media (max-width: 768px) {
+  .hero-illustration { display: none; }
+}
+
+/* ========================================
+   VALUE CARDS — ENHANCED
+   ======================================== */
+.value-card {
+  padding: 44px 28px 40px;
+}
+
+.value-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rose), var(--gold));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.value-card:hover::after {
+  transform: scaleX(1);
+}
+
+.value-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 24px;
+  transition: transform 0.5s var(--ease-out-expo), box-shadow 0.5s;
+}
+
+.value-card:hover .value-icon {
+  transform: scale(1.08);
+  box-shadow: 0 8px 30px rgba(15,27,61,0.3), 0 0 20px rgba(201,169,110,0.15);
+}
+
+.value-icon svg {
+  width: 36px;
+  height: 36px;
+}
+
+.value-card-pattern {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  opacity: 0.04;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+
+.value-card:hover .value-card-pattern {
+  opacity: 0.08;
+}
+
+/* ========================================
+   EVENT REGISTRATION MODAL
+   ======================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(15,27,61,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s var(--ease-out-expo);
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: var(--cream);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 48px 40px;
+  position: relative;
+  transform: translateY(30px) scale(0.96);
+  transition: transform 0.5s var(--ease-out-expo);
+  box-shadow: var(--shadow-xl);
+}
+
+.modal-overlay.active .modal-content {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(15,27,61,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: rgba(180,67,108,0.1);
+  color: var(--rose);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.modal-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1.5px solid rgba(15,27,61,0.1);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  background: var(--white);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 3px rgba(180,67,108,0.08);
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: var(--rose);
+  color: #fff;
+  border-radius: 100px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: all 0.4s var(--ease-out-expo);
+  box-shadow: var(--shadow-glow-rose);
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.form-submit:hover {
+  background: var(--rose-light);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 50px rgba(180,67,108,0.4);
+}
+
+/* ========================================
+   CONTACT SECTION
+   ======================================== */
+.section-contact {
+  position: relative;
+  background: var(--cream);
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+  max-width: 1000px;
+  margin: 48px auto 0;
+}
+
+.contact-info-block h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 20px;
+}
+
+.contact-info-block p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.contact-detail-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(15,27,61,0.15);
+}
+
+.contact-detail-text {
+  font-size: 0.92rem;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.contact-detail-text a {
+  color: var(--rose);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.contact-detail-text a:hover {
+  color: var(--rose-dark);
+}
+
+.contact-form-block {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  border: 1px solid rgba(15,27,61,0.04);
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .section-contact { padding: 80px 0; }
+}
 </style>
 </head>
 
@@ -1850,6 +2258,45 @@ ul, ol { list-style: none; }
   <div class="floating-cross cross-7"></div>
 
   <div class="hero-mouse-glow" id="heroGlow"></div>
+
+  <!-- Animated Illustration: Spine-Cross with healing hands -->
+  <div class="hero-illustration" aria-hidden="true">
+    <svg viewBox="0 0 340 420" xmlns="http://www.w3.org/2000/svg">
+      <!-- Spine form that subtly evokes a cross -->
+      <path class="hero-spine-path" d="M170,30 C168,50 172,65 170,80 C167,100 173,115 170,135 C168,155 172,170 170,190 C168,210 173,230 170,250 C167,270 172,290 170,310 C169,330 170,350 170,370" />
+      <path class="hero-spine-glow" d="M170,30 C168,50 172,65 170,80 C167,100 173,115 170,135 C168,155 172,170 170,190 C168,210 173,230 170,250 C167,270 172,290 170,310 C169,330 170,350 170,370" />
+      <!-- Vertebrae markers -->
+      <g opacity="0.4">
+        <ellipse cx="170" cy="60" rx="14" ry="4" fill="none" stroke="var(--gold)" stroke-width="0.6" class="hero-cross-light" style="animation-delay:3.2s"/>
+        <ellipse cx="170" cy="100" rx="16" ry="4.5" fill="none" stroke="var(--gold)" stroke-width="0.6" class="hero-cross-light" style="animation-delay:3.5s"/>
+        <ellipse cx="170" cy="140" rx="18" ry="5" fill="none" stroke="var(--gold)" stroke-width="0.6" class="hero-cross-light" style="animation-delay:3.8s"/>
+        <ellipse cx="170" cy="180" rx="20" ry="5" fill="none" stroke="var(--gold)" stroke-width="0.6" class="hero-cross-light" style="animation-delay:4.1s"/>
+        <ellipse cx="170" cy="220" rx="18" ry="5" fill="none" stroke="var(--gold)" stroke-width="0.6" class="hero-cross-light" style="animation-delay:4.4s"/>
+        <ellipse cx="170" cy="260" rx="15" ry="4" fill="none" stroke="var(--gold)" stroke-width="0.6" class="hero-cross-light" style="animation-delay:4.7s"/>
+        <ellipse cx="170" cy="300" rx="12" ry="3.5" fill="none" stroke="var(--gold)" stroke-width="0.6" class="hero-cross-light" style="animation-delay:5s"/>
+      </g>
+      <!-- Horizontal cross bar — subtle, architectural -->
+      <line x1="90" y1="180" x2="250" y2="180" stroke="var(--gold)" stroke-width="0.8" opacity="0.25" class="hero-cross-light" style="animation-delay:4s"/>
+      <!-- Healing hands — abstract, open palms -->
+      <path class="hero-hands-outline" d="M90,200 C75,185 60,175 55,165 C50,155 52,148 58,150 C62,152 68,160 72,165 L72,145 C72,138 78,135 82,140 L82,160 L82,138 C82,130 88,128 92,134 L92,160 L92,142 C92,136 97,134 100,139 L100,170 C100,180 95,195 90,200 Z" />
+      <path class="hero-hands-outline" d="M250,200 C265,185 280,175 285,165 C290,155 288,148 282,150 C278,152 272,160 268,165 L268,145 C268,138 262,135 258,140 L258,160 L258,138 C258,130 252,128 248,134 L248,160 L248,142 C248,136 243,134 240,139 L240,170 C240,180 245,195 250,200 Z" />
+      <!-- Light rays from center -->
+      <g class="hero-light-rays">
+        <line class="hero-light-ray" x1="170" y1="180" x2="170" y2="120" stroke-dasharray="40" />
+        <line class="hero-light-ray" x1="170" y1="180" x2="130" y2="150" stroke-dasharray="40" />
+        <line class="hero-light-ray" x1="170" y1="180" x2="210" y2="150" stroke-dasharray="40" />
+        <line class="hero-light-ray" x1="170" y1="180" x2="170" y2="240" stroke-dasharray="40" />
+      </g>
+      <!-- Floating particles -->
+      <g>
+        <circle class="hero-particle" cx="120" cy="120" r="2" />
+        <circle class="hero-particle" cx="220" cy="100" r="1.5" />
+        <circle class="hero-particle" cx="140" cy="250" r="1.8" />
+        <circle class="hero-particle" cx="200" cy="280" r="1.3" />
+        <circle class="hero-particle" cx="160" cy="320" r="1.6" />
+      </g>
+    </svg>
+  </div>
 
   <!-- Content -->
   <div class="hero-content">
@@ -1919,24 +2366,36 @@ ul, ol { list-style: none; }
     <!-- Value Cards -->
     <div class="value-cards">
       <div class="value-card anim-fade-up">
-        <div class="value-icon">&#10013;</div>
+        <svg class="value-card-pattern" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><path d="M60,0 L120,60 L60,120 L0,60 Z" fill="none" stroke="var(--gold)" stroke-width="0.5"/><path d="M60,20 L100,60 L60,100 L20,60 Z" fill="none" stroke="var(--gold)" stroke-width="0.3"/></svg>
+        <div class="value-icon">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 4L18 32M10 14L26 14" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round"/><circle cx="18" cy="14" r="8" stroke="var(--gold)" stroke-width="0.6" opacity="0.4"/><path d="M18 6C18 6 12 10 12 14C12 18 18 22 18 22C18 22 24 18 24 14C24 10 18 6 18 6Z" fill="var(--gold)" opacity="0.1"/></svg>
+        </div>
         <h3>Glaube</h3>
-        <p>Christlicher Glaube als Fundament&nbsp;&mdash; nicht Methode, sondern Haltung, die unser Handeln durchdringt.</p>
+        <p>Christlicher Glaube als tragendes Fundament&nbsp;&mdash; nicht Methode, sondern innere Haltung, die jede Behandlung und Begegnung durchdringt.</p>
       </div>
       <div class="value-card anim-fade-up">
-        <div class="value-icon">&#9877;</div>
+        <svg class="value-card-pattern" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><circle cx="60" cy="60" r="50" fill="none" stroke="var(--rose)" stroke-width="0.3"/><circle cx="60" cy="60" r="35" fill="none" stroke="var(--rose)" stroke-width="0.3"/><circle cx="60" cy="60" r="20" fill="none" stroke="var(--rose)" stroke-width="0.3"/></svg>
+        <div class="value-icon">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 28C10 28 12 20 14 16C16 12 18 8 18 8C18 8 20 12 22 16C24 20 26 28 26 28" stroke="var(--gold)" stroke-width="1.2" stroke-linecap="round"/><ellipse cx="18" cy="14" rx="5" ry="2.5" stroke="var(--gold)" stroke-width="0.8"/><ellipse cx="18" cy="20" rx="6" ry="2.5" stroke="var(--gold)" stroke-width="0.8"/><ellipse cx="18" cy="26" rx="7" ry="2.5" stroke="var(--gold)" stroke-width="0.8"/><circle cx="18" cy="6" r="2" stroke="var(--gold)" stroke-width="0.8"/></svg>
+        </div>
         <h3>Fachlichkeit</h3>
-        <p>H&ouml;chste therapeutische Standards. Regelm&auml;&szlig;ige Fortbildung. Evidenzbasiertes Arbeiten mit Tiefgang.</p>
+        <p>H&ouml;chste therapeutische Standards und kontinuierliche Weiterbildung. Evidenzbasiertes Arbeiten mit der Tiefe, die Heilung braucht.</p>
       </div>
       <div class="value-card anim-fade-up">
-        <div class="value-icon">&#10070;</div>
+        <svg class="value-card-pattern" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><path d="M20,60 Q60,20 100,60 Q60,100 20,60" fill="none" stroke="var(--navy)" stroke-width="0.3"/><path d="M40,60 Q60,35 80,60 Q60,85 40,60" fill="none" stroke="var(--navy)" stroke-width="0.3"/></svg>
+        <div class="value-icon">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="14" r="4" stroke="var(--gold)" stroke-width="1"/><circle cx="24" cy="14" r="4" stroke="var(--gold)" stroke-width="1"/><circle cx="18" cy="24" r="4" stroke="var(--gold)" stroke-width="1"/><line x1="15" y1="16" x2="16" y2="21" stroke="var(--gold)" stroke-width="0.8"/><line x1="21" y1="16" x2="20" y2="21" stroke="var(--gold)" stroke-width="0.8"/><line x1="13.5" y1="17" x2="22.5" y2="17" stroke="var(--gold)" stroke-width="0.5" opacity="0.4" stroke-dasharray="2 2"/></svg>
+        </div>
         <h3>Gemeinschaft</h3>
-        <p>Ein Netzwerk, das tr&auml;gt. Kollegialer Austausch, gemeinsame Retreats und echte Verbundenheit.</p>
+        <p>Ein Netzwerk, das tr&auml;gt und befl&uuml;gelt. Kollegialer Austausch, gemeinsame Retreats und eine Verbundenheit, die &uuml;ber die Praxis hinausreicht.</p>
       </div>
       <div class="value-card anim-fade-up">
-        <div class="value-icon">&#9672;</div>
+        <svg class="value-card-pattern" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="20" width="80" height="80" rx="4" fill="none" stroke="var(--gold)" stroke-width="0.3"/><rect x="35" y="35" width="50" height="50" rx="2" fill="none" stroke="var(--gold)" stroke-width="0.3"/></svg>
+        <div class="value-icon">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L30 18L18 30L6 18Z" stroke="var(--gold)" stroke-width="1.2"/><path d="M18 11L25 18L18 25L11 18Z" stroke="var(--gold)" stroke-width="0.8" opacity="0.5"/><circle cx="18" cy="18" r="2" fill="var(--gold)" opacity="0.3"/><line x1="18" y1="6" x2="18" y2="30" stroke="var(--gold)" stroke-width="0.4" opacity="0.3"/><line x1="6" y1="18" x2="30" y2="18" stroke="var(--gold)" stroke-width="0.4" opacity="0.3"/></svg>
+        </div>
         <h3>Integrit&auml;t</h3>
-        <p>Transparenz in Therapie und Kommunikation. Ethische Reflexion als fester Bestandteil unserer Arbeit.</p>
+        <p>Transparenz in Therapie und Kommunikation. Ethische Reflexion als unverzichtbarer Kompass in einer sich wandelnden Gesundheitslandschaft.</p>
       </div>
     </div>
   </div>
@@ -1995,7 +2454,9 @@ ul, ol { list-style: none; }
       <!-- Johanna Adam -->
       <div class="team-card anim-fade-up">
         <div class="team-card-inner">
-          <div class="team-initials">JA</div>
+          <div class="team-photo">
+            <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2020/01/Johanna-150x150.png" alt="Johanna Adam" loading="lazy">
+          </div>
           <div class="team-role">2. Vorsitzende</div>
           <h3 class="team-name">Johanna Adam</h3>
           <p class="team-location">M&uuml;nchen &middot; M.Sc. Ost.</p>
@@ -2008,7 +2469,9 @@ ul, ol { list-style: none; }
       <!-- Nelli Baer -->
       <div class="team-card anim-fade-up">
         <div class="team-card-inner">
-          <div class="team-initials">NB</div>
+          <div class="team-photo">
+            <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2025/04/NelliBaer-150x150.jpg" alt="Nelli B&auml;r" loading="lazy">
+          </div>
           <div class="team-role">Schriftf&uuml;hrung</div>
           <h3 class="team-name">Nelli B&auml;r</h3>
           <p class="team-location">Hamburg &middot; B.Sc. Ost.</p>
@@ -2021,7 +2484,9 @@ ul, ol { list-style: none; }
       <!-- Madeleine Krumpein -->
       <div class="team-card anim-fade-up">
         <div class="team-card-inner">
-          <div class="team-initials">MK</div>
+          <div class="team-photo">
+            <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2025/04/MadeleineKrumpein-150x150.jpg" alt="Madeleine Krumpein" loading="lazy">
+          </div>
           <div class="team-role">Schatzmeisterin</div>
           <h3 class="team-name">Madeleine Krumpein</h3>
           <p class="team-location">Berlin &middot; D.O.</p>
@@ -2034,7 +2499,9 @@ ul, ol { list-style: none; }
       <!-- Luc Fieuw -->
       <div class="team-card anim-fade-up">
         <div class="team-card-inner">
-          <div class="team-initials">LF</div>
+          <div class="team-photo">
+            <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2024/12/LucFieuw-150x150.jpg" alt="Luc Fieuw" loading="lazy">
+          </div>
           <div class="team-role">Beisitz &middot; International</div>
           <h3 class="team-name">Luc Fieuw</h3>
           <p class="team-location">Br&uuml;ssel &middot; D.O.</p>
@@ -2047,7 +2514,9 @@ ul, ol { list-style: none; }
       <!-- Dr. Astrid Kuehn-Letkemann -->
       <div class="team-card anim-fade-up">
         <div class="team-card-inner">
-          <div class="team-initials">AK</div>
+          <div class="team-photo">
+            <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2024/12/AstridKuehn-150x150.jpg" alt="Dr. Astrid K&uuml;hn-Letkemann" loading="lazy">
+          </div>
           <div class="team-role">Beisitz &middot; Forschung</div>
           <h3 class="team-name">Dr. Astrid K&uuml;hn-Letkemann</h3>
           <p class="team-location">K&ouml;ln &middot; Ph.D., D.O.</p>
@@ -2102,7 +2571,7 @@ ul, ol { list-style: none; }
         <h3>A.T. Stills MAN IS TRIUNE</h3>
         <p class="event-instructors">Michaela Dippon</p>
         <p class="event-price">120 &euro; <span class="early">140 &euro;</span></p>
-        <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Anmeldung: MAN IS TRIUNE" class="event-btn">Anmelden &rarr;</a>
+        <button class="event-btn" onclick="openRegistration('A.T. Stills MAN IS TRIUNE', '27. Februar 2027')">Anmelden &rarr;</button>
       </div>
 
       <!-- Event 2 -->
@@ -2111,7 +2580,7 @@ ul, ol { list-style: none; }
         <h3>Der Fu&szlig; als Schl&uuml;ssel zur K&ouml;rperstatik</h3>
         <p class="event-instructors">Nelli B&auml;r, Madeleine Krumpein, Michaela Dippon</p>
         <p class="event-price">370 &euro;</p>
-        <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Anmeldung: Fuss als Schluessel" class="event-btn">Anmelden &rarr;</a>
+        <button class="event-btn" onclick="openRegistration('Der Fu&szlig; als Schl&uuml;ssel zur K&ouml;rperstatik', '03.&ndash;04. Juli 2026')">Anmelden &rarr;</button>
       </div>
 
       <!-- Event 3 -->
@@ -2120,7 +2589,7 @@ ul, ol { list-style: none; }
         <h3>Trauma &mdash; verstehen und begegnen</h3>
         <p class="event-instructors">Johanna Adam &amp; Michaela Dippon</p>
         <p class="event-price">580 &euro;</p>
-        <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Anmeldung: Trauma" class="event-btn">Anmelden &rarr;</a>
+        <button class="event-btn" onclick="openRegistration('Trauma &mdash; verstehen und begegnen', '16.&ndash;18. Oktober 2026')">Anmelden &rarr;</button>
       </div>
 
       <!-- Event 4 -->
@@ -2129,7 +2598,7 @@ ul, ol { list-style: none; }
         <h3>Das Kiefergelenk</h3>
         <p class="event-instructors">Dr. Matthias Hoch, Wolfgang Riek, Michaela Dippon</p>
         <p class="event-price">580 &euro;</p>
-        <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Anmeldung: Kiefergelenk" class="event-btn">Anmelden &rarr;</a>
+        <button class="event-btn" onclick="openRegistration('Das Kiefergelenk', '20.&ndash;22. November 2026')">Anmelden &rarr;</button>
       </div>
 
       <!-- Event 5 -->
@@ -2138,7 +2607,7 @@ ul, ol { list-style: none; }
         <h3>Schwangerschaft &mdash; Geburt &mdash; Postpartum</h3>
         <p class="event-instructors">Luc Fieuw &amp; Dr. Astrid K&uuml;hn-Letkemann</p>
         <p class="event-price">580 &euro;</p>
-        <a href="mailto:info@Christen-in-der-Osteopathie.de?subject=Anmeldung: Schwangerschaft" class="event-btn">Anmelden &rarr;</a>
+        <button class="event-btn" onclick="openRegistration('Schwangerschaft &mdash; Geburt &mdash; Postpartum', '11.&ndash;13. Juni 2027')">Anmelden &rarr;</button>
       </div>
     </div>
 
@@ -2240,6 +2709,79 @@ ul, ol { list-style: none; }
   <div class="orb orb-gold" style="width:400px;height:400px;top:10%;right:-100px;opacity:.12;animation:orbFloat3 20s ease-in-out infinite;"></div>
 </section>
 
+<!-- ======== SECTION: KONTAKT ======== -->
+<section class="section-contact" id="kontakt">
+  <div class="container">
+    <div class="section-heading anim-fade-up">
+      <div class="section-label" style="justify-content:center;">Kontakt</div>
+      <h2>Sprechen Sie<br>uns <em>an.</em></h2>
+      <p class="subtitle">Fragen zur Mitgliedschaft, zu Veranstaltungen oder zum Verein? Wir freuen uns auf Ihre Nachricht.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info-block anim-fade-up">
+        <h3>So erreichen Sie uns</h3>
+        <p>Ob Sie Interesse an einer Mitgliedschaft haben, Fragen zu unseren Fortbildungen stellen oder einfach mehr erfahren m&ouml;chten&nbsp;&mdash; schreiben Sie uns.</p>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon">&#9993;</div>
+          <div class="contact-detail-text">
+            <strong>E-Mail</strong><br>
+            <a href="mailto:info@Christen-in-der-Osteopathie.de">info@Christen-in-der-Osteopathie.de</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">&#9742;</div>
+          <div class="contact-detail-text">
+            <strong>Telefon</strong><br>
+            <a href="tel:+4907118209390">0711-8209390</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">&#9672;</div>
+          <div class="contact-detail-text">
+            <strong>Adresse</strong><br>
+            Christen in der Osteopathie e.V.<br>
+            c/o Michaela Dippon<br>
+            Hindenburgstr. 129, 73728 Esslingen
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-block anim-fade-up">
+        <form id="contactForm" onsubmit="submitContactForm(event)">
+          <div class="form-group">
+            <label for="contact-name">Name</label>
+            <input type="text" id="contact-name" name="name" placeholder="Ihr vollst&auml;ndiger Name" required>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">E-Mail</label>
+            <input type="email" id="contact-email" name="email" placeholder="ihre@email.de" required>
+          </div>
+          <div class="form-group">
+            <label for="contact-subject">Betreff</label>
+            <select id="contact-subject" name="subject" required>
+              <option value="" disabled selected>Bitte w&auml;hlen</option>
+              <option value="Mitgliedschaft">Mitgliedschaft</option>
+              <option value="Veranstaltungen">Veranstaltungen</option>
+              <option value="Allgemeine Anfrage">Allgemeine Anfrage</option>
+              <option value="Kooperation">Kooperation</option>
+              <option value="Presse">Presse</option>
+              <option value="Sonstiges">Sonstiges</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="contact-message">Nachricht</label>
+            <textarea id="contact-message" name="message" placeholder="Ihre Nachricht an uns..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Nachricht senden &rarr;</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="orb orb-rose" style="width:350px;height:350px;opacity:.08;top:-100px;right:-80px;animation:orbFloat3 18s ease-in-out infinite;"></div>
+</section>
+
 <!-- ======== WAVE: CREAM to NAVY ======== -->
 <div class="wave-divider cream-to-navy">
   <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
@@ -2248,7 +2790,7 @@ ul, ol { list-style: none; }
 </div>
 
 <!-- ======== FOOTER ======== -->
-<footer class="footer" id="kontakt">
+<footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
@@ -2292,6 +2834,35 @@ ul, ol { list-style: none; }
 
   <div class="orb orb-rose" style="width:400px;height:400px;bottom:-150px;left:-100px;opacity:.06;animation:orbFloat2 25s ease-in-out infinite;"></div>
 </footer>
+
+<!-- ======== EVENT REGISTRATION MODAL ======== -->
+<div class="modal-overlay" id="registrationModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeRegistration()">&times;</button>
+    <h3 class="modal-title">Anmeldung</h3>
+    <p class="modal-subtitle" id="modalEventInfo"></p>
+    <form id="registrationForm" onsubmit="submitRegistration(event)">
+      <div class="form-group">
+        <label for="reg-name">Name</label>
+        <input type="text" id="reg-name" name="name" placeholder="Ihr vollst&auml;ndiger Name" required>
+      </div>
+      <div class="form-group">
+        <label for="reg-email">E-Mail</label>
+        <input type="email" id="reg-email" name="email" placeholder="ihre@email.de" required>
+      </div>
+      <div class="form-group">
+        <label for="reg-phone">Telefon</label>
+        <input type="tel" id="reg-phone" name="phone" placeholder="Ihre Telefonnummer (optional)">
+      </div>
+      <div class="form-group">
+        <label for="reg-message">Nachricht</label>
+        <textarea id="reg-message" name="message" placeholder="Besondere Hinweise oder Fragen (optional)"></textarea>
+      </div>
+      <input type="hidden" id="reg-event" name="event">
+      <button type="submit" class="form-submit">Verbindlich anmelden &rarr;</button>
+    </form>
+  </div>
+</div>
 
 <!-- ======== BACK TO TOP ======== -->
 <button class="back-to-top" id="backToTop" aria-label="Nach oben scrollen">&uarr;</button>
@@ -2721,6 +3292,108 @@ ul, ol { list-style: none; }
       ScrollTrigger.refresh();
     }, 250);
   }, { passive: true });
+
+  /* ========================================
+     EVENT REGISTRATION MODAL
+     ======================================== */
+  var currentEventName = '';
+
+  window.openRegistration = function(eventName, eventDate) {
+    currentEventName = eventName;
+    var modal = document.getElementById('registrationModal');
+    var info = document.getElementById('modalEventInfo');
+    var hiddenInput = document.getElementById('reg-event');
+    // Decode HTML entities for display
+    var tmp = document.createElement('span');
+    tmp.innerHTML = eventName;
+    var decodedName = tmp.textContent || tmp.innerText;
+    tmp.innerHTML = eventDate;
+    var decodedDate = tmp.textContent || tmp.innerText;
+    info.textContent = decodedName + ' — ' + decodedDate;
+    hiddenInput.value = decodedName;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeRegistration = function() {
+    var modal = document.getElementById('registrationModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  // Close modal on overlay click
+  document.getElementById('registrationModal').addEventListener('click', function(e) {
+    if (e.target === this) closeRegistration();
+  });
+
+  // Close modal on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeRegistration();
+  });
+
+  window.submitRegistration = function(e) {
+    e.preventDefault();
+    var form = document.getElementById('registrationForm');
+    var name = form.querySelector('#reg-name').value;
+    var email = form.querySelector('#reg-email').value;
+    var phone = form.querySelector('#reg-phone').value;
+    var message = form.querySelector('#reg-message').value;
+    var eventName = form.querySelector('#reg-event').value;
+
+    var subject = encodeURIComponent('Anmeldung: ' + eventName);
+    var body = encodeURIComponent(
+      'Anmeldung zur Veranstaltung: ' + eventName + '\n\n' +
+      'Name: ' + name + '\n' +
+      'E-Mail: ' + email + '\n' +
+      'Telefon: ' + (phone || 'nicht angegeben') + '\n\n' +
+      'Nachricht:\n' + (message || 'keine') + '\n'
+    );
+
+    window.location.href = 'mailto:info@Christen-in-der-Osteopathie.de?subject=' + subject + '&body=' + body;
+    closeRegistration();
+    form.reset();
+  };
+
+  /* ========================================
+     CONTACT FORM
+     ======================================== */
+  window.submitContactForm = function(e) {
+    e.preventDefault();
+    var form = document.getElementById('contactForm');
+    var name = form.querySelector('#contact-name').value;
+    var email = form.querySelector('#contact-email').value;
+    var subjectVal = form.querySelector('#contact-subject').value;
+    var message = form.querySelector('#contact-message').value;
+
+    var subject = encodeURIComponent('Kontaktformular: ' + subjectVal);
+    var body = encodeURIComponent(
+      'Kontaktanfrage über die Website\n\n' +
+      'Name: ' + name + '\n' +
+      'E-Mail: ' + email + '\n' +
+      'Betreff: ' + subjectVal + '\n\n' +
+      'Nachricht:\n' + message + '\n'
+    );
+
+    window.location.href = 'mailto:info@Christen-in-der-Osteopathie.de?subject=' + subject + '&body=' + body;
+    form.reset();
+  };
+
+  /* ========================================
+     CONTACT SECTION ANIMATIONS
+     ======================================== */
+  ScrollTrigger.create({
+    trigger: '.section-contact',
+    start: 'top 85%',
+    onEnter: function() {
+      gsap.from('.contact-info-block', {
+        opacity: 0, x: -30, duration: 0.8, ease: 'power3.out'
+      });
+      gsap.from('.contact-form-block', {
+        opacity: 0, x: 30, duration: 0.8, ease: 'power3.out', delay: 0.15
+      });
+    },
+    once: true
+  });
 
 })();
 </script>
