@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CiO Website-Redesign — Analyse & Strategie 2026</title>
+<meta name="description" content="Strategiedokument für das Website-Redesign von Christen in der Osteopathie. Analyse, Zielgruppenforschung und Maßnahmenplan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --navy: #0f1b3d;
+  --navy-light: #1a2d5e;
+  --navy-mid: #253a6e;
+  --rose: #b4436c;
+  --rose-light: #d4698e;
+  --rose-glow: #e8a0b8;
+  --rose-pale: #f5dce6;
+  --gold: #c9a96e;
+  --gold-light: #e0c992;
+  --cream: #faf7f2;
+  --cream-warm: #f5efe6;
+  --stone: #e8e2d8;
+  --text-dark: #1a1a2e;
+  --text-body: #3a3a4a;
+  --text-muted: #6b6b7b;
+  --white: #ffffff;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-body);
+  background: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── REVEAL ANIMATIONS ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ─── NAVIGATION ─── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.5s var(--ease-out);
+}
+.nav.scrolled {
+  background: rgba(15, 27, 61, 0.92);
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  padding: 0.6rem 2rem;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+.nav-logo img {
+  height: 48px;
+  transition: height 0.4s var(--ease-out);
+}
+.nav.scrolled .nav-logo img { height: 36px; }
+.nav-logo-text {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+.nav-logo-text span {
+  display: block;
+  font-size: 0.65rem;
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.5rem 0.9rem;
+  border-radius: 100px;
+  transition: all 0.3s ease;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--white);
+  background: rgba(255,255,255,0.12);
+}
+.nav-cta {
+  background: var(--rose) !important;
+  color: var(--white) !important;
+  padding: 0.5rem 1.2rem !important;
+}
+.nav-cta:hover {
+  background: var(--rose-light) !important;
+  transform: translateY(-1px);
+}
+
+/* Mobile menu */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1001;
+}
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; }
+.nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--navy);
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(180, 67, 108, 0.15) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 30%, rgba(201, 169, 110, 0.1) 0%, transparent 40%),
+              radial-gradient(ellipse at 50% 80%, rgba(26, 45, 94, 0.8) 0%, transparent 50%);
+  animation: heroShift 20s ease-in-out infinite alternate;
+}
+@keyframes heroShift {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(-5%, 3%) rotate(3deg); }
+}
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 256px;
+}
+
+/* Floating orbs */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.2;
+  animation: orbFloat 15s ease-in-out infinite;
+}
+.hero-orb:nth-child(1) {
+  width: 500px; height: 500px;
+  background: var(--rose);
+  top: 10%; right: -10%;
+  animation-delay: 0s;
+}
+.hero-orb:nth-child(2) {
+  width: 400px; height: 400px;
+  background: var(--gold);
+  bottom: 10%; left: -5%;
+  animation-delay: -5s;
+  animation-duration: 18s;
+}
+.hero-orb:nth-child(3) {
+  width: 300px; height: 300px;
+  background: var(--navy-mid);
+  top: 50%; left: 40%;
+  animation-delay: -10s;
+  animation-duration: 22s;
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(30px, -30px); }
+  66% { transform: translate(-20px, 20px); }
+}
+
+/* Decorative cross */
+.hero-cross {
+  position: absolute;
+  width: 1px;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, rgba(201, 169, 110, 0.2), transparent);
+  top: 15%;
+  right: 15%;
+}
+.hero-cross::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201, 169, 110, 0.2), transparent);
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  padding: 2rem;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 100px;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 1s var(--ease-out) 0.3s forwards;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 1.2s var(--ease-out) 0.5s forwards;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--rose-light);
+}
+.hero-sub {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.65);
+  max-width: 650px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fadeUp 1.2s var(--ease-out) 0.7s forwards;
+}
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 1.2s var(--ease-out) 0.9s forwards;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero scroll indicator */
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: fadeUp 1.2s var(--ease-out) 1.5s forwards;
+  opacity: 0;
+}
+.hero-scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ─── BUTTONS ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2rem;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.4s var(--ease-out);
+}
+.btn-primary {
+  background: var(--rose);
+  color: var(--white);
+  box-shadow: 0 4px 20px rgba(180, 67, 108, 0.3);
+}
+.btn-primary:hover {
+  background: var(--rose-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(180, 67, 108, 0.4);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.btn-outline:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.4);
+  transform: translateY(-2px);
+}
+.btn-dark {
+  background: var(--navy);
+  color: var(--white);
+}
+.btn-dark:hover {
+  background: var(--navy-light);
+  transform: translateY(-2px);
+}
+
+/* ─── SECTIONS ─── */
+section {
+  padding: 7rem 2rem;
+  position: relative;
+}
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 4rem;
+}
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rose);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.section-tag::before, .section-tag::after {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--rose-light);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  color: var(--navy);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.section-title em {
+  font-style: italic;
+  color: var(--rose);
+}
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ─── TABLE OF CONTENTS ─── */
+#toc { background: var(--cream-warm); }
+.toc-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.toc-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.75rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.4s var(--ease-out);
+  border: 1px solid rgba(0,0,0,0.04);
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+.toc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(15, 27, 61, 0.08);
+  border-color: var(--rose-pale);
+}
+.toc-num {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--rose-light);
+  line-height: 1;
+  min-width: 2.5rem;
+  opacity: 0.5;
+}
+.toc-card:hover .toc-num { opacity: 1; }
+.toc-text h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.35rem;
+}
+.toc-text p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ─── EXECUTIVE SUMMARY (dark section) ─── */
+#executive {
+  background: var(--navy);
+  color: var(--white);
+  overflow: hidden;
+}
+#executive .section-tag { color: var(--gold-light); }
+#executive .section-tag::before, #executive .section-tag::after { background: var(--gold); }
+#executive .section-title { color: var(--white); }
+#executive .section-title em { color: var(--gold-light); }
+.executive-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.executive-content p {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 1.5rem;
+}
+.executive-content p:first-of-type {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: rgba(255,255,255,0.9);
+}
+.executive-deco {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 169, 110, 0.06);
+  pointer-events: none;
+}
+.executive-deco::before {
+  content: '';
+  position: absolute;
+  inset: 60px;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 169, 110, 0.04);
+}
+
+/* ─── IST-ANALYSE ─── */
+#ist { background: var(--cream); }
+.ist-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+.ist-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  border: 1px solid rgba(0,0,0,0.04);
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  transition: all 0.4s var(--ease-out);
+}
+.ist-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(15, 27, 61, 0.06);
+}
+.ist-status {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.ist-status.critical { background: #fde8e8; }
+.ist-status.warning { background: #fef3cd; }
+.ist-status.pass { background: #d4edda; }
+.ist-info h4 {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.3rem;
+}
+.ist-info p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.ist-summary-text {
+  max-width: 900px;
+  margin: 3rem auto 2.5rem;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--text-body);
+  line-height: 1.7;
+}
+
+.ist-summary-badges {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.ist-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.ist-badge.critical { background: #fde8e8; color: #c0392b; }
+.ist-badge.warning { background: #fef3cd; color: #d68910; }
+.ist-badge.pass { background: #d4edda; color: #27ae60; }
+.ist-badge-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ─── ZIELGRUPPE ─── */
+#zielgruppe { background: var(--white); }
+.persona-card {
+  max-width: 1000px;
+  margin: 0 auto 3rem;
+  background: var(--cream);
+  border-radius: 24px;
+  padding: 3rem;
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.persona-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.persona-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose), var(--gold));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+.persona-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+.persona-header p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.persona-item {
+  padding: 1rem 1.25rem;
+  background: var(--white);
+  border-radius: 12px;
+}
+.persona-item-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 0.35rem;
+}
+.persona-item-value {
+  font-size: 0.88rem;
+  color: var(--navy);
+  line-height: 1.5;
+}
+
+.persona-card.secondary {
+  max-width: 800px;
+  background: var(--cream-warm);
+}
+.persona-card.secondary .persona-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+.persona-card.secondary .persona-avatar {
+  width: 56px;
+  height: 56px;
+  font-size: 1.4rem;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+}
+
+.markt-text {
+  max-width: 800px;
+  margin: 3rem auto 2.5rem;
+  text-align: center;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-body);
+}
+
+.netzwerk-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.netzwerk-card {
+  background: var(--cream);
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: all 0.3s var(--ease-out);
+}
+.netzwerk-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(15,27,61,0.06);
+}
+.netzwerk-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.4rem;
+}
+.netzwerk-card p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ─── BENCHMARKS (dark) ─── */
+#benchmarks {
+  background: var(--navy);
+  color: var(--white);
+  overflow: hidden;
+}
+#benchmarks .section-tag { color: var(--gold-light); }
+#benchmarks .section-tag::before, #benchmarks .section-tag::after { background: var(--gold); }
+#benchmarks .section-title { color: var(--white); }
+#benchmarks .section-title em { color: var(--gold-light); }
+
+.benchmark-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.benchmark-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.4s var(--ease-out);
+}
+.benchmark-card:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+}
+.benchmark-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+.benchmark-card h4 span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-top: 0.3rem;
+}
+.benchmark-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+.benchmark-col h5 {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 0.5rem;
+}
+.benchmark-col ul {
+  list-style: none;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.8;
+}
+.benchmark-col ul li::before {
+  content: '+ ';
+  color: var(--gold-light);
+  font-weight: 600;
+}
+.benchmark-col.weak ul li::before {
+  content: '- ';
+  color: var(--rose-light);
+}
+
+/* ─── RECHT ─── */
+#recht { background: var(--cream); }
+.recht-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.recht-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2.5rem;
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: all 0.4s var(--ease-out);
+}
+.recht-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(15,27,61,0.08);
+}
+.recht-card-tag {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: 100px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.recht-card-tag.dsgvo { background: var(--rose-pale); color: var(--rose); }
+.recht-card-tag.hwg { background: #e8f0fd; color: var(--navy-light); }
+.recht-card-tag.bfsg { background: #fef3cd; color: #d68910; }
+.recht-card-tag.tmg { background: #d4edda; color: #27ae60; }
+.recht-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 1rem;
+}
+.recht-card ul {
+  list-style: none;
+  font-size: 0.88rem;
+  color: var(--text-body);
+  line-height: 2;
+}
+.recht-card ul li::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rose-light);
+  margin-right: 0.75rem;
+  vertical-align: middle;
+}
+
+/* ─── UX-EMPFEHLUNGEN ─── */
+#ux { background: var(--cream-warm); }
+.ux-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+.ux-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  border: 1px solid rgba(0,0,0,0.04);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  transition: all 0.4s var(--ease-out);
+}
+.ux-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(15,27,61,0.06);
+}
+.ux-card h4 {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.3rem;
+}
+.ux-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.ux-badge {
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ux-badge.kritisch { background: #fde8e8; color: #c0392b; }
+.ux-badge.hoch { background: #fef3cd; color: #d68910; }
+.ux-badge.mittel { background: #e8f0fd; color: var(--navy-light); }
+.ux-badge.niedrig { background: var(--stone); color: var(--text-muted); }
+
+/* ─── STÄRKEN ─── */
+#staerken { background: var(--cream); }
+.staerken-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+.staerken-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 1.75rem 2rem;
+  border: 1px solid rgba(0,0,0,0.04);
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  transition: all 0.4s var(--ease-out);
+}
+.staerken-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(15,27,61,0.06);
+}
+.staerken-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #d4edda;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.staerken-card h4 {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.3rem;
+}
+.staerken-card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ─── MASSNAHMEN ─── */
+#massnahmen { background: var(--white); }
+.massnahmen-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.massnahmen-card {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: all 0.4s var(--ease-out);
+}
+.massnahmen-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(15,27,61,0.08);
+}
+.massnahmen-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+}
+.massnahmen-card-icon.tech { background: var(--rose-pale); }
+.massnahmen-card-icon.content { background: #e8f0fd; }
+.massnahmen-card-icon.design { background: #fef3cd; }
+
+.massnahmen-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 1.25rem;
+}
+.massnahmen-card ul {
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--text-body);
+  line-height: 2.2;
+}
+.massnahmen-card ul li::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+  vertical-align: middle;
+}
+.massnahmen-card.tech ul li::before { background: var(--rose); }
+.massnahmen-card.content ul li::before { background: var(--navy-light); }
+.massnahmen-card.design ul li::before { background: var(--gold); }
+
+/* ─── ZUSAMMENFASSUNG (dark) ─── */
+#zusammenfassung {
+  background: var(--navy);
+  color: var(--white);
+  overflow: hidden;
+}
+#zusammenfassung .section-tag { color: var(--gold-light); }
+#zusammenfassung .section-tag::before, #zusammenfassung .section-tag::after { background: var(--gold); }
+#zusammenfassung .section-title { color: var(--white); }
+#zusammenfassung .section-title em { color: var(--gold-light); }
+.zusammenfassung-text {
+  max-width: 800px;
+  margin: 0 auto 4rem;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.75);
+}
+
+/* Timeline */
+.timeline {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(201, 169, 110, 0.2);
+  transform: translateX(-50%);
+}
+.timeline-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.timeline-item:nth-child(odd) {
+  flex-direction: row;
+  padding-right: calc(50% + 2rem);
+  text-align: right;
+}
+.timeline-item:nth-child(even) {
+  flex-direction: row-reverse;
+  padding-left: calc(50% + 2rem);
+  text-align: left;
+}
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--navy);
+  z-index: 2;
+}
+.timeline-content h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 0.2rem;
+}
+.timeline-content .timeline-date {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+.timeline-content p {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+}
+
+.zusammenfassung-final {
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.7;
+}
+.zusammenfassung-cta {
+  text-align: center;
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  background: #0a1228;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.footer-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,169,110,0.3), transparent);
+  margin: 0 auto 1.5rem;
+}
+.footer p {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+  line-height: 1.8;
+}
+.footer a {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+}
+.footer a:hover { color: var(--rose-light); }
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .toc-grid { grid-template-columns: repeat(2, 1fr); }
+  .ist-grid { grid-template-columns: 1fr; }
+  .persona-grid { grid-template-columns: repeat(2, 1fr); }
+  .netzwerk-grid { grid-template-columns: repeat(2, 1fr); }
+  .benchmark-grid { grid-template-columns: 1fr; max-width: 600px; }
+  .recht-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
+  .staerken-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
+  .massnahmen-grid { grid-template-columns: 1fr; max-width: 600px; margin: 0 auto; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 27, 61, 0.98);
+    backdrop-filter: blur(20px);
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 999;
+  }
+  .nav-links.open a {
+    font-size: 1.2rem;
+    padding: 0.75rem 2rem;
+  }
+  .nav-toggle { display: flex; }
+
+  section { padding: 4rem 1.25rem; }
+  .hero h1 { font-size: 2.4rem; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-content { padding: 1rem; }
+
+  .toc-grid { grid-template-columns: 1fr; }
+  .persona-grid { grid-template-columns: 1fr; }
+  .persona-card { padding: 2rem; }
+  .netzwerk-grid { grid-template-columns: 1fr 1fr; }
+  .ux-card { grid-template-columns: 1fr; gap: 0.75rem; }
+
+  .timeline::before { left: 20px; }
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    flex-direction: row;
+    padding-left: 3rem;
+    padding-right: 0;
+    text-align: left;
+  }
+  .timeline-dot { left: 20px; }
+}
+
+@media (max-width: 480px) {
+  .netzwerk-grid { grid-template-columns: 1fr; }
+  .ist-summary-badges { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+  <a href="index.html" class="nav-logo">
+    <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2017/07/cropped-CiO_400x180.png" alt="CiO Logo">
+    <div class="nav-logo-text">
+      Christen in der Osteopathie
+      <span>Strategiedokument &bull; Redesign 2026</span>
+    </div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#toc">Übersicht</a></li>
+    <li><a href="#ist">IST-Analyse</a></li>
+    <li><a href="#zielgruppe">Zielgruppe</a></li>
+    <li><a href="#recht">Recht</a></li>
+    <li><a href="#ux">UX</a></li>
+    <li><a href="#massnahmen">Maßnahmen</a></li>
+    <li><a href="index.html" class="nav-cta">Zur Website →</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-orb"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-cross"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">Strategiedokument 2026</div>
+    <h1>Website-Redesign<br>Analyse & <em>Strategie</em></h1>
+    <p class="hero-sub">Fundierte Analyse, Zielgruppenforschung und strategische Empfehlungen für die digitale Neuausrichtung von Christen in der Osteopathie.</p>
+    <div class="hero-actions">
+      <a href="#toc" class="btn btn-primary">Analyse lesen ↓</a>
+      <a href="index.html" class="btn btn-outline">Website-Entwurf →</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    Weiter
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<section id="toc">
+  <div class="section-header reveal">
+    <div class="section-tag">Inhaltsverzeichnis</div>
+    <h2 class="section-title">Alle Kapitel im <em>Überblick</em></h2>
+    <p class="section-subtitle">Neun Abschnitte bilden die Grundlage für ein fundiertes, strategisches Website-Redesign.</p>
+  </div>
+  <div class="toc-grid">
+    <a href="#executive" class="toc-card reveal" style="transition-delay: 0.05s">
+      <div class="toc-num">01</div>
+      <div class="toc-text">
+        <h3>Executive Summary</h3>
+        <p>Zusammenfassung der Ausgangslage und Projektziele</p>
+      </div>
+    </a>
+    <a href="#ist" class="toc-card reveal" style="transition-delay: 0.1s">
+      <div class="toc-num">02</div>
+      <div class="toc-text">
+        <h3>IST-Analyse</h3>
+        <p>Technische Bewertung der aktuellen Website</p>
+      </div>
+    </a>
+    <a href="#zielgruppe" class="toc-card reveal" style="transition-delay: 0.15s">
+      <div class="toc-num">03</div>
+      <div class="toc-text">
+        <h3>Zielgruppenanalyse</h3>
+        <p>Personas, Demografie und Nutzungsverhalten</p>
+      </div>
+    </a>
+    <a href="#benchmarks" class="toc-card reveal" style="transition-delay: 0.2s">
+      <div class="toc-num">04</div>
+      <div class="toc-text">
+        <h3>Benchmarks & Wettbewerb</h3>
+        <p>Vergleich mit relevanten Organisationen</p>
+      </div>
+    </a>
+    <a href="#recht" class="toc-card reveal" style="transition-delay: 0.25s">
+      <div class="toc-num">05</div>
+      <div class="toc-text">
+        <h3>Rechtliche Anforderungen</h3>
+        <p>DSGVO, HWG, BFSG und Impressumspflicht</p>
+      </div>
+    </a>
+    <a href="#ux" class="toc-card reveal" style="transition-delay: 0.3s">
+      <div class="toc-num">06</div>
+      <div class="toc-text">
+        <h3>UX-Empfehlungen</h3>
+        <p>Priorisierte Nutzerführungs-Empfehlungen</p>
+      </div>
+    </a>
+    <a href="#staerken" class="toc-card reveal" style="transition-delay: 0.35s">
+      <div class="toc-num">07</div>
+      <div class="toc-text">
+        <h3>Stärken</h3>
+        <p>Bestehende Assets und Alleinstellungsmerkmale</p>
+      </div>
+    </a>
+    <a href="#massnahmen" class="toc-card reveal" style="transition-delay: 0.4s">
+      <div class="toc-num">08</div>
+      <div class="toc-text">
+        <h3>Redesign-Maßnahmen</h3>
+        <p>Technische, inhaltliche und gestalterische Umsetzung</p>
+      </div>
+    </a>
+    <a href="#zusammenfassung" class="toc-card reveal" style="transition-delay: 0.45s">
+      <div class="toc-num">09</div>
+      <div class="toc-text">
+        <h3>Zusammenfassung</h3>
+        <p>Fazit, Timeline und nächste Schritte</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- 1. EXECUTIVE SUMMARY -->
+<section id="executive">
+  <div class="executive-deco"></div>
+  <div class="section-header reveal">
+    <div class="section-tag">Kapitel 01</div>
+    <h2 class="section-title">Executive <em>Summary</em></h2>
+  </div>
+  <div class="executive-content reveal">
+    <p>Die Website christen-in-der-osteopathie.de ist die zentrale Online-Präsenz des Netzwerks „Christen in der Osteopathie" (CiO). Die aktuelle Seite basiert auf einem veralteten WordPress-Theme von 2017 und weist erhebliche Defizite in den Bereichen Mobile-Optimierung, Suchmaschinenoptimierung (SEO), Barrierefreiheit und Nutzerführung auf.</p>
+    <p>Dieses Dokument analysiert den Ist-Zustand, definiert die Zielgruppe anhand fundierter Daten, identifiziert rechtliche Anforderungen und leitet daraus konkrete Redesign-Maßnahmen ab. Ziel ist eine moderne, professionelle und DSGVO-konforme Website, die das Netzwerk zeitgemäß repräsentiert und neue Mitglieder sowie Patienten effektiv anspricht.</p>
+  </div>
+</section>
+
+<!-- 2. IST-ANALYSE -->
+<section id="ist">
+  <div class="section-header reveal">
+    <div class="section-tag">Kapitel 02</div>
+    <h2 class="section-title">IST-<em>Analyse</em></h2>
+    <p class="section-subtitle">Technische und inhaltliche Bewertung der aktuellen Website anhand zentraler Qualitätskriterien.</p>
+  </div>
+  <div class="ist-grid">
+    <div class="ist-card reveal" style="transition-delay: 0.05s">
+      <div class="ist-status critical">&#10060;</div>
+      <div class="ist-info">
+        <h4>Viewport Meta-Tag</h4>
+        <p>Fehlt komplett — keine mobile Optimierung</p>
+      </div>
+    </div>
+    <div class="ist-card reveal" style="transition-delay: 0.1s">
+      <div class="ist-status critical">&#10060;</div>
+      <div class="ist-info">
+        <h4>Meta-Description</h4>
+        <p>Keine vorhanden — unsichtbar für Google</p>
+      </div>
+    </div>
+    <div class="ist-card reveal" style="transition-delay: 0.15s">
+      <div class="ist-status critical">&#10060;</div>
+      <div class="ist-info">
+        <h4>Responsive Design</h4>
+        <p>Nicht implementiert — Desktop-only Layout</p>
+      </div>
+    </div>
+    <div class="ist-card reveal" style="transition-delay: 0.2s">
+      <div class="ist-status pass">&#9989;</div>
+      <div class="ist-info">
+        <h4>SSL-Zertifikat</h4>
+        <p>HTTPS aktiv</p>
+      </div>
+    </div>
+    <div class="ist-card reveal" style="transition-delay: 0.25s">
+      <div class="ist-status warning">&#9888;&#65039;</div>
+      <div class="ist-info">
+        <h4>Ladezeit</h4>
+        <p>Nicht optimiert (kein Lazy Loading, keine Bildkompression)</p>
+      </div>
+    </div>
+    <div class="ist-card reveal" style="transition-delay: 0.3s">
+      <div class="ist-status critical">&#10060;</div>
+      <div class="ist-info">
+        <h4>Therapeutensuche</h4>
+        <p>Nur statische Liste ohne Filter- oder Suchfunktion</p>
+      </div>
+    </div>
+    <div class="ist-card reveal" style="transition-delay: 0.35s">
+      <div class="ist-status warning">&#9888;&#65039;</div>
+      <div class="ist-info">
+        <h4>Veranstaltungen</h4>
+        <p>Preise erst auf Detailseite sichtbar</p>
+      </div>
+    </div>
+    <div class="ist-card reveal" style="transition-delay: 0.4s">
+      <div class="ist-status critical">&#10060;</div>
+      <div class="ist-info">
+        <h4>Barrierefreiheit</h4>
+        <p>Keine ARIA-Labels, kein Fokus-Management</p>
+      </div>
+    </div>
+    <div class="ist-card reveal" style="transition-delay: 0.45s">
+      <div class="ist-status critical">&#10060;</div>
+      <div class="ist-info">
+        <h4>WordPress-Theme</h4>
+        <p>Veraltet (2017), keine Updates</p>
+      </div>
+    </div>
+    <div class="ist-card reveal" style="transition-delay: 0.5s">
+      <div class="ist-status warning">&#9888;&#65039;</div>
+      <div class="ist-info">
+        <h4>Content-Struktur</h4>
+        <p>Unstrukturiert, keine klare Nutzerführung</p>
+      </div>
+    </div>
+  </div>
+  <p class="ist-summary-text reveal">Die Website erfüllt damit weder aktuelle technische Standards noch die ab Juni 2025 geltenden Anforderungen des Barrierefreiheitsstärkungsgesetzes (BFSG).</p>
+  <div class="ist-summary-badges reveal">
+    <div class="ist-badge critical">
+      <div class="ist-badge-num"><span class="counter" data-target="6">0</span></div>
+      kritisch
+    </div>
+    <div class="ist-badge warning">
+      <div class="ist-badge-num"><span class="counter" data-target="3">0</span></div>
+      mangelhaft
+    </div>
+    <div class="ist-badge pass">
+      <div class="ist-badge-num"><span class="counter" data-target="1">0</span></div>
+      bestanden
+    </div>
+  </div>
+</section>
+
+<!-- 3. ZIELGRUPPENANALYSE -->
+<section id="zielgruppe">
+  <div class="section-header reveal">
+    <div class="section-tag">Kapitel 03</div>
+    <h2 class="section-title">Zielgruppen<em>analyse</em></h2>
+    <p class="section-subtitle">Datenbasierte Persona-Definition für eine nutzerzentrierte Website-Gestaltung.</p>
+  </div>
+
+  <!-- 3.1 Primary -->
+  <div class="persona-card reveal">
+    <div class="persona-header">
+      <div class="persona-avatar">&#129681;</div>
+      <div>
+        <h3>Primäre Zielgruppe: Osteopathen</h3>
+        <p>Christliche Therapeuten mit osteopathischer Ausbildung</p>
+      </div>
+    </div>
+    <div class="persona-grid">
+      <div class="persona-item">
+        <div class="persona-item-label">Alter</div>
+        <div class="persona-item-value">35–55 Jahre (Schwerpunkt 40–50)</div>
+      </div>
+      <div class="persona-item">
+        <div class="persona-item-label">Geschlecht</div>
+        <div class="persona-item-value">Überwiegend weiblich (ca. 70%)</div>
+      </div>
+      <div class="persona-item">
+        <div class="persona-item-label">Berufsgruppe</div>
+        <div class="persona-item-value">Selbstständige Osteopathen, HP-Physio, Heilpraktiker</div>
+      </div>
+      <div class="persona-item">
+        <div class="persona-item-label">Ausbildung</div>
+        <div class="persona-item-value">Mind. 4 Jahre (1.350+ Stunden), akademisch orientiert</div>
+      </div>
+      <div class="persona-item">
+        <div class="persona-item-label">Digitalkompetenz</div>
+        <div class="persona-item-value">Mittel bis hoch (89–97% Internetnutzung in Altersgruppe)</div>
+      </div>
+      <div class="persona-item">
+        <div class="persona-item-label">Geräte-Nutzung</div>
+        <div class="persona-item-value">Desktop primär (Praxis-PC), Smartphone sekundär</div>
+      </div>
+      <div class="persona-item">
+        <div class="persona-item-label">Social Media</div>
+        <div class="persona-item-value">Facebook aktiv, Instagram zunehmend, LinkedIn beruflich</div>
+      </div>
+      <div class="persona-item">
+        <div class="persona-item-label">Werte</div>
+        <div class="persona-item-value">Glaube, Fachkompetenz, Gemeinschaft, evidenzbasierte Medizin</div>
+      </div>
+      <div class="persona-item">
+        <div class="persona-item-label">Motivation</div>
+        <div class="persona-item-value">Fachliche Fortbildung + geistlicher Austausch</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.2 Secondary -->
+  <div class="persona-card secondary reveal">
+    <div class="persona-header">
+      <div class="persona-avatar">&#128100;</div>
+      <div>
+        <h3>Sekundäre Zielgruppe: Patienten</h3>
+        <p>Menschen auf der Suche nach einem christlichen Therapeuten</p>
+      </div>
+    </div>
+    <div class="persona-grid">
+      <div class="persona-item">
+        <div class="persona-item-label">Alter</div>
+        <div class="persona-item-value">30–65 Jahre</div>
+      </div>
+      <div class="persona-item">
+        <div class="persona-item-label">Suchverhalten</div>
+        <div class="persona-item-value">„Osteopath + [Stadt]", „christlicher Osteopath"</div>
+      </div>
+      <div class="persona-item">
+        <div class="persona-item-label">Bedürfnis</div>
+        <div class="persona-item-value">Therapeut finden, der Werte teilt</div>
+      </div>
+      <div class="persona-item">
+        <div class="persona-item-label">Geräte</div>
+        <div class="persona-item-value">Überwiegend Smartphone (Google-Suche)</div>
+      </div>
+      <div class="persona-item">
+        <div class="persona-item-label">Entscheidungsfaktor</div>
+        <div class="persona-item-value">Nähe, Qualifikation, Vertrauenssignale</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.3 Marktkontext -->
+  <p class="markt-text reveal">In Deutschland praktizieren ca. 7.000–10.000 Osteopathen. Der VOD hat über 6.500 Mitglieder, der BVO ca. 1.400. CiO bedient eine spezifische Nische: die Verbindung von osteopathischer Fachkompetenz mit christlichem Glauben.</p>
+
+  <div class="section-header reveal" style="margin-bottom: 2rem;">
+    <div class="section-tag">Vergleichbare Netzwerke</div>
+  </div>
+  <div class="netzwerk-grid">
+    <div class="netzwerk-card reveal" style="transition-delay: 0.05s">
+      <h4>CiG</h4>
+      <p>Christen im Gesundheitswesen — größtes Netzwerk, breiter Ansatz</p>
+    </div>
+    <div class="netzwerk-card reveal" style="transition-delay: 0.1s">
+      <h4>C-STAB</h4>
+      <p>Christliche Heilpraktiker</p>
+    </div>
+    <div class="netzwerk-card reveal" style="transition-delay: 0.15s">
+      <h4>DGCN</h4>
+      <p>Christliche Naturheilkunde</p>
+    </div>
+    <div class="netzwerk-card reveal" style="transition-delay: 0.2s">
+      <h4>ACM</h4>
+      <p>Akademie für christliche Medizin</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. BENCHMARKS -->
+<section id="benchmarks">
+  <div class="section-header reveal">
+    <div class="section-tag">Kapitel 04</div>
+    <h2 class="section-title">Benchmarks & <em>Wettbewerb</em></h2>
+    <p class="section-subtitle" style="color: rgba(255,255,255,0.5);">Vergleich mit relevanten Verbänden und Netzwerken im Gesundheitsbereich.</p>
+  </div>
+  <div class="benchmark-grid">
+    <div class="benchmark-card reveal" style="transition-delay: 0.05s">
+      <h4>osteopathie.de<span>VOD — Verband der Osteopathen</span></h4>
+      <div class="benchmark-row">
+        <div class="benchmark-col">
+          <h5>Stärken</h5>
+          <ul>
+            <li>Therapeutensuche mit PLZ</li>
+            <li>Professionelles Design</li>
+          </ul>
+        </div>
+        <div class="benchmark-col weak">
+          <h5>Schwächen</h5>
+          <ul>
+            <li>Kein religiöser Bezug</li>
+            <li>Sehr funktional</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="benchmark-card reveal" style="transition-delay: 0.1s">
+      <h4>bv-osteopathie.de<span>BVO — Bundesverband Osteopathie</span></h4>
+      <div class="benchmark-row">
+        <div class="benchmark-col">
+          <h5>Stärken</h5>
+          <ul>
+            <li>Moderne Optik</li>
+            <li>Gute Struktur</li>
+          </ul>
+        </div>
+        <div class="benchmark-col weak">
+          <h5>Schwächen</h5>
+          <ul>
+            <li>Wenig Community-Fokus</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="benchmark-card reveal" style="transition-delay: 0.15s">
+      <h4>christenimgesundheitswesen.de<span>CiG — Christen im Gesundheitswesen</span></h4>
+      <div class="benchmark-row">
+        <div class="benchmark-col">
+          <h5>Stärken</h5>
+          <ul>
+            <li>Starke Community</li>
+            <li>Events</li>
+          </ul>
+        </div>
+        <div class="benchmark-col weak">
+          <h5>Schwächen</h5>
+          <ul>
+            <li>Veraltetes Design</li>
+            <li>Langsam</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="benchmark-card reveal" style="transition-delay: 0.2s">
+      <h4>dgcn.de<span>DGCN — Deutsche Gesellschaft für Christliche Naturheilkunde</span></h4>
+      <div class="benchmark-row">
+        <div class="benchmark-col">
+          <h5>Stärken</h5>
+          <ul>
+            <li>Nischen-Positionierung</li>
+          </ul>
+        </div>
+        <div class="benchmark-col weak">
+          <h5>Schwächen</h5>
+          <ul>
+            <li>Minimal-Design</li>
+            <li>Wenig Funktionalität</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. RECHT -->
+<section id="recht">
+  <div class="section-header reveal">
+    <div class="section-tag">Kapitel 05</div>
+    <h2 class="section-title">Rechtliche <em>Anforderungen</em></h2>
+    <p class="section-subtitle">Verbindliche gesetzliche Vorgaben, die das Redesign berücksichtigen muss.</p>
+  </div>
+  <div class="recht-grid">
+    <div class="recht-card reveal" style="transition-delay: 0.05s">
+      <div class="recht-card-tag dsgvo">DSGVO</div>
+      <h3>Datenschutz-Grundverordnung</h3>
+      <ul>
+        <li>Datenschutzerklärung nach Art. 13 DSGVO</li>
+        <li>Cookie-Consent-Banner mit Opt-in</li>
+        <li>Auftragsverarbeitungsverträge (AVV) für alle Drittanbieter</li>
+        <li>SSL-Verschlüsselung (bereits vorhanden)</li>
+        <li>Recht auf Auskunft, Löschung, Datenportabilität</li>
+      </ul>
+    </div>
+    <div class="recht-card reveal" style="transition-delay: 0.1s">
+      <div class="recht-card-tag hwg">HWG</div>
+      <h3>Heilmittelwerbegesetz</h3>
+      <ul>
+        <li>Keine Heilversprechen oder Erfolgsgarantien</li>
+        <li>Keine irreführenden Vorher-Nachher-Darstellungen</li>
+        <li>Sachliche Darstellung der Osteopathie</li>
+        <li>Therapeutenliste ohne werbliche Übertreibung</li>
+      </ul>
+    </div>
+    <div class="recht-card reveal" style="transition-delay: 0.15s">
+      <div class="recht-card-tag bfsg">BFSG</div>
+      <h3>Barrierefreiheitsstärkungsgesetz (ab 28. Juni 2025)</h3>
+      <ul>
+        <li>WCAG 2.1 Level AA als Mindeststandard</li>
+        <li>Tastaturbedienbarkeit aller Funktionen</li>
+        <li>Screenreader-Kompatibilität (ARIA-Labels)</li>
+        <li>Ausreichende Kontrastverhältnisse (min. 4.5:1)</li>
+        <li>Skalierbare Schriften (bis 200% ohne Funktionsverlust)</li>
+        <li>Alternative Texte für alle Bilder</li>
+      </ul>
+    </div>
+    <div class="recht-card reveal" style="transition-delay: 0.2s">
+      <div class="recht-card-tag tmg">TMG / DDG</div>
+      <h3>Impressumspflicht</h3>
+      <ul>
+        <li>Vollständiges Impressum nach § 5 DDG</li>
+        <li>Angabe der zuständigen Aufsichtsbehörde</li>
+        <li>Berufsbezeichnung und Kammerzugehörigkeit</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6. UX-EMPFEHLUNGEN -->
+<section id="ux">
+  <div class="section-header reveal">
+    <div class="section-tag">Kapitel 06</div>
+    <h2 class="section-title">UX-<em>Empfehlungen</em></h2>
+    <p class="section-subtitle">Priorisierte Handlungsempfehlungen für eine optimale Nutzererfahrung.</p>
+  </div>
+  <div class="ux-grid">
+    <div class="ux-card reveal" style="transition-delay: 0.05s">
+      <div>
+        <h4>Mobile-First Design</h4>
+        <p>89–97% der Zielgruppe nutzt das Internet, zunehmend mobil</p>
+      </div>
+      <div class="ux-badge kritisch">Kritisch</div>
+    </div>
+    <div class="ux-card reveal" style="transition-delay: 0.1s">
+      <div>
+        <h4>Therapeutensuche mit PLZ-Filter</h4>
+        <p>Kernfunktion für Patienten, Benchmark bei VOD</p>
+      </div>
+      <div class="ux-badge kritisch">Kritisch</div>
+    </div>
+    <div class="ux-card reveal" style="transition-delay: 0.15s">
+      <div>
+        <h4>Große, lesbare Schriften (min. 16px)</h4>
+        <p>Altersgruppe 40–55, Lesbarkeit am Bildschirm</p>
+      </div>
+      <div class="ux-badge hoch">Hoch</div>
+    </div>
+    <div class="ux-card reveal" style="transition-delay: 0.2s">
+      <div>
+        <h4>Klare Navigation (max. 6 Hauptpunkte)</h4>
+        <p>Mittlere Digitalkompetenz, schnelle Orientierung</p>
+      </div>
+      <div class="ux-badge hoch">Hoch</div>
+    </div>
+    <div class="ux-card reveal" style="transition-delay: 0.25s">
+      <div>
+        <h4>Veranstaltungskalender mit Preisen</h4>
+        <p>Transparenz als Vertrauensfaktor</p>
+      </div>
+      <div class="ux-badge hoch">Hoch</div>
+    </div>
+    <div class="ux-card reveal" style="transition-delay: 0.3s">
+      <div>
+        <h4>Kontaktformular statt nur E-Mail</h4>
+        <p>Niedrigschwelliger Erstkontakt</p>
+      </div>
+      <div class="ux-badge mittel">Mittel</div>
+    </div>
+    <div class="ux-card reveal" style="transition-delay: 0.35s">
+      <div>
+        <h4>Testimonials / Erfahrungsberichte</h4>
+        <p>Social Proof für beide Zielgruppen</p>
+      </div>
+      <div class="ux-badge mittel">Mittel</div>
+    </div>
+    <div class="ux-card reveal" style="transition-delay: 0.4s">
+      <div>
+        <h4>Blog / Aktuelles</h4>
+        <p>SEO-Boost, Wiederkehrbesucher</p>
+      </div>
+      <div class="ux-badge niedrig">Niedrig</div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. STÄRKEN -->
+<section id="staerken">
+  <div class="section-header reveal">
+    <div class="section-tag">Kapitel 07</div>
+    <h2 class="section-title">Bestehende <em>Stärken</em></h2>
+    <p class="section-subtitle">Vorhandene Assets und Alleinstellungsmerkmale, auf denen das Redesign aufbaut.</p>
+  </div>
+  <div class="staerken-grid">
+    <div class="staerken-card reveal" style="transition-delay: 0.05s">
+      <div class="staerken-icon">&#10003;</div>
+      <div>
+        <h4>Einzigartige Positionierung</h4>
+        <p>Einziges Netzwerk für christliche Osteopathen im DACH-Raum</p>
+      </div>
+    </div>
+    <div class="staerken-card reveal" style="transition-delay: 0.1s">
+      <div class="staerken-icon">&#10003;</div>
+      <div>
+        <h4>Authentischer Content</h4>
+        <p>Persönliche Ansprache, klare Wertebasis</p>
+      </div>
+    </div>
+    <div class="staerken-card reveal" style="transition-delay: 0.15s">
+      <div class="staerken-icon">&#10003;</div>
+      <div>
+        <h4>Starkes Fortbildungsprogramm</h4>
+        <p>6 Seminare + 2 Netzwerktreffen in 2026/2027</p>
+      </div>
+    </div>
+    <div class="staerken-card reveal" style="transition-delay: 0.2s">
+      <div class="staerken-icon">&#10003;</div>
+      <div>
+        <h4>Zertifizierung</h4>
+        <p>VOD- und BVO-anerkannte Fortbildungspunkte</p>
+      </div>
+    </div>
+    <div class="staerken-card reveal" style="transition-delay: 0.25s">
+      <div class="staerken-icon">&#10003;</div>
+      <div>
+        <h4>Etabliertes Netzwerk</h4>
+        <p>40+ Therapeuten aus Deutschland, Österreich und der Schweiz</p>
+      </div>
+    </div>
+    <div class="staerken-card reveal" style="transition-delay: 0.3s">
+      <div class="staerken-icon">&#10003;</div>
+      <div>
+        <h4>SSL-Verschlüsselung</h4>
+        <p>Grundlegende Sicherheit vorhanden</p>
+      </div>
+    </div>
+    <div class="staerken-card reveal" style="transition-delay: 0.35s">
+      <div class="staerken-icon">&#10003;</div>
+      <div>
+        <h4>Klare Abgrenzung</h4>
+        <p>Explizite Distanzierung von Esoterik, naturwissenschaftliche Basis</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. MASSNAHMEN -->
+<section id="massnahmen">
+  <div class="section-header reveal">
+    <div class="section-tag">Kapitel 08</div>
+    <h2 class="section-title">Redesign-<em>Maßnahmen</em></h2>
+    <p class="section-subtitle">Drei Säulen der Umsetzung: Technik, Inhalt und Design.</p>
+  </div>
+  <div class="massnahmen-grid">
+    <div class="massnahmen-card tech reveal" style="transition-delay: 0.05s">
+      <div class="massnahmen-card-icon tech">&#9881;&#65039;</div>
+      <h3>Technisch</h3>
+      <ul>
+        <li>Viewport Meta-Tag implementieren</li>
+        <li>Responsive Layout (Mobile-First)</li>
+        <li>Bildoptimierung (WebP, Lazy Loading)</li>
+        <li>Strukturierte Daten (Schema.org)</li>
+        <li>Performance-Optimierung (Core Web Vitals)</li>
+        <li>ARIA-Labels und Fokus-Management</li>
+        <li>Cookie-Consent-Integration</li>
+      </ul>
+    </div>
+    <div class="massnahmen-card content reveal" style="transition-delay: 0.15s">
+      <div class="massnahmen-card-icon content">&#128196;</div>
+      <h3>Inhaltlich</h3>
+      <ul>
+        <li>SEO-optimierte Meta-Descriptions</li>
+        <li>Therapeutensuche mit PLZ-Filter und Kartenansicht</li>
+        <li>Veranstaltungsübersicht mit allen Preisen und Terminen</li>
+        <li>Klare Call-to-Actions</li>
+        <li>FAQ-Bereich</li>
+        <li>Download-Bereich (Flyer, Anmeldeformulare)</li>
+      </ul>
+    </div>
+    <div class="massnahmen-card design reveal" style="transition-delay: 0.25s">
+      <div class="massnahmen-card-icon design">&#127912;</div>
+      <h3>Design</h3>
+      <ul>
+        <li>Modernes Farbschema: Navy + Rose + Gold</li>
+        <li>Professionelle Typografie: Cormorant Garamond + DM Sans</li>
+        <li>Scroll-Animationen (Intersection Observer)</li>
+        <li>Hero-Section mit animiertem Hintergrund</li>
+        <li>Sticky Navigation mit Blur-Effekt</li>
+        <li>Professionelle Bildsprache</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 9. ZUSAMMENFASSUNG -->
+<section id="zusammenfassung">
+  <div class="section-header reveal">
+    <div class="section-tag">Kapitel 09</div>
+    <h2 class="section-title">Zusammenfassung & <em>Nächste Schritte</em></h2>
+  </div>
+  <div class="zusammenfassung-text reveal">
+    Das Redesign der CiO-Website ist nicht nur ein visuelles Update, sondern eine strategische Neuausrichtung der digitalen Präsenz. Die Kombination aus technischer Modernisierung, zielgruppengerechter Gestaltung und rechtlicher Compliance schafft die Grundlage für nachhaltiges Wachstum des Netzwerks.
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    <div class="timeline-item reveal" style="transition-delay: 0.05s">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Juni 2026</span>
+        <h4>Phase 1: Konzeption</h4>
+        <p>Wireframes, Content-Strategie, Designsystem</p>
+      </div>
+    </div>
+    <div class="timeline-item reveal" style="transition-delay: 0.15s">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Juli 2026</span>
+        <h4>Phase 2: Design</h4>
+        <p>UI-Design, Prototyp, Abstimmung</p>
+      </div>
+    </div>
+    <div class="timeline-item reveal" style="transition-delay: 0.25s">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">August – September 2026</span>
+        <h4>Phase 3: Entwicklung</h4>
+        <p>Frontend, CMS-Integration, Therapeuten-DB</p>
+      </div>
+    </div>
+    <div class="timeline-item reveal" style="transition-delay: 0.35s">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">Oktober 2026</span>
+        <h4>Phase 4: Testing</h4>
+        <p>Cross-Browser, Mobile, Barrierefreiheit, SEO</p>
+      </div>
+    </div>
+    <div class="timeline-item reveal" style="transition-delay: 0.45s">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <span class="timeline-date">November 2026</span>
+        <h4>Phase 5: Launch</h4>
+        <p>Go-Live, Monitoring, Optimierung</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="zusammenfassung-final reveal">Mit diesem Redesign positioniert sich CiO als modernes, professionelles Netzwerk, das sowohl fachliche Exzellenz als auch christliche Werte authentisch kommuniziert.</p>
+
+  <div class="zusammenfassung-cta reveal">
+    <a href="index.html" class="btn btn-primary">Website-Entwurf ansehen →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-divider"></div>
+  <div class="footer-links">
+    <a href="index.html">Website-Entwurf</a>
+    <a href="https://christen-in-der-osteopathie.de" target="_blank" rel="noopener">Aktuelle Website</a>
+  </div>
+  <p>Erstellt von Benjamin Rumold | Mai 2026</p>
+  <p>Christen in der Osteopathie — Website-Redesign Strategiedokument</p>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+});
+
+// Mobile nav
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('active');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navToggle.classList.remove('active');
+    navLinks.classList.remove('open');
+  });
+});
+
+// Reveal on scroll
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -60px 0px' };
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// Counter animation
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const counters = entry.target.querySelectorAll('.counter');
+      counters.forEach(counter => {
+        const target = parseInt(counter.dataset.target);
+        const duration = 1500;
+        const start = performance.now();
+        const animate = (now) => {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 4);
+          counter.textContent = Math.round(eased * target);
+          if (progress < 1) requestAnimationFrame(animate);
+        };
+        requestAnimationFrame(animate);
+      });
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.ist-summary-badges').forEach(el => counterObserver.observe(el));
+
+// Active nav highlight
+const sections = document.querySelectorAll('section[id]');
+const navItems = document.querySelectorAll('.nav-links a');
+const highlightNav = () => {
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 120;
+    if (window.scrollY >= top) {
+      current = section.getAttribute('id');
+    }
+  });
+  navItems.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) {
+      link.classList.add('active');
+    }
+  });
+};
+window.addEventListener('scroll', highlightNav);
+</script>
+</body>
+</html>
