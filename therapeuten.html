@@ -23,234 +23,389 @@
       --gray-700: #495057;
       --gray-800: #212529;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'DM Sans', -apple-system, sans-serif;
       background: #fff;
       color: var(--gray-800);
       min-height: 100vh;
     }
-
     .header {
       background: var(--blue);
-      padding: 20px 0;
-      text-align: center;
-    }
-    .header img {
-      height: 50px;
-    }
-    .header-fallback {
-      color: #fff;
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.4rem;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 56px 24px 32px;
-    }
-    .hero h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      color: var(--blue);
-      margin-bottom: 12px;
-      line-height: 1.2;
-    }
-    .hero p {
-      color: var(--gray-600);
-      font-size: 1.05rem;
-      max-width: 560px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    .search-box {
-      background: var(--gray-50);
-      border-radius: 16px;
-      padding: 32px 32px 24px;
-      margin-bottom: 24px;
-    }
-    .search-input-wrapper {
+      padding: 18px 24px;
       display: flex;
-      gap: 12px;
-      max-width: 500px;
-      margin: 0 auto 20px;
+      align-items: center;
+      justify-content: center;
     }
-    .search-input-wrapper input {
-      flex: 1;
-      padding: 14px 20px;
-      border: 2px solid var(--gray-200);
-      border-radius: 12px;
-      font-size: 1rem;
+    .header img { height: 46px; }
+
+    .main {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      min-height: calc(100vh - 82px);
+    }
+
+    /* ===== MAP PANEL ===== */
+    .map-panel {
+      background: var(--gray-50);
+      border-right: 1px solid var(--gray-200);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .map-panel h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--blue);
+      margin-bottom: 4px;
+      text-align: center;
+    }
+    .map-panel .map-subtitle {
+      font-size: 0.82rem;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .map-container {
+      width: 100%;
+      max-width: 300px;
+      position: relative;
+    }
+    .map-container svg {
+      width: 100%;
+      height: auto;
+    }
+    .map-dot {
+      cursor: pointer;
+      transition: r 0.15s, fill 0.15s;
+    }
+    .map-dot:hover {
+      r: 7;
+      fill: var(--rose);
+    }
+    .map-dot.active {
+      r: 8;
+      fill: var(--rose);
+      stroke: #fff;
+      stroke-width: 2;
+    }
+    .map-tooltip {
+      position: absolute;
+      background: var(--blue);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+      z-index: 10;
+      transform: translate(-50%, -100%);
+      margin-top: -10px;
+    }
+    .map-tooltip.show { opacity: 1; }
+    .map-legend {
+      margin-top: 16px;
+      width: 100%;
+      max-width: 280px;
+    }
+    .map-legend-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .map-city-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .map-city-btn {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: 0.72rem;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all 0.15s;
       font-family: inherit;
-      transition: border-color 0.2s;
-      outline: none;
     }
-    .search-input-wrapper input:focus {
+    .map-city-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+    .map-city-btn.active {
+      background: var(--blue);
+      color: #fff;
       border-color: var(--blue);
     }
-    .search-input-wrapper button {
-      padding: 14px 28px;
+    .map-city-btn .count {
+      font-weight: 700;
+    }
+
+    /* ===== SEARCH PANEL ===== */
+    .search-panel {
+      padding: 32px 32px 48px;
+    }
+    .search-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      max-width: 600px;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 13px 18px;
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-bar input:focus { border-color: var(--blue); }
+    .search-bar button {
+      padding: 13px 22px;
       background: var(--blue);
       color: #fff;
       border: none;
       border-radius: 12px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
       font-family: inherit;
+      transition: background 0.2s;
+      white-space: nowrap;
     }
-    .search-input-wrapper button:hover {
-      background: var(--blue-dark);
-      transform: translateY(-1px);
+    .search-bar button:hover { background: var(--blue-dark); }
+    .search-bar .btn-reset {
+      background: var(--gray-100);
+      color: var(--gray-600);
+      font-weight: 500;
     }
-    .search-stats {
-      text-align: center;
-      font-size: 0.9rem;
+    .search-bar .btn-reset:hover { background: var(--gray-200); }
+
+    .stats {
+      font-size: 0.88rem;
       color: var(--gray-500);
+      margin-bottom: 20px;
     }
-    .search-stats strong {
-      color: var(--gray-700);
-    }
+    .stats strong { color: var(--gray-700); }
 
     .results {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 16px;
-      padding-bottom: 60px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
     }
-
     .card {
       background: #fff;
       border: 1px solid var(--gray-200);
       border-radius: 12px;
-      padding: 20px;
-      transition: box-shadow 0.2s, transform 0.15s;
+      padding: 18px;
+      transition: box-shadow 0.2s, transform 0.15s, border-color 0.2s;
     }
     .card:hover {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
       transform: translateY(-2px);
     }
-    .card-header {
+    .card.highlight {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 1px var(--rose), 0 4px 16px rgba(158,42,94,0.1);
+    }
+    .card-head {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 10px;
-      gap: 12px;
+      gap: 10px;
+      margin-bottom: 8px;
     }
     .card-name {
       font-weight: 700;
+      font-size: 1rem;
       color: var(--gray-800);
-      font-size: 1.05rem;
     }
     .card-badge {
       background: var(--blue-light);
       color: var(--blue);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      padding: 4px 10px;
+      padding: 4px 9px;
       border-radius: 20px;
       white-space: nowrap;
       flex-shrink: 0;
     }
-    .card-qual {
-      font-size: 0.85rem;
-      color: var(--gray-500);
-      margin-bottom: 8px;
-    }
-    .card-praxis {
-      font-size: 0.9rem;
-      color: var(--gray-600);
-      font-weight: 500;
-      margin-bottom: 3px;
-    }
-    .card-adresse {
-      font-size: 0.85rem;
-      color: var(--gray-500);
-      margin-bottom: 14px;
-    }
-    .card-kontakt {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .card-kontakt a {
-      font-size: 0.8rem;
+    .card-qual { font-size: 0.82rem; color: var(--gray-500); margin-bottom: 7px; }
+    .card-praxis { font-size: 0.88rem; color: var(--gray-600); font-weight: 500; margin-bottom: 2px; }
+    .card-addr { font-size: 0.82rem; color: var(--gray-500); margin-bottom: 12px; }
+    .card-links { display: flex; flex-wrap: wrap; gap: 6px; }
+    .card-links a {
+      font-size: 0.78rem;
       color: var(--blue);
       text-decoration: none;
-      padding: 5px 12px;
+      padding: 4px 10px;
       border: 1px solid var(--blue-light);
       border-radius: 6px;
       transition: background 0.15s;
     }
-    .card-kontakt a:hover {
-      background: var(--blue-light);
-    }
+    .card-links a:hover { background: var(--blue-light); }
 
     .no-results {
       text-align: center;
-      padding: 48px 24px;
+      padding: 48px 20px;
       color: var(--gray-500);
       grid-column: 1 / -1;
     }
-    .no-results strong {
-      display: block;
-      font-size: 1.1rem;
-      color: var(--gray-700);
-      margin-bottom: 8px;
-    }
+    .no-results strong { display: block; font-size: 1.05rem; color: var(--gray-700); margin-bottom: 6px; }
 
     .footer {
       text-align: center;
-      padding: 24px;
+      padding: 20px;
       color: var(--gray-400);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       border-top: 1px solid var(--gray-100);
     }
 
-    @media (max-width: 700px) {
-      .search-input-wrapper { flex-direction: column; }
+    @media (max-width: 860px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+      .map-panel {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--gray-200);
+        padding: 20px 16px;
+      }
+      .map-container { max-width: 220px; }
+      .search-panel { padding: 24px 16px 40px; }
+      .search-bar { flex-direction: column; }
       .results { grid-template-columns: 1fr; }
-      .search-box { padding: 24px 16px 20px; }
-      .hero { padding: 40px 16px 24px; }
     }
   </style>
 </head>
 <body>
 
 <div class="header">
-  <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2017/07/cropped-CiO_400x180.png" alt="CiO Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-  <div class="header-fallback" style="display:none">Christen in der Osteopathie</div>
+  <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2017/07/cropped-CiO_400x180.png" alt="CiO Logo">
 </div>
 
-<div class="hero">
-  <h1>Therapeut:in finden</h1>
-  <p>Finden Sie einen christlichen Osteopathen in Ihrer N&auml;he &mdash; einfach PLZ oder Ort eingeben.</p>
-</div>
+<div class="main">
 
-<div class="container">
-  <div class="search-box">
-    <div class="search-input-wrapper">
-      <input type="text" id="plz" placeholder="PLZ oder Ortsname eingeben&hellip;" maxlength="30" autofocus>
-      <button onclick="search()">Suchen</button>
+  <!-- MAP -->
+  <div class="map-panel">
+    <h2>Standorte</h2>
+    <p class="map-subtitle">Klicken Sie auf einen Punkt oder Ort</p>
+
+    <div class="map-container">
+      <div class="map-tooltip" id="tooltip"></div>
+      <svg viewBox="0 0 380 480" xmlns="http://www.w3.org/2000/svg">
+        <!-- Germany outline (simplified) -->
+        <path d="
+          M 108,28 L 130,20 L 155,30 L 172,38 L 190,44 L 210,50 L 235,52
+          L 255,55 L 270,60 L 290,68 L 310,72 L 328,80 L 340,88
+          L 345,100 L 348,115 L 350,130 L 348,148
+          L 352,165 L 358,180 L 355,195
+          L 340,210 L 332,225 L 340,240 L 348,255 L 355,265
+          L 358,278 L 350,290 L 338,298 L 325,310
+          L 310,318 L 298,328 L 290,340 L 285,352
+          L 290,365 L 298,378 L 305,390 L 310,402
+          L 305,412 L 295,420 L 280,425 L 265,430
+          L 252,438 L 240,445 L 225,448 L 210,450
+          L 195,448 L 180,442 L 168,438
+          L 155,445 L 142,455 L 130,460
+          L 115,458 L 105,450 L 95,440
+          L 85,430 L 78,418 L 72,405
+          L 65,395 L 55,382 L 48,370
+          L 42,355 L 38,340 L 35,325
+          L 30,310 L 25,295 L 20,280
+          L 18,265 L 22,250 L 28,235
+          L 25,220 L 30,205 L 35,190
+          L 40,175 L 48,160 L 55,148
+          L 60,135 L 68,120 L 72,108
+          L 78,95 L 85,82 L 92,70
+          L 98,58 L 105,45 Z
+        " fill="#e9ecef" stroke="#ced4da" stroke-width="1.5"/>
+
+        <!-- AT/CH indicators -->
+        <text x="290" y="470" font-size="10" fill="#adb5bd" font-family="DM Sans" text-anchor="middle">AT</text>
+        <text x="140" y="470" font-size="10" fill="#adb5bd" font-family="DM Sans" text-anchor="middle">CH</text>
+
+        <!-- City dots - will be generated by JS -->
+        <g id="map-dots"></g>
+      </svg>
     </div>
-    <div class="search-stats" id="stats"><strong>42 Therapeut:innen</strong> aus Deutschland, &Ouml;sterreich &amp; der Schweiz</div>
+
+    <div class="map-legend">
+      <div class="map-legend-title">St&auml;dte mit Therapeut:innen</div>
+      <div class="map-city-list" id="city-btns"></div>
+    </div>
   </div>
-  <div class="results" id="res"></div>
+
+  <!-- SEARCH + RESULTS -->
+  <div class="search-panel">
+    <div class="search-bar">
+      <input type="text" id="q" placeholder="Name, PLZ oder Ort eingeben&hellip;" autofocus>
+      <button onclick="doSearch()">Suchen</button>
+      <button class="btn-reset" onclick="resetSearch()">Alle</button>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="results" id="res"></div>
+  </div>
+
 </div>
 
 <div class="footer">&copy; 2026 Christen in der Osteopathie</div>
 
 <script>
+// City coordinates on the SVG (x, y) — mapped to the Germany outline
+var cityCoords = {
+  "Zwickau":        [298, 280],
+  "Chemnitz":       [305, 272],
+  "Berlin":         [328, 168],
+  "Hamburg":        [188, 100],
+  "Bremen":         [148, 112],
+  "Hannover":       [178, 158],
+  "Paderborn":      [148, 192],
+  "Düsseldorf":     [72, 220],
+  "Köln":           [68, 238],
+  "Bonn":           [72, 248],
+  "Mainz":          [108, 310],
+  "Frankfurt am Main": [125, 302],
+  "Offenbach":      [130, 306],
+  "Heidelberg":     [120, 338],
+  "Stuttgart":      [140, 368],
+  "Esslingen":      [148, 372],
+  "Tübingen":       [138, 380],
+  "Reutlingen":     [142, 382],
+  "Leonberg":       [135, 365],
+  "Kirchheim unter Teck": [155, 375],
+  "Heilbronn":      [142, 348],
+  "Karlsruhe":      [110, 350],
+  "Freiburg":       [85, 400],
+  "Friedrichshafen":[155, 440],
+  "München":        [238, 415],
+  "Augsburg":       [218, 405],
+  "Ulm":            [178, 398],
+  "Regensburg":     [260, 362],
+  "Nürnberg":       [232, 340],
+  "Erlangen":       [228, 330],
+  "Hof":            [252, 290],
+  "Oberkotzau":     [255, 288],
+  "Gießen":         [118, 272],
+  "Haus im Ennstal (Österreich)": [290, 460],
+  "Gossau (Schweiz)": [152, 458]
+};
+
 var T=[
 {name:"Michaela Dippon",q:"Osteopathin, Heilpraktikerin",p:"Praxis für Osteopathie",s:"Hindenburgstr. 129",plz:"73728",o:"Esslingen",tel:"0711-8209390",e:"info@osteopathie-dippon.de",w:"www.osteopathie-dippon.de"},
 {name:"Thomas Braun",q:"Osteopath, Physiotherapeut",p:"Praxis für Osteopathie & Physiotherapie",s:"",plz:"73728",o:"Esslingen",tel:"",e:"",w:""},
@@ -296,32 +451,142 @@ var T=[
 {name:"Monika Huber",q:"Osteopathin, Heilpraktikerin",p:"Osteopathie & Naturheilkunde Huber",s:"Frauenstr. 9",plz:"89073",o:"Ulm",tel:"0731-9382741",e:"praxis@osteopathie-huber-ulm.de",w:"www.osteopathie-huber-ulm.de"}
 ];
 
-function search(){
-  var v=document.getElementById('plz').value.trim().toLowerCase();
-  var r=T;
-  if(v){r=T.filter(function(t){return t.plz.toLowerCase().startsWith(v)||t.o.toLowerCase().indexOf(v)!==-1||t.name.toLowerCase().indexOf(v)!==-1});}
-  var s=document.getElementById('stats');
-  if(v){s.innerHTML='<strong>'+r.length+' Ergebnis'+(r.length!==1?'se':'')+'</strong> für „'+v+'“';}
-  else{s.innerHTML='<strong>42 Therapeut:innen</strong> aus Deutschland, Österreich &amp; der Schweiz';}
-  var c=document.getElementById('res');
-  if(!r.length){c.innerHTML='<div class="no-results"><strong>Keine Therapeut:innen gefunden</strong>Versuchen Sie eine andere PLZ, einen Ortsnamen oder einen Namen.</div>';return;}
-  c.innerHTML=r.map(function(t){
-    var k='';
-    if(t.tel)k+='<a href="tel:'+t.tel+'">☎ '+t.tel+'</a>';
-    if(t.e)k+='<a href="mailto:'+t.e+'">✉ E-Mail</a>';
-    if(t.w)k+='<a href="https://'+t.w+'" target="_blank">↗ Website</a>';
-    return '<div class="card">'+
-      '<div class="card-header"><span class="card-name">'+t.name+'</span><span class="card-badge">'+t.plz+' '+t.o+'</span></div>'+
-      (t.q?'<div class="card-qual">'+t.q+'</div>':'')+
-      (t.p?'<div class="card-praxis">'+t.p+'</div>':'')+
-      (t.s?'<div class="card-adresse">'+t.s+', '+t.plz+' '+t.o+'</div>':'<div class="card-adresse">'+t.plz+' '+t.o+'</div>')+
-      (k?'<div class="card-kontakt">'+k+'</div>':'')+
+var activeCity = null;
+
+// Build city groups
+var cityGroups = {};
+T.forEach(function(t) {
+  if (!cityGroups[t.o]) cityGroups[t.o] = [];
+  cityGroups[t.o].push(t);
+});
+
+// Draw map dots
+var dotsG = document.getElementById('map-dots');
+var drawnCities = {};
+Object.keys(cityGroups).forEach(function(city) {
+  var coords = cityCoords[city];
+  if (!coords) return;
+  if (drawnCities[coords[0]+','+coords[1]]) return;
+  drawnCities[coords[0]+','+coords[1]] = true;
+  var count = cityGroups[city].length;
+  var r = Math.min(4 + count, 8);
+  var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  circle.setAttribute('cx', coords[0]);
+  circle.setAttribute('cy', coords[1]);
+  circle.setAttribute('r', r);
+  circle.setAttribute('fill', '#1a1a5e');
+  circle.setAttribute('class', 'map-dot');
+  circle.setAttribute('data-city', city);
+  circle.addEventListener('click', function() { filterByCity(city); });
+  circle.addEventListener('mouseenter', function(ev) { showTooltip(ev, city, count); });
+  circle.addEventListener('mouseleave', hideTooltip);
+  dotsG.appendChild(circle);
+});
+
+// Build city buttons
+var cityBtns = document.getElementById('city-btns');
+var sortedCities = Object.keys(cityGroups).sort();
+sortedCities.forEach(function(city) {
+  var btn = document.createElement('button');
+  btn.className = 'map-city-btn';
+  btn.setAttribute('data-city', city);
+  btn.innerHTML = city + ' <span class="count">(' + cityGroups[city].length + ')</span>';
+  btn.onclick = function() { filterByCity(city); };
+  cityBtns.appendChild(btn);
+});
+
+function showTooltip(ev, city, count) {
+  var tip = document.getElementById('tooltip');
+  var svg = document.querySelector('.map-container svg');
+  var rect = svg.getBoundingClientRect();
+  var circle = ev.target;
+  var cx = parseFloat(circle.getAttribute('cx'));
+  var cy = parseFloat(circle.getAttribute('cy'));
+  var scaleX = rect.width / 380;
+  var scaleY = rect.height / 480;
+  tip.textContent = city + ' (' + count + ')';
+  tip.style.left = (cx * scaleX) + 'px';
+  tip.style.top = (cy * scaleY - 8) + 'px';
+  tip.classList.add('show');
+}
+function hideTooltip() {
+  document.getElementById('tooltip').classList.remove('show');
+}
+
+function filterByCity(city) {
+  if (activeCity === city) {
+    activeCity = null;
+    document.getElementById('q').value = '';
+  } else {
+    activeCity = city;
+    document.getElementById('q').value = city;
+  }
+  updateMapHighlight();
+  doSearch();
+}
+
+function updateMapHighlight() {
+  document.querySelectorAll('.map-dot').forEach(function(d) {
+    d.classList.toggle('active', d.getAttribute('data-city') === activeCity);
+  });
+  document.querySelectorAll('.map-city-btn').forEach(function(b) {
+    b.classList.toggle('active', b.getAttribute('data-city') === activeCity);
+  });
+}
+
+function resetSearch() {
+  activeCity = null;
+  document.getElementById('q').value = '';
+  updateMapHighlight();
+  doSearch();
+}
+
+function doSearch() {
+  var v = document.getElementById('q').value.trim().toLowerCase();
+  var r = T;
+  if (v) {
+    r = T.filter(function(t) {
+      return t.name.toLowerCase().indexOf(v) !== -1 ||
+             t.plz.toLowerCase().startsWith(v) ||
+             t.o.toLowerCase().indexOf(v) !== -1;
+    });
+  }
+  var s = document.getElementById('stats');
+  if (v) {
+    s.innerHTML = '<strong>' + r.length + ' Ergebnis' + (r.length !== 1 ? 'se' : '') + '</strong> für „' + v + '“';
+  } else {
+    s.innerHTML = '<strong>42 Therapeut:innen</strong> aus Deutschland, Österreich & der Schweiz';
+  }
+  var c = document.getElementById('res');
+  if (!r.length) {
+    c.innerHTML = '<div class="no-results"><strong>Keine Therapeut:innen gefunden</strong>Versuchen Sie einen anderen Namen, PLZ oder Ort.</div>';
+    return;
+  }
+  c.innerHTML = r.map(function(t) {
+    var links = '';
+    if (t.tel) links += '<a href="tel:' + t.tel + '">☎ ' + t.tel + '</a>';
+    if (t.e) links += '<a href="mailto:' + t.e + '">✉ E-Mail</a>';
+    if (t.w) links += '<a href="https://' + t.w + '" target="_blank">↗ Website</a>';
+    var hl = (activeCity && t.o === activeCity) ? ' highlight' : '';
+    return '<div class="card' + hl + '">' +
+      '<div class="card-head"><span class="card-name">' + t.name + '</span><span class="card-badge">' + t.plz + ' ' + t.o + '</span></div>' +
+      (t.q ? '<div class="card-qual">' + t.q + '</div>' : '') +
+      (t.p ? '<div class="card-praxis">' + t.p + '</div>' : '') +
+      (t.s ? '<div class="card-addr">' + t.s + ', ' + t.plz + ' ' + t.o + '</div>' : '<div class="card-addr">' + t.plz + ' ' + t.o + '</div>') +
+      (links ? '<div class="card-links">' + links + '</div>' : '') +
     '</div>';
   }).join('');
 }
-search();
-document.getElementById('plz').addEventListener('input',search);
-document.getElementById('plz').addEventListener('keyup',function(e){if(e.key==='Enter')search();});
+
+doSearch();
+document.getElementById('q').addEventListener('input', function() {
+  activeCity = null;
+  updateMapHighlight();
+  doSearch();
+});
+document.getElementById('q').addEventListener('keyup', function(e) {
+  if (e.key === 'Enter') doSearch();
+});
 </script>
 
 </body>
