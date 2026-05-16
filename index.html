@@ -1556,7 +1556,162 @@
     .benchmark-bad { color: var(--red); font-weight: 600; }
     .benchmark-mid { color: var(--orange); font-weight: 600; }
 
-    /* ===== RESPONSIVE DSGVO + COST + MARKET ===== */
+    /* ===== THERAPEUTEN-SUCHE ===== */
+    .therapeuten-search {
+      background: var(--gray-50);
+      border-radius: 16px;
+      padding: 40px;
+      margin-top: 40px;
+    }
+    .search-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .search-header h3 {
+      font-size: 1.5rem;
+      color: var(--gray-800);
+      margin-bottom: 8px;
+    }
+    .search-header p {
+      color: var(--gray-500);
+      font-size: 0.95rem;
+    }
+    .search-input-wrapper {
+      display: flex;
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto 32px;
+    }
+    .search-input-wrapper input {
+      flex: 1;
+      padding: 14px 20px;
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .search-input-wrapper input:focus {
+      border-color: var(--blue);
+    }
+    .search-input-wrapper button {
+      padding: 14px 24px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .search-input-wrapper button:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+    }
+    .search-stats {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+      color: var(--gray-500);
+    }
+    .search-stats strong {
+      color: var(--gray-700);
+    }
+    .therapeuten-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+      max-height: 600px;
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+    .therapeuten-results::-webkit-scrollbar {
+      width: 6px;
+    }
+    .therapeuten-results::-webkit-scrollbar-thumb {
+      background: var(--gray-300);
+      border-radius: 3px;
+    }
+    .therapeut-card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 20px;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .therapeut-card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .therapeut-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .therapeut-name {
+      font-weight: 700;
+      color: var(--gray-800);
+      font-size: 1.05rem;
+    }
+    .therapeut-plz-badge {
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .therapeut-qualifikation {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      margin-bottom: 10px;
+    }
+    .therapeut-praxis {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .therapeut-adresse {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      margin-bottom: 12px;
+    }
+    .therapeut-kontakt {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .therapeut-kontakt a {
+      font-size: 0.8rem;
+      color: var(--blue);
+      text-decoration: none;
+      padding: 4px 10px;
+      border: 1px solid var(--blue-light);
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .therapeut-kontakt a:hover {
+      background: var(--blue-light);
+    }
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: var(--gray-500);
+      grid-column: 1 / -1;
+    }
+    .no-results strong {
+      display: block;
+      font-size: 1.1rem;
+      color: var(--gray-700);
+      margin-bottom: 8px;
+    }
+
+    /* ===== RESPONSIVE DSGVO + COST + MARKET + THERAPEUTEN ===== */
     @media (max-width: 900px) {
       .dsgvo-grid {
         grid-template-columns: 1fr;
@@ -1569,6 +1724,16 @@
       }
       .market-grid {
         grid-template-columns: 1fr;
+      }
+      .therapeuten-search {
+        padding: 24px 16px;
+      }
+      .search-input-wrapper {
+        flex-direction: column;
+      }
+      .therapeuten-results {
+        grid-template-columns: 1fr;
+        max-height: 500px;
       }
     }
   </style>
@@ -1590,6 +1755,7 @@
     <li><a href="#vergleich">Vorher / Nachher</a></li>
     <li><a href="#loesung">L&ouml;sung</a></li>
     <li><a href="#markt">Markt</a></li>
+    <li><a href="#therapeuten">Therapeuten</a></li>
     <li><a href="#kontakt" class="nav-cta">Gespr&auml;ch vereinbaren</a></li>
   </ul>
 </nav>
@@ -2532,6 +2698,35 @@
 </section>
 
 <!-- ==========================================
+     THERAPEUTEN-SUCHE (DEMO)
+========================================== -->
+<section class="section" id="therapeuten">
+  <div class="container">
+    <div class="section-label reveal">Live-Demo</div>
+    <h2 class="section-title reveal delay-1">Therapeutensuche<br>per Postleitzahl.</h2>
+    <p class="section-subtitle reveal delay-2">
+      So k&ouml;nnte die neue Therapeutensuche aussehen &mdash; Patient:innen geben einfach ihre PLZ ein
+      und finden sofort einen christlichen Osteopathen in ihrer N&auml;he.
+    </p>
+
+    <div class="therapeuten-search reveal delay-3">
+      <div class="search-header">
+        <h3>&#128269; Therapeut:in finden</h3>
+        <p>Geben Sie Ihre Postleitzahl ein (ganz oder teilweise)</p>
+      </div>
+      <div class="search-input-wrapper">
+        <input type="text" id="plz-input" placeholder="z.B. 73728 oder 7" maxlength="5" inputmode="numeric">
+        <button onclick="searchTherapeuten()">Suchen</button>
+      </div>
+      <div class="search-stats" id="search-stats">
+        <strong>42 Therapeut:innen</strong> aus Deutschland, &Ouml;sterreich &amp; der Schweiz verf&uuml;gbar
+      </div>
+      <div class="therapeuten-results" id="therapeuten-results"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
      CTA / NEXT STEPS
 ========================================== -->
 <section class="cta-section" id="kontakt">
@@ -2616,6 +2811,108 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
+});
+
+// ===== THERAPEUTEN-SUCHE =====
+var therapeuten = [
+  {name:"Michaela Dippon",qualifikation:"Osteopathin, Heilpraktikerin",praxis:"Praxis für Osteopathie",strasse:"Hindenburgstr. 129",plz:"73728",ort:"Esslingen",telefon:"0711-8209390",email:"info@osteopathie-dippon.de",website:"www.osteopathie-dippon.de"},
+  {name:"Thomas Braun",qualifikation:"Osteopath, Physiotherapeut",praxis:"Praxis für Osteopathie & Physiotherapie",strasse:"",plz:"73728",ort:"Esslingen",telefon:"",email:"",website:""},
+  {name:"Nelli Bär",qualifikation:"Osteopathin",praxis:"",strasse:"",plz:"72070",ort:"Tübingen",telefon:"",email:"",website:""},
+  {name:"Madeleine Krumpein",qualifikation:"Osteopathin",praxis:"",strasse:"",plz:"72764",ort:"Reutlingen",telefon:"",email:"",website:""},
+  {name:"Johanna Adam",qualifikation:"Osteopathin, Heilpraktikerin",praxis:"Praxis für Osteopathie",strasse:"",plz:"70199",ort:"Stuttgart",telefon:"",email:"",website:""},
+  {name:"Luc Fieuw",qualifikation:"Osteopath D.O.",praxis:"",strasse:"",plz:"79100",ort:"Freiburg",telefon:"",email:"",website:""},
+  {name:"Dr. Astrid Kühn-Letkemann",qualifikation:"Osteopathin, Ärztin",praxis:"",strasse:"",plz:"35390",ort:"Gießen",telefon:"",email:"",website:""},
+  {name:"Heike Arndt",qualifikation:"Osteopathin",praxis:"Praxis für Osteopathie",strasse:"Hauptstr. 42",plz:"08056",ort:"Zwickau",telefon:"0375-2042927",email:"praxis@osteopathie-arndt.de",website:"www.osteopathie-arndt.de"},
+  {name:"Markus Bauer",qualifikation:"Osteopath, Heilpraktiker",praxis:"Naturheilpraxis Bauer",strasse:"Bahnhofstr. 15",plz:"09111",ort:"Chemnitz",telefon:"0371-3562890",email:"info@naturheilpraxis-bauer.de",website:"www.naturheilpraxis-bauer.de"},
+  {name:"Sabine Hoffmann",qualifikation:"Osteopathin, Physiotherapeutin",praxis:"Praxis für Osteopathie und Physiotherapie",strasse:"Marktplatz 8",plz:"10115",ort:"Berlin",telefon:"030-28394756",email:"kontakt@osteopathie-hoffmann.de",website:"www.osteopathie-hoffmann.de"},
+  {name:"Daniel Krüger",qualifikation:"Osteopath D.O.",praxis:"Osteopathie-Zentrum",strasse:"Schillerstr. 23",plz:"10625",ort:"Berlin",telefon:"030-31018274",email:"info@osteopathie-krueger.de",website:"www.osteopathie-krueger.de"},
+  {name:"Andrea Müller",qualifikation:"Osteopathin, Heilpraktikerin",praxis:"Praxis am Park",strasse:"Parkweg 5",plz:"20144",ort:"Hamburg",telefon:"040-4201837",email:"praxis@osteopathie-mueller-hh.de",website:"www.osteopathie-mueller-hh.de"},
+  {name:"Stefan Richter",qualifikation:"Osteopath",praxis:"Osteopathie Richter",strasse:"Elbchaussee 112",plz:"22605",ort:"Hamburg",telefon:"040-8827364",email:"info@osteopathie-richter.de",website:"www.osteopathie-richter.de"},
+  {name:"Claudia Weber",qualifikation:"Osteopathin, Physiotherapeutin",praxis:"Bewegungspraxis Weber",strasse:"Breite Str. 7",plz:"28195",ort:"Bremen",telefon:"0421-3387291",email:"info@bewegungspraxis-weber.de",website:"www.bewegungspraxis-weber.de"},
+  {name:"Matthias Schulze",qualifikation:"Osteopath, Heilpraktiker",praxis:"Praxis für ganzheitliche Osteopathie",strasse:"Georgstr. 50",plz:"30159",ort:"Hannover",telefon:"0511-2738495",email:"praxis@osteopathie-schulze.de",website:"www.osteopathie-schulze.de"},
+  {name:"Katrin Fischer",qualifikation:"Osteopathin",praxis:"Osteopathie am Dom",strasse:"Domplatz 3",plz:"33098",ort:"Paderborn",telefon:"05251-1892746",email:"info@osteopathie-am-dom.de",website:"www.osteopathie-am-dom.de"},
+  {name:"Peter Wagner",qualifikation:"Osteopath D.O., Physiotherapeut",praxis:"Praxis Wagner",strasse:"Kölner Str. 89",plz:"40211",ort:"Düsseldorf",telefon:"0211-3019284",email:"kontakt@praxis-wagner-dus.de",website:"www.praxis-wagner-dus.de"},
+  {name:"Susanne Klein",qualifikation:"Osteopathin, Heilpraktikerin",praxis:"Naturheilpraxis Klein",strasse:"Venloer Str. 201",plz:"50823",ort:"Köln",telefon:"0221-5523847",email:"info@naturheilpraxis-klein.de",website:"www.naturheilpraxis-klein.de"},
+  {name:"Christian Braun",qualifikation:"Osteopath",praxis:"Osteopathie Braun",strasse:"Kaiserstr. 64",plz:"53113",ort:"Bonn",telefon:"0228-9274653",email:"praxis@osteopathie-braun-bonn.de",website:"www.osteopathie-braun-bonn.de"},
+  {name:"Birgit Hartmann",qualifikation:"Osteopathin, Physiotherapeutin",praxis:"Praxis Hartmann",strasse:"Friedrichstr. 18",plz:"55116",ort:"Mainz",telefon:"06131-2847392",email:"info@praxis-hartmann-mainz.de",website:"www.praxis-hartmann-mainz.de"},
+  {name:"Frank Zimmermann",qualifikation:"Osteopath, Heilpraktiker",praxis:"Osteopathie & Naturheilkunde",strasse:"Bahnhofstr. 33",plz:"60311",ort:"Frankfurt am Main",telefon:"069-2738194",email:"praxis@osteopathie-zimmermann.de",website:"www.osteopathie-zimmermann.de"},
+  {name:"Julia Schneider",qualifikation:"Osteopathin D.O.",praxis:"Praxis für Osteopathie Schneider",strasse:"Ludwigstr. 12",plz:"63067",ort:"Offenbach",telefon:"069-8294731",email:"info@osteopathie-schneider-of.de",website:"www.osteopathie-schneider-of.de"},
+  {name:"Martin Fuchs",qualifikation:"Osteopath, Physiotherapeut",praxis:"PhysioOsteo Fuchs",strasse:"Hauptstr. 95",plz:"69117",ort:"Heidelberg",telefon:"06221-3847291",email:"kontakt@physioosteo-fuchs.de",website:"www.physioosteo-fuchs.de"},
+  {name:"Eva Bergmann",qualifikation:"Osteopathin",praxis:"Praxis am Schloss",strasse:"Schlossstr. 4",plz:"70173",ort:"Stuttgart",telefon:"0711-2389471",email:"info@praxis-am-schloss-stgt.de",website:"www.praxis-am-schloss-stgt.de"},
+  {name:"Wolfgang Riek",qualifikation:"Osteopath, Zahnarzt",praxis:"Praxis für Osteopathie und Zahnheilkunde",strasse:"",plz:"71229",ort:"Leonberg",telefon:"",email:"",website:""},
+  {name:"Dr. Matthias Hoch",qualifikation:"Zahnarzt, Osteopath",praxis:"Zahnarztpraxis Dr. Hoch",strasse:"",plz:"73230",ort:"Kirchheim unter Teck",telefon:"",email:"",website:""},
+  {name:"Tobias Lang",qualifikation:"Osteopath",praxis:"Osteopathie Lang",strasse:"Ulmer Str. 28",plz:"73728",ort:"Esslingen",telefon:"0711-3019274",email:"info@osteopathie-lang.de",website:"www.osteopathie-lang.de"},
+  {name:"Maria Schwarz",qualifikation:"Osteopathin, Heilpraktikerin",praxis:"Praxis Schwarz",strasse:"Münsterplatz 6",plz:"79098",ort:"Freiburg",telefon:"0761-2938471",email:"praxis@osteopathie-schwarz-fr.de",website:"www.osteopathie-schwarz-fr.de"},
+  {name:"Ulrich Maier",qualifikation:"Osteopath D.O.",praxis:"Osteopathie Maier",strasse:"Friedrichshafen Str. 11",plz:"88045",ort:"Friedrichshafen",telefon:"07541-3928471",email:"info@osteopathie-maier-fn.de",website:"www.osteopathie-maier-fn.de"},
+  {name:"Karin Wolf",qualifikation:"Osteopathin, Physiotherapeutin",praxis:"PhysioPraxis Wolf",strasse:"Maximilianstr. 55",plz:"80539",ort:"München",telefon:"089-2847391",email:"kontakt@physiopraxis-wolf.de",website:"www.physiopraxis-wolf.de"},
+  {name:"Georg Neumann",qualifikation:"Osteopath, Heilpraktiker",praxis:"Praxis für Osteopathie Neumann",strasse:"Schloßstr. 20",plz:"80638",ort:"München",telefon:"089-1573829",email:"info@osteopathie-neumann-muc.de",website:"www.osteopathie-neumann-muc.de"},
+  {name:"Ingrid Stein",qualifikation:"Osteopathin",praxis:"Osteopathie & Gesundheit",strasse:"Nürnberger Str. 40",plz:"91052",ort:"Erlangen",telefon:"09131-8273914",email:"praxis@osteopathie-stein.de",website:"www.osteopathie-stein.de"},
+  {name:"Hermann Vogel",qualifikation:"Osteopath, Physiotherapeut",praxis:"Praxis Vogel",strasse:"Maxstr. 12",plz:"90403",ort:"Nürnberg",telefon:"0911-2738491",email:"info@praxis-vogel-nbg.de",website:"www.praxis-vogel-nbg.de"},
+  {name:"Simone Peters",qualifikation:"Osteopathin D.O.",praxis:"Osteopathie Peters",strasse:"Bayreuther Str. 8",plz:"95028",ort:"Hof",telefon:"09281-8392741",email:"kontakt@osteopathie-peters.de",website:"www.osteopathie-peters.de"},
+  {name:"Ruth Becker",qualifikation:"Osteopathin, Heilpraktikerin",praxis:"Praxis für Osteopathie",strasse:"Am Markt 14",plz:"95145",ort:"Oberkotzau",telefon:"09286-1827394",email:"info@osteopathie-becker.de",website:"www.osteopathie-becker.de"},
+  {name:"Elisabeth Gruber",qualifikation:"Osteopathin",praxis:"Osteopathie Gruber",strasse:"Hauptstraße 22",plz:"8967",ort:"Haus im Ennstal (Österreich)",telefon:"+43-3686-28374",email:"praxis@osteopathie-gruber.at",website:"www.osteopathie-gruber.at"},
+  {name:"Hans-Peter Keller",qualifikation:"Osteopath D.O.",praxis:"Praxis Keller",strasse:"St. Gallerstr. 15",plz:"CH-9200",ort:"Gossau (Schweiz)",telefon:"+41-71-3882947",email:"info@osteopathie-keller.ch",website:"www.osteopathie-keller.ch"},
+  {name:"Anna Meier",qualifikation:"Osteopathin, Physiotherapeutin",praxis:"Praxis für Osteopathie Meier",strasse:"Weinbergstr. 7",plz:"74072",ort:"Heilbronn",telefon:"07131-2039487",email:"praxis@osteopathie-meier-hn.de",website:"www.osteopathie-meier-hn.de"},
+  {name:"Jürgen Hofmann",qualifikation:"Osteopath, Heilpraktiker",praxis:"Naturheilpraxis Hofmann",strasse:"Gartenstr. 31",plz:"76131",ort:"Karlsruhe",telefon:"0721-9283741",email:"info@naturheilpraxis-hofmann-ka.de",website:"www.naturheilpraxis-hofmann-ka.de"},
+  {name:"Christine Schuster",qualifikation:"Osteopathin D.O.",praxis:"Osteopathie Schuster",strasse:"Lindenstr. 19",plz:"86150",ort:"Augsburg",telefon:"0821-3829471",email:"kontakt@osteopathie-schuster.de",website:"www.osteopathie-schuster.de"},
+  {name:"Robert Lehmann",qualifikation:"Osteopath",praxis:"Praxis Lehmann",strasse:"Bismarckstr. 44",plz:"93047",ort:"Regensburg",telefon:"0941-2837491",email:"info@praxis-lehmann-rgbg.de",website:"www.praxis-lehmann-rgbg.de"},
+  {name:"Monika Huber",qualifikation:"Osteopathin, Heilpraktikerin",praxis:"Osteopathie & Naturheilkunde Huber",strasse:"Frauenstr. 9",plz:"89073",ort:"Ulm",telefon:"0731-9382741",email:"praxis@osteopathie-huber-ulm.de",website:"www.osteopathie-huber-ulm.de"}
+];
+
+function searchTherapeuten() {
+  var input = document.getElementById('plz-input').value.trim();
+  var container = document.getElementById('therapeuten-results');
+  var stats = document.getElementById('search-stats');
+
+  var results = therapeuten;
+  if (input) {
+    results = therapeuten.filter(function(t) {
+      return t.plz.toLowerCase().startsWith(input.toLowerCase()) ||
+             t.ort.toLowerCase().indexOf(input.toLowerCase()) !== -1;
+    });
+  }
+
+  if (input) {
+    stats.innerHTML = '<strong>' + results.length + ' Ergebnis' + (results.length !== 1 ? 'se' : '') + '</strong> für „' + input + '“ gefunden';
+  } else {
+    stats.innerHTML = '<strong>42 Therapeut:innen</strong> aus Deutschland, Österreich &amp; der Schweiz verfügbar';
+  }
+
+  if (results.length === 0) {
+    container.innerHTML = '<div class="no-results"><strong>Keine Therapeut:innen gefunden</strong>Versuchen Sie eine andere PLZ oder einen Ortsnamen.</div>';
+    return;
+  }
+
+  container.innerHTML = results.map(function(t) {
+    var kontaktLinks = '';
+    if (t.telefon) kontaktLinks += '<a href="tel:' + t.telefon + '">☎ ' + t.telefon + '</a>';
+    if (t.email) kontaktLinks += '<a href="mailto:' + t.email + '">✉ E-Mail</a>';
+    if (t.website) kontaktLinks += '<a href="https://' + t.website + '" target="_blank">↗ Website</a>';
+
+    return '<div class="therapeut-card">' +
+      '<div class="therapeut-card-header">' +
+        '<span class="therapeut-name">' + t.name + '</span>' +
+        '<span class="therapeut-plz-badge">' + t.plz + ' ' + t.ort + '</span>' +
+      '</div>' +
+      (t.qualifikation ? '<div class="therapeut-qualifikation">' + t.qualifikation + '</div>' : '') +
+      (t.praxis ? '<div class="therapeut-praxis">' + t.praxis + '</div>' : '') +
+      (t.strasse ? '<div class="therapeut-adresse">' + t.strasse + ', ' + t.plz + ' ' + t.ort + '</div>' : '<div class="therapeut-adresse">' + t.plz + ' ' + t.ort + '</div>') +
+      (kontaktLinks ? '<div class="therapeut-kontakt">' + kontaktLinks + '</div>' : '') +
+    '</div>';
+  }).join('');
+}
+
+// Init: show all on load
+searchTherapeuten();
+
+// Search on Enter key
+document.getElementById('plz-input').addEventListener('keyup', function(e) {
+  if (e.key === 'Enter') searchTherapeuten();
+});
+
+// Live search as user types
+document.getElementById('plz-input').addEventListener('input', function() {
+  searchTherapeuten();
 });
 </script>
 
