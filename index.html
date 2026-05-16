@@ -1377,12 +1377,197 @@
       color: var(--gray-600);
     }
 
-    /* ===== RESPONSIVE DSGVO + COST ===== */
+    /* ===== QUESTIONS GRID ===== */
+    .questions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .question-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      border: 1px solid var(--gray-200);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .question-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+
+    .question-icon {
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+    }
+
+    .question-card h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gray-700);
+      margin-bottom: 16px;
+    }
+
+    .question-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .question-card li {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--gray-500);
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .question-card li::before {
+      content: '?';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .question-card code {
+      background: var(--gray-100);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+    }
+
+    /* ===== MARKET ANALYSIS ===== */
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .market-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      border: 1px solid var(--gray-200);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .market-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+
+    .market-card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+    .market-card-icon.blue { background: #e8f0fe; }
+    .market-card-icon.green { background: var(--green-light); }
+    .market-card-icon.orange { background: var(--orange-light); }
+    .market-card-icon.rose { background: #fde8ef; }
+
+    .market-card h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gray-700);
+      margin-bottom: 12px;
+    }
+
+    .market-card p {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+    }
+
+    .market-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .market-card li {
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: var(--gray-600);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .market-card li::before {
+      content: '\2022';
+      position: absolute;
+      left: 4px;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .benchmark-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 40px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+    }
+
+    .benchmark-table thead th {
+      background: var(--navy);
+      color: var(--white);
+      padding: 14px 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-align: left;
+    }
+
+    .benchmark-table td {
+      padding: 12px 20px;
+      font-size: 0.85rem;
+      border-bottom: 1px solid var(--gray-200);
+      color: var(--gray-600);
+    }
+
+    .benchmark-table tr:last-child td { border-bottom: none; }
+    .benchmark-table tr:hover td { background: var(--gray-100); }
+
+    .benchmark-table .highlight-row td {
+      background: var(--orange-light);
+      font-weight: 600;
+      color: var(--gray-700);
+    }
+
+    .benchmark-good { color: var(--green); font-weight: 600; }
+    .benchmark-bad { color: var(--red); font-weight: 600; }
+    .benchmark-mid { color: var(--orange); font-weight: 600; }
+
+    /* ===== RESPONSIVE DSGVO + COST + MARKET ===== */
     @media (max-width: 900px) {
       .dsgvo-grid {
         grid-template-columns: 1fr;
       }
       .cost-comparison {
+        grid-template-columns: 1fr;
+      }
+      .questions-grid {
+        grid-template-columns: 1fr;
+      }
+      .market-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -1404,7 +1589,7 @@
     <li><a href="#dsgvo">DSGVO</a></li>
     <li><a href="#vergleich">Vorher / Nachher</a></li>
     <li><a href="#loesung">L&ouml;sung</a></li>
-    <li><a href="#kosten">Kosten</a></li>
+    <li><a href="#markt">Markt</a></li>
     <li><a href="#kontakt" class="nav-cta">Gespr&auml;ch vereinbaren</a></li>
   </ul>
 </nav>
@@ -2079,14 +2264,139 @@
 </section>
 
 <!-- ==========================================
+     MARKT- & ZIELGRUPPENANALYSE
+========================================== -->
+<section class="section" id="markt">
+  <div class="container">
+    <div class="section-label reveal">Markt &amp; Zielgruppe</div>
+    <h2 class="section-title reveal delay-1">Wer sind Ihre Zielgruppen &mdash;<br>und wie erreichen Sie sie?</h2>
+    <p class="section-subtitle reveal delay-2">
+      Eine professionelle Website ist kein Selbstzweck. Sie muss die richtigen Menschen
+      erreichen und ihnen den Weg zu CiO so einfach wie m&ouml;glich machen.
+    </p>
+
+    <div class="market-grid reveal delay-3">
+
+      <div class="market-card">
+        <div class="market-card-icon blue">&#128101;</div>
+        <h4>Zielgruppe 1: Osteopath:innen</h4>
+        <p>Christliche Osteopath:innen, die fachliche Fortbildung mit geistlicher Gemeinschaft verbinden m&ouml;chten.</p>
+        <ul>
+          <li>Suchen: Fortbildungen ohne esoterische Inhalte</li>
+          <li>Brauchen: Einfache Anmeldung, klare Kurs&uuml;bersicht</li>
+          <li>Erwarten: Professionellen, vertrauensw&uuml;rdigen Auftritt</li>
+          <li>Finden CiO &uuml;ber: Empfehlungen, Google, Berufsverb&auml;nde</li>
+        </ul>
+      </div>
+
+      <div class="market-card">
+        <div class="market-card-icon green">&#128269;</div>
+        <h4>Zielgruppe 2: Patient:innen</h4>
+        <p>Menschen, die gezielt einen christlichen Osteopathen in ihrer N&auml;he suchen.</p>
+        <ul>
+          <li>Suchen: &bdquo;Christlicher Osteopath + [Stadt]&ldquo;</li>
+          <li>Brauchen: Therapeutenliste mit PLZ-Suche</li>
+          <li>Erwarten: Schnelle, mobile-optimierte Ergebnisse</li>
+          <li>Aktuell: Keine Suchfunktion, 45+ Eintr&auml;ge als Textwand</li>
+        </ul>
+      </div>
+
+      <div class="market-card">
+        <div class="market-card-icon orange">&#127919;</div>
+        <h4>Konkurrenzanalyse</h4>
+        <p>Wie positionieren sich vergleichbare Verb&auml;nde und Netzwerke im deutschsprachigen Raum?</p>
+        <ul>
+          <li><strong>VOD</strong> (Verband der Osteopathen) &mdash; professionelle Website, Event-System, Therapeutensuche mit Karte</li>
+          <li><strong>BVO</strong> (Bundesverband Osteopathie) &mdash; modernes Design, Online-Anmeldung, Mitgliederbereich</li>
+          <li><strong>DGOM</strong> &mdash; klare Struktur, Kurskalender, Responsive Design</li>
+          <li><strong>CiO aktuell</strong> &mdash; deutlich hinter dem Branchenstandard</li>
+        </ul>
+      </div>
+
+      <div class="market-card">
+        <div class="market-card-icon rose">&#128200;</div>
+        <h4>Wachstumspotenzial</h4>
+        <p>Mit einer optimierten Website kann CiO deutlich mehr Reichweite und Anmeldungen erzielen.</p>
+        <ul>
+          <li><strong>SEO-Potenzial:</strong> Keine einzige Seite rankt aktuell f&uuml;r relevante Suchbegriffe</li>
+          <li><strong>Google-Suchen:</strong> &bdquo;Osteopathie Fortbildung&ldquo; hat &uuml;ber 1.000 Suchen/Monat</li>
+          <li><strong>Nischen-Vorteil:</strong> &bdquo;Christlicher Osteopath&ldquo; ist eine unbesetzte Nische</li>
+          <li><strong>Therapeuten-Wachstum:</strong> Professioneller Auftritt zieht neue Mitglieder an</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <h3 class="section-title reveal" style="font-size:1.4rem; margin-top:56px;">Benchmark-Vergleich: CiO vs. Branchenstandard</h3>
+
+    <table class="benchmark-table reveal delay-1">
+      <thead>
+        <tr>
+          <th style="width:200px">Kriterium</th>
+          <th>VOD / BVO</th>
+          <th>DGOM</th>
+          <th>CiO (aktuell)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Responsive Design</td>
+          <td><span class="benchmark-good">&#10003; Ja</span></td>
+          <td><span class="benchmark-good">&#10003; Ja</span></td>
+          <td><span class="benchmark-bad">&#10060; Nur Theme-Standard</span></td>
+        </tr>
+        <tr>
+          <td>Therapeutensuche</td>
+          <td><span class="benchmark-good">&#10003; Mit Karte &amp; Filter</span></td>
+          <td><span class="benchmark-mid">~ Einfache Liste</span></td>
+          <td><span class="benchmark-bad">&#10060; Keine Suchfunktion</span></td>
+        </tr>
+        <tr>
+          <td>Online-Anmeldung</td>
+          <td><span class="benchmark-good">&#10003; Integriert</span></td>
+          <td><span class="benchmark-good">&#10003; Integriert</span></td>
+          <td><span class="benchmark-bad">&#10060; Nur per E-Mail/Fax</span></td>
+        </tr>
+        <tr>
+          <td>SEO-Optimierung</td>
+          <td><span class="benchmark-good">&#10003; Vollst&auml;ndig</span></td>
+          <td><span class="benchmark-good">&#10003; Vollst&auml;ndig</span></td>
+          <td><span class="benchmark-bad">&#10060; Nicht vorhanden</span></td>
+        </tr>
+        <tr>
+          <td>DSGVO-konform</td>
+          <td><span class="benchmark-good">&#10003; Ja</span></td>
+          <td><span class="benchmark-good">&#10003; Ja</span></td>
+          <td><span class="benchmark-mid">~ Teilweise (DSE veraltet)</span></td>
+        </tr>
+        <tr>
+          <td>Letztes Redesign</td>
+          <td><span class="benchmark-good">2023</span></td>
+          <td><span class="benchmark-good">2022</span></td>
+          <td><span class="benchmark-bad">2017</span></td>
+        </tr>
+        <tr class="highlight-row">
+          <td>Gesamteindruck</td>
+          <td>Professionell</td>
+          <td>Professionell</td>
+          <td>Deutlich veraltet</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</section>
+
+<!-- ==========================================
      DSGVO FORWARD-STREAM
 ========================================== -->
 <section class="section" id="dsgvo">
   <div class="container">
     <div class="section-label reveal">Rechtssicherheit</div>
-    <h2 class="section-title reveal delay-1">100% abmahnsicher &mdash;<br>ohne Kompromisse.</h2>
+    <h2 class="section-title reveal delay-1">Abmahnsicher nach<br>aktuellem Standard.</h2>
     <p class="section-subtitle reveal delay-2">
-      Unser konkreter Plan f&uuml;r eine Website, die jedem rechtlichen Check standh&auml;lt.
+      Wir gestalten die Website nach aktuellem rechtlichen Stand abmahnsicher.
+      Eine rechtliche Haftung &uuml;bernehmen wir nicht &mdash; daf&uuml;r empfehlen wir die Pr&uuml;fung durch einen Fachanwalt.
     </p>
 
     <div class="dsgvo-grid reveal delay-3">
@@ -2138,8 +2448,8 @@
     <div class="dsgvo-summary reveal">
       <div class="dsgvo-summary-icon">&#128737;</div>
       <div class="dsgvo-summary-text">
-        <strong>Das Ergebnis:</strong> Eine Website ohne Abmahnrisiko. Kein Cookie-Banner-Popup n&ouml;tig,
-        keine Daten&uuml;bermittlung an Dritte, vollst&auml;ndige DSGVO-Dokumentation.
+        <strong>Das Ergebnis:</strong> Eine Website nach aktuellem DSGVO-Standard. Kein Cookie-Banner-Popup n&ouml;tig,
+        keine Daten&uuml;bermittlung an Dritte, vollst&auml;ndige Datenschutz-Dokumentation.
         Ihre Besucher und Therapeuten k&ouml;nnen die Seite sorgenfrei nutzen.
       </div>
     </div>
@@ -2147,51 +2457,75 @@
 </section>
 
 <!-- ==========================================
-     KOSTEN & EHRENAMT
+     AUSGANGSLAGE & OFFENE FRAGEN
 ========================================== -->
-<section class="section section-cream" id="kosten">
+<section class="section section-cream" id="naechste-schritte">
   <div class="container">
-    <div class="section-label reveal">Wirtschaftlichkeit</div>
-    <h2 class="section-title reveal delay-1">Professionell muss nicht<br>teuer bedeuten.</h2>
+    <div class="section-label reveal">N&auml;chste Schritte</div>
+    <h2 class="section-title reveal delay-1">Was wir gemeinsam<br>kl&auml;ren m&uuml;ssen.</h2>
     <p class="section-subtitle reveal delay-2">
-      Wir wissen, dass CiO von ehrenamtlichem Engagement lebt.
-      Deshalb haben wir ein Modell entwickelt, das beides verbindet: maximale Qualit&auml;t bei minimalen laufenden Kosten.
+      Bevor wir mit der Umsetzung starten, gibt es einige organisatorische und technische Fragen,
+      die wir in einem kurzen Gespr&auml;ch kl&auml;ren sollten.
     </p>
 
     <div class="cost-comparison reveal delay-3">
       <div class="cost-card old">
-        <div class="cost-card-label">Aktuell</div>
+        <div class="cost-card-label">Aktuelle Situation</div>
         <h4>WordPress + Ehrenamt</h4>
         <ul class="cost-list">
-          <li class="cost-con">Abh&auml;ngig von einer Person</li>
-          <li class="cost-con">Regelm&auml;&szlig;ige Updates n&ouml;tig (Sicherheit!)</li>
-          <li class="cost-con">Hosting-Kosten ca. 10&ndash;20&euro;/Monat</li>
-          <li class="cost-con">Plugin-Lizenzen j&auml;hrlich</li>
+          <li class="cost-con">Abh&auml;ngig von einer einzelnen Person</li>
+          <li class="cost-con">Regelm&auml;&szlig;ige Sicherheits-Updates n&ouml;tig</li>
+          <li class="cost-con">Plugin-Abh&auml;ngigkeiten &amp; Lizenzen</li>
           <li class="cost-con">Wenn Ehrenamtler wegf&auml;llt: Stillstand</li>
           <li class="cost-con">Rechtliche Risiken (veraltete DSE)</li>
+          <li class="cost-con">Veraltetes Design seit 2017</li>
         </ul>
       </div>
       <div class="cost-card new">
-        <div class="cost-card-label">Unser Vorschlag</div>
-        <h4>Moderne Jamstack-L&ouml;sung</h4>
+        <div class="cost-card-label">Unser Ansatz</div>
+        <h4>Moderne, wartungsarme L&ouml;sung</h4>
         <ul class="cost-list">
-          <li class="cost-pro">Hosting: 0&euro;/Monat (Vercel/Netlify Free Tier)</li>
-          <li class="cost-pro">Keine Plugin-Updates, keine Sicherheitsl&uuml;cken</li>
-          <li class="cost-pro">Inhalte einfach &auml;nderbar (CMS oder direkt)</li>
-          <li class="cost-pro">Einmalige Investition, keine laufenden Kosten</li>
-          <li class="cost-pro">Blitzschnell (statische Seiten, kein PHP)</li>
-          <li class="cost-pro">Zukunftssicher: l&auml;uft 10+ Jahre ohne Wartung</li>
+          <li class="cost-pro">Keine Abh&auml;ngigkeit von einer Person</li>
+          <li class="cost-pro">Minimaler Wartungsaufwand</li>
+          <li class="cost-pro">Keine Plugin-Sicherheitsl&uuml;cken</li>
+          <li class="cost-pro">Inhalte einfach &auml;nderbar</li>
+          <li class="cost-pro">Rechtssicher nach aktuellem Standard</li>
+          <li class="cost-pro">Zukunftssicher &amp; schnell</li>
         </ul>
       </div>
     </div>
 
-    <div class="cost-note reveal">
-      <p>
-        <strong>&#128161; Unser Ansatz:</strong> Wir erstellen eine moderne, statische Website, die auf kostenlosen
-        Hosting-Plattformen l&auml;uft. Keine monatlichen Kosten, keine Abh&auml;ngigkeit von Ehrenamtlern f&uuml;r technische Updates.
-        &Auml;nderungen an Inhalten (neue Fortbildungen, Therapeuten) k&ouml;nnen Sie k&uuml;nftig selbst vornehmen &mdash;
-        wir zeigen Ihnen wie, oder &uuml;bernehmen das auf Wunsch.
-      </p>
+    <div class="questions-grid reveal">
+      <div class="question-card">
+        <div class="question-icon">&#127760;</div>
+        <h4>Domain &amp; Hosting</h4>
+        <ul>
+          <li>Wo liegt die Domain <code>christen-in-der-osteopathie.de</code> aktuell?</li>
+          <li>Wer hat Zugang zum Domain-Provider?</li>
+          <li>Wo wird die Website aktuell gehostet?</li>
+          <li>Wer verwaltet DNS-Einstellungen?</li>
+        </ul>
+      </div>
+      <div class="question-card">
+        <div class="question-icon">&#128101;</div>
+        <h4>Verantwortlichkeiten</h4>
+        <ul>
+          <li>Wer pflegt k&uuml;nftig Inhalte (Fortbildungen, Therapeuten)?</li>
+          <li>Wie oft &auml;ndern sich Inhalte?</li>
+          <li>Soll die Pflege eigenst&auml;ndig oder betreut erfolgen?</li>
+          <li>Gibt es Budget f&uuml;r laufende Betreuung?</li>
+        </ul>
+      </div>
+      <div class="question-card">
+        <div class="question-icon">&#128196;</div>
+        <h4>Inhalte &amp; Funktionen</h4>
+        <ul>
+          <li>Soll die Therapeutenliste erweiterbar bleiben?</li>
+          <li>Wird eine Online-Anmeldung f&uuml;r Fortbildungen gew&uuml;nscht?</li>
+          <li>Gibt es neue Inhalte oder Seiten, die dazukommen sollen?</li>
+          <li>Sind E-Mail-Adressen (@christen-in-der-osteopathie.de) gew&uuml;nscht?</li>
+        </ul>
+      </div>
     </div>
 
   </div>
