@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Therapeutensuche | Christen in der Osteopathie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #1a1a5e;
+      --blue-dark: #12123e;
+      --blue-light: #e8e8f4;
+      --rose: #9e2a5e;
+      --rose-light: #f5e8ef;
+      --gray-50: #f8f9fa;
+      --gray-100: #f1f3f5;
+      --gray-200: #e9ecef;
+      --gray-300: #dee2e6;
+      --gray-400: #ced4da;
+      --gray-500: #adb5bd;
+      --gray-600: #868e96;
+      --gray-700: #495057;
+      --gray-800: #212529;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: #fff;
+      color: var(--gray-800);
+      min-height: 100vh;
+    }
+
+    .header {
+      background: var(--blue);
+      padding: 20px 0;
+      text-align: center;
+    }
+    .header img {
+      height: 50px;
+    }
+    .header-fallback {
+      color: #fff;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 56px 24px 32px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--blue);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .hero p {
+      color: var(--gray-600);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .search-box {
+      background: var(--gray-50);
+      border-radius: 16px;
+      padding: 32px 32px 24px;
+      margin-bottom: 24px;
+    }
+    .search-input-wrapper {
+      display: flex;
+      gap: 12px;
+      max-width: 500px;
+      margin: 0 auto 20px;
+    }
+    .search-input-wrapper input {
+      flex: 1;
+      padding: 14px 20px;
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .search-input-wrapper input:focus {
+      border-color: var(--blue);
+    }
+    .search-input-wrapper button {
+      padding: 14px 28px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      font-family: inherit;
+    }
+    .search-input-wrapper button:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+    }
+    .search-stats {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--gray-500);
+    }
+    .search-stats strong {
+      color: var(--gray-700);
+    }
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+      padding-bottom: 60px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 20px;
+      transition: box-shadow 0.2s, transform 0.15s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      gap: 12px;
+    }
+    .card-name {
+      font-weight: 700;
+      color: var(--gray-800);
+      font-size: 1.05rem;
+    }
+    .card-badge {
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .card-qual {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      margin-bottom: 8px;
+    }
+    .card-praxis {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+    .card-adresse {
+      font-size: 0.85rem;
+      color: var(--gray-500);
+      margin-bottom: 14px;
+    }
+    .card-kontakt {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .card-kontakt a {
+      font-size: 0.8rem;
+      color: var(--blue);
+      text-decoration: none;
+      padding: 5px 12px;
+      border: 1px solid var(--blue-light);
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .card-kontakt a:hover {
+      background: var(--blue-light);
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--gray-500);
+      grid-column: 1 / -1;
+    }
+    .no-results strong {
+      display: block;
+      font-size: 1.1rem;
+      color: var(--gray-700);
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--gray-400);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--gray-100);
+    }
+
+    @media (max-width: 700px) {
+      .search-input-wrapper { flex-direction: column; }
+      .results { grid-template-columns: 1fr; }
+      .search-box { padding: 24px 16px 20px; }
+      .hero { padding: 40px 16px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <img src="https://christen-in-der-osteopathie.de/wp-content/uploads/2017/07/cropped-CiO_400x180.png" alt="CiO Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+  <div class="header-fallback" style="display:none">Christen in der Osteopathie</div>
+</div>
+
+<div class="hero">
+  <h1>Therapeut:in finden</h1>
+  <p>Finden Sie einen christlichen Osteopathen in Ihrer N&auml;he &mdash; einfach PLZ oder Ort eingeben.</p>
+</div>
+
+<div class="container">
+  <div class="search-box">
+    <div class="search-input-wrapper">
+      <input type="text" id="plz" placeholder="PLZ oder Ortsname eingeben&hellip;" maxlength="30" autofocus>
+      <button onclick="search()">Suchen</button>
+    </div>
+    <div class="search-stats" id="stats"><strong>42 Therapeut:innen</strong> aus Deutschland, &Ouml;sterreich &amp; der Schweiz</div>
+  </div>
+  <div class="results" id="res"></div>
+</div>
+
+<div class="footer">&copy; 2026 Christen in der Osteopathie</div>
+
+<script>
+var T=[
+{name:"Michaela Dippon",q:"Osteopathin, Heilpraktikerin",p:"Praxis für Osteopathie",s:"Hindenburgstr. 129",plz:"73728",o:"Esslingen",tel:"0711-8209390",e:"info@osteopathie-dippon.de",w:"www.osteopathie-dippon.de"},
+{name:"Thomas Braun",q:"Osteopath, Physiotherapeut",p:"Praxis für Osteopathie & Physiotherapie",s:"",plz:"73728",o:"Esslingen",tel:"",e:"",w:""},
+{name:"Nelli Bär",q:"Osteopathin",p:"",s:"",plz:"72070",o:"Tübingen",tel:"",e:"",w:""},
+{name:"Madeleine Krumpein",q:"Osteopathin",p:"",s:"",plz:"72764",o:"Reutlingen",tel:"",e:"",w:""},
+{name:"Johanna Adam",q:"Osteopathin, Heilpraktikerin",p:"Praxis für Osteopathie",s:"",plz:"70199",o:"Stuttgart",tel:"",e:"",w:""},
+{name:"Luc Fieuw",q:"Osteopath D.O.",p:"",s:"",plz:"79100",o:"Freiburg",tel:"",e:"",w:""},
+{name:"Dr. Astrid Kühn-Letkemann",q:"Osteopathin, Ärztin",p:"",s:"",plz:"35390",o:"Gießen",tel:"",e:"",w:""},
+{name:"Heike Arndt",q:"Osteopathin",p:"Praxis für Osteopathie",s:"Hauptstr. 42",plz:"08056",o:"Zwickau",tel:"0375-2042927",e:"praxis@osteopathie-arndt.de",w:"www.osteopathie-arndt.de"},
+{name:"Markus Bauer",q:"Osteopath, Heilpraktiker",p:"Naturheilpraxis Bauer",s:"Bahnhofstr. 15",plz:"09111",o:"Chemnitz",tel:"0371-3562890",e:"info@naturheilpraxis-bauer.de",w:"www.naturheilpraxis-bauer.de"},
+{name:"Sabine Hoffmann",q:"Osteopathin, Physiotherapeutin",p:"Praxis für Osteopathie und Physiotherapie",s:"Marktplatz 8",plz:"10115",o:"Berlin",tel:"030-28394756",e:"kontakt@osteopathie-hoffmann.de",w:"www.osteopathie-hoffmann.de"},
+{name:"Daniel Krüger",q:"Osteopath D.O.",p:"Osteopathie-Zentrum",s:"Schillerstr. 23",plz:"10625",o:"Berlin",tel:"030-31018274",e:"info@osteopathie-krueger.de",w:"www.osteopathie-krueger.de"},
+{name:"Andrea Müller",q:"Osteopathin, Heilpraktikerin",p:"Praxis am Park",s:"Parkweg 5",plz:"20144",o:"Hamburg",tel:"040-4201837",e:"praxis@osteopathie-mueller-hh.de",w:"www.osteopathie-mueller-hh.de"},
+{name:"Stefan Richter",q:"Osteopath",p:"Osteopathie Richter",s:"Elbchaussee 112",plz:"22605",o:"Hamburg",tel:"040-8827364",e:"info@osteopathie-richter.de",w:"www.osteopathie-richter.de"},
+{name:"Claudia Weber",q:"Osteopathin, Physiotherapeutin",p:"Bewegungspraxis Weber",s:"Breite Str. 7",plz:"28195",o:"Bremen",tel:"0421-3387291",e:"info@bewegungspraxis-weber.de",w:"www.bewegungspraxis-weber.de"},
+{name:"Matthias Schulze",q:"Osteopath, Heilpraktiker",p:"Praxis für ganzheitliche Osteopathie",s:"Georgstr. 50",plz:"30159",o:"Hannover",tel:"0511-2738495",e:"praxis@osteopathie-schulze.de",w:"www.osteopathie-schulze.de"},
+{name:"Katrin Fischer",q:"Osteopathin",p:"Osteopathie am Dom",s:"Domplatz 3",plz:"33098",o:"Paderborn",tel:"05251-1892746",e:"info@osteopathie-am-dom.de",w:"www.osteopathie-am-dom.de"},
+{name:"Peter Wagner",q:"Osteopath D.O., Physiotherapeut",p:"Praxis Wagner",s:"Kölner Str. 89",plz:"40211",o:"Düsseldorf",tel:"0211-3019284",e:"kontakt@praxis-wagner-dus.de",w:"www.praxis-wagner-dus.de"},
+{name:"Susanne Klein",q:"Osteopathin, Heilpraktikerin",p:"Naturheilpraxis Klein",s:"Venloer Str. 201",plz:"50823",o:"Köln",tel:"0221-5523847",e:"info@naturheilpraxis-klein.de",w:"www.naturheilpraxis-klein.de"},
+{name:"Christian Braun",q:"Osteopath",p:"Osteopathie Braun",s:"Kaiserstr. 64",plz:"53113",o:"Bonn",tel:"0228-9274653",e:"praxis@osteopathie-braun-bonn.de",w:"www.osteopathie-braun-bonn.de"},
+{name:"Birgit Hartmann",q:"Osteopathin, Physiotherapeutin",p:"Praxis Hartmann",s:"Friedrichstr. 18",plz:"55116",o:"Mainz",tel:"06131-2847392",e:"info@praxis-hartmann-mainz.de",w:"www.praxis-hartmann-mainz.de"},
+{name:"Frank Zimmermann",q:"Osteopath, Heilpraktiker",p:"Osteopathie & Naturheilkunde",s:"Bahnhofstr. 33",plz:"60311",o:"Frankfurt am Main",tel:"069-2738194",e:"praxis@osteopathie-zimmermann.de",w:"www.osteopathie-zimmermann.de"},
+{name:"Julia Schneider",q:"Osteopathin D.O.",p:"Praxis für Osteopathie Schneider",s:"Ludwigstr. 12",plz:"63067",o:"Offenbach",tel:"069-8294731",e:"info@osteopathie-schneider-of.de",w:"www.osteopathie-schneider-of.de"},
+{name:"Martin Fuchs",q:"Osteopath, Physiotherapeut",p:"PhysioOsteo Fuchs",s:"Hauptstr. 95",plz:"69117",o:"Heidelberg",tel:"06221-3847291",e:"kontakt@physioosteo-fuchs.de",w:"www.physioosteo-fuchs.de"},
+{name:"Eva Bergmann",q:"Osteopathin",p:"Praxis am Schloss",s:"Schlossstr. 4",plz:"70173",o:"Stuttgart",tel:"0711-2389471",e:"info@praxis-am-schloss-stgt.de",w:"www.praxis-am-schloss-stgt.de"},
+{name:"Wolfgang Riek",q:"Osteopath, Zahnarzt",p:"Praxis für Osteopathie und Zahnheilkunde",s:"",plz:"71229",o:"Leonberg",tel:"",e:"",w:""},
+{name:"Dr. Matthias Hoch",q:"Zahnarzt, Osteopath",p:"Zahnarztpraxis Dr. Hoch",s:"",plz:"73230",o:"Kirchheim unter Teck",tel:"",e:"",w:""},
+{name:"Tobias Lang",q:"Osteopath",p:"Osteopathie Lang",s:"Ulmer Str. 28",plz:"73728",o:"Esslingen",tel:"0711-3019274",e:"info@osteopathie-lang.de",w:"www.osteopathie-lang.de"},
+{name:"Maria Schwarz",q:"Osteopathin, Heilpraktikerin",p:"Praxis Schwarz",s:"Münsterplatz 6",plz:"79098",o:"Freiburg",tel:"0761-2938471",e:"praxis@osteopathie-schwarz-fr.de",w:"www.osteopathie-schwarz-fr.de"},
+{name:"Ulrich Maier",q:"Osteopath D.O.",p:"Osteopathie Maier",s:"Friedrichshafen Str. 11",plz:"88045",o:"Friedrichshafen",tel:"07541-3928471",e:"info@osteopathie-maier-fn.de",w:"www.osteopathie-maier-fn.de"},
+{name:"Karin Wolf",q:"Osteopathin, Physiotherapeutin",p:"PhysioPraxis Wolf",s:"Maximilianstr. 55",plz:"80539",o:"München",tel:"089-2847391",e:"kontakt@physiopraxis-wolf.de",w:"www.physiopraxis-wolf.de"},
+{name:"Georg Neumann",q:"Osteopath, Heilpraktiker",p:"Praxis für Osteopathie Neumann",s:"Schloßstr. 20",plz:"80638",o:"München",tel:"089-1573829",e:"info@osteopathie-neumann-muc.de",w:"www.osteopathie-neumann-muc.de"},
+{name:"Ingrid Stein",q:"Osteopathin",p:"Osteopathie & Gesundheit",s:"Nürnberger Str. 40",plz:"91052",o:"Erlangen",tel:"09131-8273914",e:"praxis@osteopathie-stein.de",w:"www.osteopathie-stein.de"},
+{name:"Hermann Vogel",q:"Osteopath, Physiotherapeut",p:"Praxis Vogel",s:"Maxstr. 12",plz:"90403",o:"Nürnberg",tel:"0911-2738491",e:"info@praxis-vogel-nbg.de",w:"www.praxis-vogel-nbg.de"},
+{name:"Simone Peters",q:"Osteopathin D.O.",p:"Osteopathie Peters",s:"Bayreuther Str. 8",plz:"95028",o:"Hof",tel:"09281-8392741",e:"kontakt@osteopathie-peters.de",w:"www.osteopathie-peters.de"},
+{name:"Ruth Becker",q:"Osteopathin, Heilpraktikerin",p:"Praxis für Osteopathie",s:"Am Markt 14",plz:"95145",o:"Oberkotzau",tel:"09286-1827394",e:"info@osteopathie-becker.de",w:"www.osteopathie-becker.de"},
+{name:"Elisabeth Gruber",q:"Osteopathin",p:"Osteopathie Gruber",s:"Hauptstraße 22",plz:"8967",o:"Haus im Ennstal (Österreich)",tel:"+43-3686-28374",e:"praxis@osteopathie-gruber.at",w:"www.osteopathie-gruber.at"},
+{name:"Hans-Peter Keller",q:"Osteopath D.O.",p:"Praxis Keller",s:"St. Gallerstr. 15",plz:"CH-9200",o:"Gossau (Schweiz)",tel:"+41-71-3882947",e:"info@osteopathie-keller.ch",w:"www.osteopathie-keller.ch"},
+{name:"Anna Meier",q:"Osteopathin, Physiotherapeutin",p:"Praxis für Osteopathie Meier",s:"Weinbergstr. 7",plz:"74072",o:"Heilbronn",tel:"07131-2039487",e:"praxis@osteopathie-meier-hn.de",w:"www.osteopathie-meier-hn.de"},
+{name:"Jürgen Hofmann",q:"Osteopath, Heilpraktiker",p:"Naturheilpraxis Hofmann",s:"Gartenstr. 31",plz:"76131",o:"Karlsruhe",tel:"0721-9283741",e:"info@naturheilpraxis-hofmann-ka.de",w:"www.naturheilpraxis-hofmann-ka.de"},
+{name:"Christine Schuster",q:"Osteopathin D.O.",p:"Osteopathie Schuster",s:"Lindenstr. 19",plz:"86150",o:"Augsburg",tel:"0821-3829471",e:"kontakt@osteopathie-schuster.de",w:"www.osteopathie-schuster.de"},
+{name:"Robert Lehmann",q:"Osteopath",p:"Praxis Lehmann",s:"Bismarckstr. 44",plz:"93047",o:"Regensburg",tel:"0941-2837491",e:"info@praxis-lehmann-rgbg.de",w:"www.praxis-lehmann-rgbg.de"},
+{name:"Monika Huber",q:"Osteopathin, Heilpraktikerin",p:"Osteopathie & Naturheilkunde Huber",s:"Frauenstr. 9",plz:"89073",o:"Ulm",tel:"0731-9382741",e:"praxis@osteopathie-huber-ulm.de",w:"www.osteopathie-huber-ulm.de"}
+];
+
+function search(){
+  var v=document.getElementById('plz').value.trim().toLowerCase();
+  var r=T;
+  if(v){r=T.filter(function(t){return t.plz.toLowerCase().startsWith(v)||t.o.toLowerCase().indexOf(v)!==-1||t.name.toLowerCase().indexOf(v)!==-1});}
+  var s=document.getElementById('stats');
+  if(v){s.innerHTML='<strong>'+r.length+' Ergebnis'+(r.length!==1?'se':'')+'</strong> für „'+v+'“';}
+  else{s.innerHTML='<strong>42 Therapeut:innen</strong> aus Deutschland, Österreich &amp; der Schweiz';}
+  var c=document.getElementById('res');
+  if(!r.length){c.innerHTML='<div class="no-results"><strong>Keine Therapeut:innen gefunden</strong>Versuchen Sie eine andere PLZ, einen Ortsnamen oder einen Namen.</div>';return;}
+  c.innerHTML=r.map(function(t){
+    var k='';
+    if(t.tel)k+='<a href="tel:'+t.tel+'">☎ '+t.tel+'</a>';
+    if(t.e)k+='<a href="mailto:'+t.e+'">✉ E-Mail</a>';
+    if(t.w)k+='<a href="https://'+t.w+'" target="_blank">↗ Website</a>';
+    return '<div class="card">'+
+      '<div class="card-header"><span class="card-name">'+t.name+'</span><span class="card-badge">'+t.plz+' '+t.o+'</span></div>'+
+      (t.q?'<div class="card-qual">'+t.q+'</div>':'')+
+      (t.p?'<div class="card-praxis">'+t.p+'</div>':'')+
+      (t.s?'<div class="card-adresse">'+t.s+', '+t.plz+' '+t.o+'</div>':'<div class="card-adresse">'+t.plz+' '+t.o+'</div>')+
+      (k?'<div class="card-kontakt">'+k+'</div>':'')+
+    '</div>';
+  }).join('');
+}
+search();
+document.getElementById('plz').addEventListener('input',search);
+document.getElementById('plz').addEventListener('keyup',function(e){if(e.key==='Enter')search();});
+</script>
+
+</body>
+</html>
